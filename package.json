@@ -1,5 +1,5 @@
 {
-  "name": "halving-voltage",
+  "name": "halving-massacre",
   "private": true,
   "scripts": {
     "build": "turbo build",

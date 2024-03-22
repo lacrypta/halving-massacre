@@ -23,6 +23,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@halving-massacre/nomad':
+        specifier: workspace:*
+        version: link:../../packages/nomad
       '@lawallet/ui':
         specifier: ^0.1.1
         version: 0.1.1(react@18.2.0)(styled-components@6.1.8)
