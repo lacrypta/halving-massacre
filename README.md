@@ -1,14 +1,6 @@
 # Halving Massacre
 
-Halving Voltage monorepo
-
-## Using this example
-
-Run the following command:
-
-```sh
-pnpm dev
-```
+Halving Voltage monorepo. [Game Rules](./RULES.md)
 
 ## What's inside?
 
