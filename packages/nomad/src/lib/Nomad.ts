@@ -83,7 +83,7 @@ export class Nomad {
       eventEmitter?.emit("status", NomadStatus.REPO_MANIFEST);
 
       const [repoName, requestedVersion = "latest"] = repoPath.split("@");
-      const repoManifest = await getRepoManifest(pubkey, repoName, relay);
+      const repoManifest = await getRepoManifest(pubkey, repoName!, relay);
 
       eventEmitter?.emit("repoManifest", repoManifest);
 
@@ -92,8 +92,14 @@ export class Nomad {
       const latestVersion = versions[versions.length - 1];
 
       const selectedVersion =
-        versions.find((v) => v === requestedVersion) || latestVersion;
+        versions.find((v) => v === requestedVersion) ||
+        latestVersion ||
+        "latest";
       const eventId = repoManifest.versions[selectedVersion];
+
+      if (!eventId) {
+        throw new Error(`Version ${selectedVersion} not found`);
+      }
 
       eventEmitter?.emit("status", NomadStatus.CODE_EVENT);
       const codeEvent = await getCodeEvent(eventId, relay);
@@ -132,10 +138,14 @@ export class Nomad {
 
     let pubkey;
     // Is NIP05 handle
-    if (nip05OrPubkey.includes("@")) {
-      pubkey = await resolveNip05(nip05OrPubkey);
+    if (nip05OrPubkey!.includes("@")) {
+      pubkey = await resolveNip05(nip05OrPubkey!);
     } else {
       pubkey = nip05OrPubkey;
+    }
+
+    if (!pubkey) {
+      throw new Error("Invalid pubkey");
     }
 
     return this.fromPubkey(pubkey, repoPath, relay, eventEmitter);
@@ -149,7 +159,7 @@ export async function resolveNip05(handle: string): Promise<string> {
   );
   const data = await res.json();
 
-  return data.names[username] as string;
+  return data.names[username!] as string;
 }
 
 export async function getRepoManifest(
@@ -171,11 +181,11 @@ export async function getRepoManifest(
 
   const versions: { [key: string]: string } = {};
   event.tags
-    .filter((tag) => tag[0].startsWith("version:"))
+    .filter((tag) => tag[0]!.startsWith("version:"))
     ?.forEach((tag) => {
-      const version = tag[0].split(":")[1];
+      const version = tag[0]!.split(":")[1] as string;
       const eventId = tag[1];
-      versions[version] = eventId;
+      versions[version] = eventId!;
     });
 
   return {

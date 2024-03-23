@@ -1,6 +1,6 @@
 # Halving Massacre
 
-Halving Voltage monorepo. [Game Rules](./RULES.md)
+Halving Massacre monorepo. [Game Rules](./RULES.md)
 
 ## What's inside?
 
@@ -28,7 +28,7 @@ This Turborepo has some additional tools already setup for you:
 To build all apps and packages, run the following command:
 
 ```
-cd halving-voltage
+cd halving-massacre
 pnpm build
 ```
 
@@ -37,7 +37,7 @@ pnpm build
 To develop all apps and packages, run the following command:
 
 ```
-cd halving-voltage
+cd halving-massacre
 pnpm dev
 ```
 

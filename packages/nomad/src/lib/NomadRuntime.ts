@@ -64,7 +64,7 @@ export class NomadRuntime {
     }
 
     if (typeof this.runtime === "object") {
-      return this.runtime[name](...args);
+      return this.runtime[name]!(...args);
     }
     return this.runtime(...args);
   }

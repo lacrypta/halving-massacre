@@ -6,8 +6,8 @@ import StyledComponentsRegistry from "./lib/registry";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Halving Voltage | LaWallet.io",
-  description: "Create your own wallet with the LaWallet stack",
+  title: "Halving Massacre | LaWallet.io",
+  description: "Lightning Network Halving Game",
 };
 
 export default function RootLayout({

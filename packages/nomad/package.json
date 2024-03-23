@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./useNomad": "./src/hooks/useNomad.tsx"
+    "./useNomad": "./src/hooks/useNomad.ts",
+    ".": "./src/index.ts"
   },
   "scripts": {
     "dev": "echo 'Add dev script here'",
