@@ -11,13 +11,14 @@ interface ILotteryABI {
 import { useNomad } from "@halving-massacre/nomad";
 import { useState } from "react";
 import { removeObjectKeys } from "../../lib/utils";
-import { Button, Divider, Heading, Input, Textarea } from "@lawallet/ui";
+import { Button, Divider, Heading, Input, Text, Textarea } from "@lawallet/ui";
 
 export const NomadTest = () => {
   const { halve, numberOfRounds } = useNomad<ILotteryABI>(
     "timba@hodl.ar/lottery"
   );
   const [playersInput, setPlayersInput] = useState("");
+  const [error, setError] = useState<string>();
   const [remainingRounds, setRemainingRounds] = useState(0);
   const [seed, setSeed] = useState<string>();
   const [currentPlayers, setCurrentPlayers] = useState<{
@@ -30,12 +31,17 @@ export const NomadTest = () => {
     [key: string]: number;
   }>({});
 
-  const calcRemainingRounds = () => {
+  const parseCurrentPlayers = (playersInput: string) => {
+    setPlayersInput(playersInput);
     try {
       const players = JSON.parse(playersInput);
-      setRemainingRounds(numberOfRounds(players));
       setCurrentPlayers(players);
+      setRemainingRounds(numberOfRounds(currentPlayers));
+      setError(undefined);
     } catch (e) {
+      setCurrentPlayers({});
+      setRemainingRounds(0);
+      setError("Invalid JSON");
       console.log("Invalid JSON");
     }
   };
@@ -58,12 +64,12 @@ export const NomadTest = () => {
       <div>Participantes en JSON</div>
       <Divider y={20} />
       <Textarea
-        onChange={(elm) => setPlayersInput(elm.currentTarget.value)}
+        onChange={(elm) => parseCurrentPlayers(elm.currentTarget.value)}
         placeholder='{}'
+        status={error ? "error" : "success"}
         value={playersInput || ""}
       ></Textarea>
-      <Divider y={20} />
-      <Button onClick={calcRemainingRounds}>Calcular Rondas</Button>
+      {error && <Text color='red'>{error}</Text>}
       <Divider y={20} />
       <div>Rondas Restantes : {remainingRounds}</div>
       <Divider y={20} />
