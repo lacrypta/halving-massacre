@@ -27,8 +27,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/nomad
       '@lawallet/ui':
-        specifier: ^0.1.1
-        version: 0.1.1(react@18.2.0)(styled-components@6.1.8)
+        specifier: ^0.1.21
+        version: 0.1.21(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       next:
         specifier: ^14.1.1
         version: 14.1.1(react-dom@18.2.0)(react@18.2.0)
@@ -444,13 +444,17 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@lawallet/ui@0.1.1(react@18.2.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-NqpVxgsX8tvphVOJJFfqb2ZjmrHzlFYvfqFvMEWbIyxOYhd5nnIK2q+jF2gQKQBDacRSiC0+5UfXdaWb7dPDBA==}
+  /@lawallet/ui@0.1.21(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-6OZKD+IveWQLDCEuk7UiW4l8kK+UfvACn2x57JQKl99XHnozN3TiYCcDFho/wgRK5fXtdpMhw6X/+UUUcac/9Q==}
     peerDependencies:
+      next: ^14
       react: ^18.2.0
+      react-dom: ^18.2.0
       styled-components: ^6.1.8
     dependencies:
+      next: 14.1.1(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
       styled-components: 6.1.8(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
