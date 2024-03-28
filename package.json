@@ -9,8 +9,8 @@
     "dev:web": "pnpm --filter web dev"
   },
   "devDependencies": {
-    "@halving-massacre/eslint-config": "workspace:*",
-    "@halving-massacre/typescript-config": "workspace:*",
+    "@lawallet/eslint-config": "1.0.3",
+    "@lawallet/typescript-config": "1.0.0",
     "prettier": "^3.2.5",
     "turbo": "latest"
   },

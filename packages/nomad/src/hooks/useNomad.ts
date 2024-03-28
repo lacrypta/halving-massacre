@@ -17,7 +17,7 @@ interface UseNomadOptions {}
 
 export const useNomad = <T>(
   idOrHandle: string,
-  options?: UseNomadOptions
+  options?: UseNomadOptions,
 ): UseNomadReturn & T => {
   const [nomad, setNomad] = useState<Nomad>();
   const [eventEmitter] = useState<EventEmitter>(new EventEmitter());
@@ -38,7 +38,7 @@ export const useNomad = <T>(
       const nomad = await Nomad.fromHandleOrEventId(
         idOrHandle,
         relay,
-        eventEmitter
+        eventEmitter,
       );
       nomad.init();
       setIsLoaded(true);

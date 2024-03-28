@@ -8,7 +8,7 @@ import {
   Input,
   Text,
 } from "@lawallet/ui";
-import { ChangeEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import Link from "../Icons/Link";
 import LightingAddressSheet from "./LightingAddressSheet";
 import Payment from "./Payment";

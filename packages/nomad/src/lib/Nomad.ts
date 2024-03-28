@@ -22,7 +22,7 @@ export class Nomad {
   constructor(
     codeEvent: Event,
     repoManifest?: NomadRepoManifest,
-    eventEmitter?: EventEmitter
+    eventEmitter?: EventEmitter,
   ) {
     this.codeEvent = codeEvent;
     this.authorPubkey = codeEvent.pubkey;
@@ -44,7 +44,7 @@ export class Nomad {
       this.codeEvent.content,
       this.dependencies,
       this.eventEmitter,
-      args
+      args,
     );
 
     try {
@@ -66,7 +66,7 @@ export class Nomad {
 
     if (this.nomadRuntime === undefined) {
       throw new Error(
-        "Nomad Runtime not yet initialized. Please call init() first"
+        "Nomad Runtime not yet initialized. Please call init() first",
       );
     }
 
@@ -77,7 +77,7 @@ export class Nomad {
     pubkey: string,
     repoPath: string,
     relay: Relay,
-    eventEmitter?: EventEmitter
+    eventEmitter?: EventEmitter,
   ) {
     try {
       eventEmitter?.emit("status", NomadStatus.REPO_MANIFEST);
@@ -114,7 +114,7 @@ export class Nomad {
   static async fromEventId(
     eventId: string,
     relay: Relay,
-    eventEmitter?: EventEmitter
+    eventEmitter?: EventEmitter,
   ) {
     eventEmitter?.emit("status", NomadStatus.CODE_EVENT);
 
@@ -127,7 +127,7 @@ export class Nomad {
   static async fromHandleOrEventId(
     handleOrEventId: string,
     relay: Relay,
-    eventEmitter?: EventEmitter
+    eventEmitter?: EventEmitter,
   ) {
     const [nip05OrPubkey, repoPath] = handleOrEventId.split("/");
 
@@ -155,7 +155,7 @@ export class Nomad {
 export async function resolveNip05(handle: string): Promise<string> {
   const [username, domain] = handle.split("@");
   const res = await fetch(
-    `https://${domain}/.well-known/nostr.json?name=${username}`
+    `https://${domain}/.well-known/nostr.json?name=${username}`,
   );
   const data = await res.json();
 
@@ -165,7 +165,7 @@ export async function resolveNip05(handle: string): Promise<string> {
 export async function getRepoManifest(
   authorPubkey: string,
   repoName: string,
-  relay: Relay
+  relay: Relay,
 ): Promise<NomadRepoManifest> {
   const filter = {
     authors: [authorPubkey],
@@ -198,7 +198,7 @@ export async function getRepoManifest(
 
 export async function getCodeEvent(
   eventId: string,
-  relay: Relay
+  relay: Relay,
 ): Promise<Event> {
   const event = await relay.get({
     ids: [eventId],
@@ -210,7 +210,7 @@ export async function getCodeEvent(
 
   if (event.kind !== NomadKinds.NOMAD_CODE) {
     throw new Error(
-      `Invalid event kind. Expecting ${NomadKinds.NOMAD_CODE} but got ${event.kind}`
+      `Invalid event kind. Expecting ${NomadKinds.NOMAD_CODE} but got ${event.kind}`,
     );
   }
 

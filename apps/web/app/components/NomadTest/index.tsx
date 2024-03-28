@@ -2,7 +2,7 @@
 interface ILotteryABI {
   halve: (
     seed: string,
-    weightedPlayers: { [key: string]: number }
+    weightedPlayers: { [key: string]: number },
   ) => { [key: string]: number };
   numberOfRounds: (weightedPlayers: { [key: string]: number }) => number;
   lottery(seed: string, winners: number, players: any[]): any[];
@@ -15,7 +15,7 @@ import { Button, Divider, Heading, Input, Text, Textarea } from "@lawallet/ui";
 
 export const NomadTest = () => {
   const { halve, numberOfRounds } = useNomad<ILotteryABI>(
-    "timba@hodl.ar/lottery"
+    "timba@hodl.ar/lottery",
   );
   const [playersInput, setPlayersInput] = useState("");
   const [error, setError] = useState<string>();
@@ -59,24 +59,24 @@ export const NomadTest = () => {
 
   return (
     <div>
-      <Heading align='center'>Halving Massacre</Heading>
+      <Heading align="center">Halving Massacre</Heading>
       <Divider y={20} />
       <div>Participantes en JSON</div>
       <Divider y={20} />
       <Textarea
         onChange={(elm) => parseCurrentPlayers(elm.currentTarget.value)}
-        placeholder='{}'
+        placeholder="{}"
         status={error ? "error" : "success"}
         value={playersInput || ""}
       ></Textarea>
-      {error && <Text color='red'>{error}</Text>}
+      {error && <Text color="red">{error}</Text>}
       <Divider y={20} />
       <div>Rondas Restantes : {remainingRounds}</div>
       <Divider y={20} />
 
       <Input
-        type='text'
-        placeholder='Blockhash'
+        type="text"
+        placeholder="Blockhash"
         value={seed || ""}
         onChange={(el) => setSeed(el.currentTarget.value)}
       />

@@ -27,7 +27,7 @@ export class NomadRuntime {
     code: string,
     dependencies: { [name: string]: Nomad },
     parentEventEmitter: EventEmitter,
-    args: any[]
+    args: any[],
   ) {
     this.eventEmitter = new WrappedEventEmitter(parentEventEmitter);
     this.code = code;
@@ -43,7 +43,7 @@ export class NomadRuntime {
         ...Object.keys(this.dependencies),
         "args",
         "events",
-        this.code
+        this.code,
       )(...Object.values(this.dependencies), this.args, this.eventEmitter);
     })();
 
@@ -59,7 +59,7 @@ export class NomadRuntime {
   async call(name: string, ...args: any[]) {
     if (this.runtime === undefined) {
       throw new Error(
-        "Nomad Runtime not yet initialized. Please call init() first"
+        "Nomad Runtime not yet initialized. Please call init() first",
       );
     }
 

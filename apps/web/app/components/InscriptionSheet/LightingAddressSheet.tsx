@@ -17,6 +17,7 @@ const LightingAddressSheet = ({
   onClose: () => void;
 }) => {
   const [invoice, setInvoice] = useState<string>("");
+  console.log(invoice);
 
   return (
     <Sheet title={""} isOpen={isOpen} closeText={"Cerrar"} onClose={onClose}>

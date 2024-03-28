@@ -1,6 +1,6 @@
 export function removeObjectKeys(
   obj1: { [key: string]: number },
-  obj2: { [key: string]: number }
+  obj2: { [key: string]: number },
 ): { [key: string]: number } {
   // Create a copy of obj1 to avoid modifying the original object
   const result = { ...obj1 };
