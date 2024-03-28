@@ -9,8 +9,9 @@ import {
   Text,
 } from "@lawallet/ui";
 import { ChangeEvent, useState } from "react";
-import Payment from "./Payment";
 import Link from "../Icons/Link";
+import LightingAddressSheet from "./LightingAddressSheet";
+import Payment from "./Payment";
 
 const InscriptionSheet = ({
   isOpen,
@@ -19,6 +20,7 @@ const InscriptionSheet = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
+  const [openLNInfo, setOpenLNInfo] = useState(false);
   const [lnAddress, setLNAddress] = useState<string>("");
   const [invoicePayment, setInvoicePayment] = useState<string>("");
 
@@ -45,36 +47,49 @@ const InscriptionSheet = ({
       cancelText="Cancelar"
     >
       {!invoicePayment ? (
-        <Container>
-          <Flex flex={1} justify="center" align="center" direction="column">
-            <Heading as="h3">Anotate ahora</Heading>
+        <>
+          <Container>
+            <Flex flex={1} justify="center" align="center" direction="column">
+              <Heading as="h3">Anotate ahora</Heading>
 
-            <Divider y={12} />
+              <Divider y={12} />
 
-            <Text align="center">
-              A message should be a short, complete sentence.
-            </Text>
+              <Text align="center">
+                A message should be a short, complete sentence.
+              </Text>
 
-            <Divider y={12} />
+              <Divider y={12} />
 
-            <Flex flex={1} direction="row" align="center" justify="center">
-              <Text color="#56B68C">¿Qué es esto?</Text>
-              <Link />
+              <Flex
+                flex={1}
+                direction="row"
+                align="center"
+                justify="center"
+                onClick={() => setOpenLNInfo(true)}
+              >
+                <Text color="#56B68C">¿Qué es esto?</Text>
+                <Link />
+              </Flex>
+
+              <Divider y={12} />
+
+              <Input
+                onChange={handleChangeAddress}
+                placeholder="Lightning Address"
+                value={lnAddress}
+              />
             </Flex>
 
             <Divider y={12} />
 
-            <Input
-              onChange={handleChangeAddress}
-              placeholder="Lightning Address"
-              value={lnAddress}
-            />
-          </Flex>
+            <Button onClick={handleClick}>Anotarme</Button>
+          </Container>
 
-          <Divider y={12} />
-
-          <Button onClick={handleClick}>Anotarme</Button>
-        </Container>
+          <LightingAddressSheet
+            isOpen={openLNInfo}
+            onClose={() => setOpenLNInfo(false)}
+          />
+        </>
       ) : (
         <Payment invoice={invoicePayment} />
       )}
