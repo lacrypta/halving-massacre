@@ -2,6 +2,7 @@
 
 import {
   Avatar,
+  AvatarImage,
   BannerAlert,
   Button,
   Container,
@@ -70,7 +71,10 @@ export default function Page(): JSX.Element {
         {PARTICIPANTES.map((lud16: string) => (
           <React.Fragment key={lud16}>
             <Flex align="center" gap={8}>
-              <Avatar>{lud16.substring(0, 2).toUpperCase()}</Avatar>
+              <Avatar>
+                <AvatarImage src="/favicon.ico" alt="asd" />
+              </Avatar>
+
               <Text>{lud16}</Text>
             </Flex>
             <Divider y={12} />
