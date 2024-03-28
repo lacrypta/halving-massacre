@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Avatar,
   BannerAlert,
   Button,
   Container,
@@ -9,9 +10,15 @@ import {
   Heading,
   Text,
 } from "@lawallet/ui";
-import { useState } from "react";
+import React, { useState } from "react";
 import { appTheme } from "../config/exports";
 import InscriptionSheet from "./components/InscriptionSheet/InscriptionSheet";
+
+const PARTICIPANTES = [
+  "fer@lawallet.ar",
+  "dios@lawallet.ar",
+  "agustin@lawallet.ar",
+];
 
 export default function Page(): JSX.Element {
   const [openInscription, setOpenInscription] = useState<boolean>(false);
@@ -56,6 +63,18 @@ export default function Page(): JSX.Element {
         <Heading align="center" as="h3">
           Participantes
         </Heading>
+
+        <Divider y={20} />
+
+        {PARTICIPANTES.map((lud16: string) => (
+          <React.Fragment key={lud16}>
+            <Flex align="center" gap={8}>
+              <Avatar>{lud16.substring(0, 2).toUpperCase()}</Avatar>
+              <Text>{lud16}</Text>
+            </Flex>
+            <Divider y={12} />
+          </React.Fragment>
+        ))}
       </Container>
 
       <InscriptionSheet
