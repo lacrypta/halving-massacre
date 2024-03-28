@@ -38,6 +38,7 @@ export default function Page(): JSX.Element {
             Anotarme ahora
           </Button>
         </Flex>
+        <Divider y={16} />
         <Text size="small" align="center" color={appTheme.colors.success}>
           Las inscripciones cierran en 21 días, 14 horas y 15 minutos
         </Text>
