@@ -9,11 +9,12 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@halving-massacre/nomad": "workspace:*",
     "@lawallet/ui": "^0.1.21",
     "next": "^14.1.1",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@halving-massacre/nomad": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@halving-massacre/eslint-config": "workspace:*",
