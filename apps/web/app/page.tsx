@@ -1,38 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Avatar, AvatarImage, BannerAlert, Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
-import Image from 'next/image';
+import React from 'react';
+import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 
 import { appTheme } from '../config/exports';
-import InscriptionSheet from './components/InscriptionSheet/InscriptionSheet';
+import Header from './components/Header';
+import Countdown from './components/Countdown';
 import Card from './components/Card';
 
 const PARTICIPANTES = ['fer@lawallet.ar', 'dios@lawallet.ar', 'agustin@lawallet.ar'];
 
 export default function Page(): JSX.Element {
-  const [openInscription, setOpenInscription] = useState<boolean>(false);
-
   return (
     <>
       <Divider y={64} />
       <Container>
-        <Heading align='center'>Halving Massacre</Heading>
-        <Divider y={12} />
-        <Text align='center'>
-          Sobrevivi todas las rondas seguidas aumentando tu poder de minado con Satoshis y gana el increible premio del
-          pozo acumulado.
-        </Text>
-
-        <Divider y={16} />
-        <Flex>
-          <Button onClick={() => setOpenInscription(true)}>Anotarme ahora</Button>
+        <Flex direction='column' align='center'>
+          <Header />
+          <Divider y={24} />
+          <Countdown />
         </Flex>
-        <Divider y={8} />
-        <Text align='center' color={appTheme.colors.success}>
-          Las inscripciones cierran en 21 días, 14 horas y 15 minutos
-        </Text>
-        <Divider y={16} />
+
+        <Divider y={24} />
 
         <Flex direction='column' gap={8}>
           <Flex direction='row' gap={8}>
@@ -53,7 +42,7 @@ export default function Page(): JSX.Element {
 
         <Divider y={20} />
 
-        <Heading align='center' as='h3'>
+        {/* <Heading align='center' as='h3'>
           Participantes
         </Heading>
 
@@ -70,10 +59,8 @@ export default function Page(): JSX.Element {
             </Flex>
             <Divider y={12} />
           </React.Fragment>
-        ))}
+        ))} */}
       </Container>
-
-      <InscriptionSheet isOpen={openInscription} onClose={() => setOpenInscription(false)} />
     </>
   );
 }
