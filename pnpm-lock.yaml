@@ -27,8 +27,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/nomad
       '@lawallet/ui':
-        specifier: ^0.1.21
-        version: 0.1.21(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+        specifier: 0.1.27
+        version: 0.1.27(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       next:
         specifier: ^14.1.1
         version: 14.1.1(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
@@ -420,8 +420,8 @@ packages:
     resolution: {integrity: sha512-dXkeuH+pcaqB/NNzOhGwUE63adNOFxwO2F8HniUv6LHC1T2e9+iysJZesmqSfetOQhksk+traBFkjCAUhQuz4Q==}
     dev: true
 
-  /@lawallet/ui@0.1.21(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-6OZKD+IveWQLDCEuk7UiW4l8kK+UfvACn2x57JQKl99XHnozN3TiYCcDFho/wgRK5fXtdpMhw6X/+UUUcac/9Q==}
+  /@lawallet/ui@0.1.27(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-MEawklOy4l50vi3F444xOMLqwSBTSr9xWhseAO1y281aV7KcbLdTqwsmdVn2eqNtHPci7KHxaDK32oxuREWofQ==}
     peerDependencies:
       next: ^14
       react: ^18.2.0

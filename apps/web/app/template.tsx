@@ -1,6 +1,6 @@
 "use client";
-
 import { NextProvider } from "@lawallet/ui/next";
+import "@lawallet/ui/styles";
 import { appTheme } from "../config/exports";
 import Footer from "./components/Footer";
 
