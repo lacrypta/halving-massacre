@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Container, Divider, Flex, Text, Button, Heading } from '@lawallet/ui';
+import { useNostrContext, useProfile } from '@lawallet/react';
 
 import { Avatar } from '@/components/Avatar';
 import Ticket from '@/components/Icons/Ticket';
@@ -12,7 +13,16 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@/components/Tabs';
 import { appTheme } from '../../../config/exports';
 import Progress from '@/components/Progress';
 
-export default function Page(): JSX.Element {
+interface PageProps {
+  params: {
+    lud16: string;
+  };
+}
+
+export default function Page({ params }: PageProps): JSX.Element {
+  const walias = decodeURIComponent(params.lud16);
+  const { nip05, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
+
   const hasTicket = true;
   const valueProgress = 10;
   const isDeath = false;
@@ -24,7 +34,7 @@ export default function Page(): JSX.Element {
       <Divider y={64} />
       <Container size="small">
         <Flex justify="space-between" align="center">
-          <Avatar src="https://static.lawallet.io/img/domains/8333.mobi.png" alt="Machankura" size={20} />
+          <Avatar alt={nip05?.displayName || walias} size={20} src={nip05Avatar || lud16Avatar || domainAvatar} />
           <div>
             {hasTicket ? (
               <Button onClick={() => null} variant="bezeled" disabled={isDeath}>
@@ -40,9 +50,22 @@ export default function Page(): JSX.Element {
           </div>
         </Flex>
         <Divider y={8} />
-        <Text isBold>dios@lawallet.ar</Text>
-        <Divider y={8} />
-        <Text size="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</Text>
+
+        {nip05 && nip05.displayName ? (
+          <>
+            <Text isBold>{nip05.displayName}</Text>
+            <Text>{walias}</Text>
+          </>
+        ) : (
+          <Text isBold>{walias}</Text>
+        )}
+        {nip05?.about && (
+          <>
+            <Divider y={8} />
+            <Text size="small">{nip05?.about || 'Sin descripción'}</Text>
+          </>
+        )}
+
         <Divider y={12} />
         <div>
           {hasTicket ? <Badge color="primary">Ticket adquirido</Badge> : <Badge color="secondary">Sin Ticket</Badge>}
