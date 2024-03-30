@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Flex, Button, Divider, Text, Heading } from '@lawallet/ui';
+import { Flex, Button, Divider, Text, Heading, Input } from '@lawallet/ui';
 
 import InscriptionSheet from '../InscriptionSheet/InscriptionSheet';
 
@@ -34,6 +34,8 @@ export default function Countdown() {
             <Text>Secs</Text>
           </Flex>
         </NumbersBox>
+        <Divider y={8} />
+        <Input placeholder='Lightning Address' />
         <Divider y={8} />
         <Flex>
           <Button onClick={() => setOpenInscription(true)}>Anotarme ahora</Button>
