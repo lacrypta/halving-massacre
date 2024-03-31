@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Container, Divider, Flex, Text, Button, Heading } from '@lawallet/ui';
+import { Container, Divider, Flex, Text, Button, Heading, Input } from '@lawallet/ui';
 import { useProfile } from '@lawallet/react';
 
 import { Avatar } from '@/components/Avatar';
@@ -13,6 +13,13 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@/components/Tabs';
 import { appTheme } from '../../../config/exports';
 import Progress from '@/components/Progress';
 import InscriptionSheet from '@/components/InscriptionSheet/InscriptionSheet';
+
+// Mock Data
+import { zapEvents as mockZapEvents } from '../../../mocks/zapEvents';
+import { userRounds } from '../../../mocks/rounds';
+
+import type { Zap } from '../../../types/zap';
+import Link from '@/components/Icons/Link';
 
 interface PageProps {
   params: {
@@ -95,12 +102,50 @@ export default function Page({ params }: PageProps): JSX.Element {
           </TabList>
           <TabPanels>
             <TabPanel show={showTab === 'rondas'}>
+              <Divider y={12} />
               <Flex direction="column" flex={1} align="center" justify="center">
-                <Heading as="h4">Lorem, ipsum dolor.</Heading>
-                <Text align="center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, impedit.</Text>
+                {/* <Heading as="h4">Lorem, ipsum dolor.</Heading>
+                <Text align="center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, impedit.</Text> */}
+
+                {userRounds
+                  .sort((a, b) => b.index - a.index)
+                  .map((round, k) => (
+                    <React.Fragment key={k}>
+                      <Flex align="center" justify="start" gap={8}>
+                        <Flex align="start" gap={8}>
+                          <Link />
+                          <Text>{round.name}</Text>
+                        </Flex>
+                        {!round.finished ? (
+                          // Finished Round
+                          <Text color={round.alive ? appTheme.colors.gray50 : appTheme.colors.error}>
+                            {round.alive ? `+${round.powerIncrease}` : 'Massacrated'}
+                          </Text>
+                        ) : (
+                          // In progress
+                          <Text color={appTheme.colors.gray50}>In progress</Text>
+                        )}
+                      </Flex>
+                      <Divider y={20} />
+                    </React.Fragment>
+                  ))}
               </Flex>
             </TabPanel>
-            <TabPanel show={showTab === 'zapeos'}>zapeos</TabPanel>
+            <TabPanel show={showTab === 'zapeos'}>
+              <Divider y={12} />
+              {mockZapEvents.map((zap: Zap, k) => (
+                <React.Fragment key={k}>
+                  <Flex align="center" justify="space-between" gap={8}>
+                    <Flex align="start" gap={8}>
+                      <Link />
+                      <Text>Poder agregado</Text>
+                    </Flex>
+                    <Text color={appTheme.colors.gray50}>+{zap.amount / 1000}</Text>
+                  </Flex>
+                  <Divider y={20} />
+                </React.Fragment>
+              ))}
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Container>
