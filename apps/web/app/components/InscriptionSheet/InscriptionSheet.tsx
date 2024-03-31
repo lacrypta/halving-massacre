@@ -1,7 +1,7 @@
-import { ActionSheet, Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
+import { ActionSheet, Button, Flex, Text } from '@lawallet/ui';
 import { useState } from 'react';
-import Payment from './Payment';
 import RulesSheet from '../Rules/RulesSheet';
+import { QRStyled } from '../QRCode';
 
 const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
@@ -17,47 +17,35 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   };
 
   return (
-    <ActionSheet isOpen={isOpen} description="" onClose={restartModal} cancelText="Cancelar">
+    <ActionSheet
+      isOpen={isOpen}
+      title="Comprá tu ticket"
+      description="Para poder participar de la massacre necesitas adquirir un ticket. El pago se realiza una unica vez."
+      onClose={restartModal}
+      cancelText="Cancelar"
+    >
       {!invoicePayment ? (
         <>
-          <Container>
-            <Flex flex={1} justify="center" align="center" direction="column">
-              <Heading as="h3">Comprá tu ticket</Heading>
-
-              <Divider y={24} />
-
-              <Text>
-                El ticket cuesta <b>210 sats</b> (por única vez).
-              </Text>
-              <Divider y={20} />
-              <Text>
-                Se te agrega <b>1 sat de poder</b>
-              </Text>
-              <Divider y={20} />
-              <Text>Podes seguir agregando poder cuando quieras mientras sigas vivo</Text>
-
-              <Divider y={12} />
-            </Flex>
-
-            <Divider y={12} />
-
-            <Flex flex={1} direction="row" align="center" justify="center">
-              <Button onClick={handleClick}>Anotarme</Button>
-            </Flex>
-
-            <Divider y={6} />
-
-            <Flex flex={1} direction="row" align="center" justify="center" onClick={() => setIsRulesOpen(true)}>
-              <Text size="small" color="#56B68C">
-                Ver reglamento
-              </Text>
-            </Flex>
-          </Container>
+          <Button onClick={handleClick}>Anotarme</Button>
+          <Button onClick={() => setIsRulesOpen(true)} variant="borderless">
+            Ver reglamento
+          </Button>
 
           <RulesSheet isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)} />
         </>
       ) : (
-        <Payment invoice={invoicePayment} />
+        <>
+          <Flex direction="column" gap={8} align="center">
+            <Flex gap={4} align="center" justify="center">
+              <Text size="small">Valor de inscripcion:</Text>
+              <Text isBold>210 SATs</Text>
+            </Flex>
+            <QRStyled size={250} value={invoicePayment} />
+            <Text size="small" color="gray">
+              Disponible por 10 min, 15 seg.
+            </Text>
+          </Flex>
+        </>
       )}
     </ActionSheet>
   );
