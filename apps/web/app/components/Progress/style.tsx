@@ -5,13 +5,14 @@ interface ValueProps {
 }
 
 export const ProgressPrimitive = styled.div`
+  position: relative;
   overflow: hidden;
 
   width: 100%;
-  height: 16px;
+  height: 32px;
 
   background-color: ${(props) => props.theme.colors.gray35};
-  border-radius: 12px;
+  border-radius: 24px;
 
   transition-duration: 0.4s;
 `;
@@ -21,4 +22,16 @@ export const Value = styled.div<ValueProps>`
   height: 100%;
 
   background-color: ${(props) => props.theme.colors.success};
+`;
+
+export const TextValue = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `;
