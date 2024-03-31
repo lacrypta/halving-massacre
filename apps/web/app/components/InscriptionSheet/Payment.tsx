@@ -1,5 +1,5 @@
-import { Divider, Flex, Heading, Text } from "@lawallet/ui";
-import { QRStyled } from "../QRCode";
+import { Divider, Flex, Heading, Text } from '@lawallet/ui';
+import { QRStyled } from '../QRCode';
 
 const Payment = ({ invoice }: { invoice: string }) => {
   return (
@@ -10,7 +10,7 @@ const Payment = ({ invoice }: { invoice: string }) => {
         <Divider y={12} />
 
         <Text align="center">
-          El precio de inscripcion es de 100 SAT. No te olvides de pagarlo!
+          El precio de inscripcion es de <b>210 sats</b>. No te olvides de pagarlo!
         </Text>
 
         <Divider y={12} />
