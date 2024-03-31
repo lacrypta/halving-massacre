@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Container, Divider, Flex, Text, Button, Heading } from '@lawallet/ui';
-import { useNostrContext, useProfile } from '@lawallet/react';
+import { useProfile } from '@lawallet/react';
 
 import { Avatar } from '@/components/Avatar';
 import Ticket from '@/components/Icons/Ticket';
@@ -12,6 +12,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@/components/Tabs';
 
 import { appTheme } from '../../../config/exports';
 import Progress from '@/components/Progress';
+import InscriptionSheet from '@/components/InscriptionSheet/InscriptionSheet';
 
 interface PageProps {
   params: {
@@ -22,8 +23,9 @@ interface PageProps {
 export default function Page({ params }: PageProps): JSX.Element {
   const walias = decodeURIComponent(params.lud16);
   const { nip05, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
+  const [isInscriptionOpen, setIsInscriptionOpen] = useState(false);
 
-  const hasTicket = true;
+  const hasTicket = false;
   const valueProgress = 10;
   const isDeath = false;
 
@@ -42,7 +44,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                 Agregar poder
               </Button>
             ) : (
-              <Button onClick={() => null} variant="bezeled">
+              <Button onClick={() => setIsInscriptionOpen(true)} variant="bezeled">
                 <Ticket />
                 Comprar ticket
               </Button>
@@ -102,6 +104,7 @@ export default function Page({ params }: PageProps): JSX.Element {
           </TabPanels>
         </Tabs>
       </Container>
+      <InscriptionSheet isOpen={isInscriptionOpen} onClose={() => setIsInscriptionOpen(false)} />
     </>
   );
 }
