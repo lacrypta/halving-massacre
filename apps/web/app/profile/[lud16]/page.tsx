@@ -84,10 +84,7 @@ export default function Page({ params }: PageProps): JSX.Element {
           Chances de sobrevivir la ronda
         </Text>
         <Divider y={8} />
-        <Flex align="center" gap={8}>
-          <Progress value={valueProgress} />
-          <Text>{valueProgress}%</Text>
-        </Flex>
+        <Progress value={valueProgress} />
         <Divider y={12} />
 
         {/* Configurar para que al hacer click en la Tab se muestre el TabPanel correspondiente */}
@@ -103,10 +100,13 @@ export default function Page({ params }: PageProps): JSX.Element {
           <TabPanels>
             <TabPanel show={showTab === 'rondas'}>
               <Divider y={12} />
-              <Flex direction="column" flex={1} align="center" justify="center">
-                {/* <Heading as="h4">Lorem, ipsum dolor.</Heading>
-                <Text align="center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, impedit.</Text> */}
-
+              {/* Mostrar en caso de que no tenga rondas actuales */}
+              {/* <Flex direction="column" flex={1} align="center" justify="center">
+                <Heading as="h4">Lorem, ipsum dolor.</Heading>
+                <Text align="center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, impedit.</Text>
+              </Flex> */}
+              {/* Mostrar en el caso de que tenga rondas */}
+              <Flex direction="column" flex={1} align="center">
                 {userRounds
                   .sort((a, b) => b.index - a.index)
                   .map((round, k) => (
@@ -118,12 +118,16 @@ export default function Page({ params }: PageProps): JSX.Element {
                         </Flex>
                         {!round.finished ? (
                           // Finished Round
-                          <Text color={round.alive ? appTheme.colors.gray50 : appTheme.colors.error}>
-                            {round.alive ? `+${round.powerIncrease}` : 'Massacrated'}
-                          </Text>
+                          <Flex justify="end">
+                            <Text color={round.alive ? appTheme.colors.gray50 : appTheme.colors.error}>
+                              {round.alive ? `+${round.powerIncrease}` : 'Massacrated'}
+                            </Text>
+                          </Flex>
                         ) : (
                           // In progress
-                          <Text color={appTheme.colors.gray50}>In progress</Text>
+                          <Flex justify="end">
+                            <Text color={appTheme.colors.gray50}>In progress</Text>
+                          </Flex>
                         )}
                       </Flex>
                       <Divider y={20} />
