@@ -44,6 +44,10 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
             <Text size="small" color="gray">
               Disponible por 10 min, 15 seg.
             </Text>
+            <Flex gap={8}>
+              <Button variant="borderless">Copiar</Button>
+              <Button variant="bezeled">Pagar con Alby</Button>
+            </Flex>
           </Flex>
         </>
       )}

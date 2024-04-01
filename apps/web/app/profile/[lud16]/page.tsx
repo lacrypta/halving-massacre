@@ -20,6 +20,10 @@ import { userRounds } from '../../../mocks/rounds';
 
 import type { Zap } from '../../../types/zap';
 import Link from '@/components/Icons/Link';
+import Heart from '@/components/Icons/Heart';
+import Sword from '@/components/Icons/Sword';
+import Skull from '@/components/Icons/Skull';
+import Crown from '@/components/Icons/Crown';
 
 interface PageProps {
   params: {
@@ -112,8 +116,17 @@ export default function Page({ params }: PageProps): JSX.Element {
                   .map((round, k) => (
                     <React.Fragment key={k}>
                       <Flex align="center" justify="start" gap={8}>
-                        <Flex align="start" gap={8}>
-                          <Link />
+                        <Flex align="center" gap={8}>
+                          {/* Listado de iconos: */}
+                          {/* <Heart color={appTheme.colors.success} />
+                          <Skull color={appTheme.colors.error} />
+                          <Crown color={appTheme.colors.secondary} />
+                          <Sword color={appTheme.colors.primary} /> */}
+                          {!round.alive ? (
+                            <Skull color={appTheme.colors.error} />
+                          ) : (
+                            <Heart color={appTheme.colors.success} />
+                          )}
                           <Text>{round.name}</Text>
                         </Flex>
                         {!round.finished ? (
@@ -140,8 +153,8 @@ export default function Page({ params }: PageProps): JSX.Element {
               {mockZapEvents.map((zap: Zap, k) => (
                 <React.Fragment key={k}>
                   <Flex align="center" justify="space-between" gap={8}>
-                    <Flex align="start" gap={8}>
-                      <Link />
+                    <Flex align="center" gap={8}>
+                      <Bolt color={appTheme.colors.primary} />
                       <Text>Poder agregado</Text>
                     </Flex>
                     <Text color={appTheme.colors.gray50}>+{zap.amount / 1000}</Text>
