@@ -13,5 +13,6 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": ["NOSTR_PRIVATE_KEY", "NEXT_PUBLIC_TICKET_PRICE", "NEXT_PUBLIC_TICKET_DESTINATION_PUBKEY"]
 }
