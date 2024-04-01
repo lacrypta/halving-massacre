@@ -12,7 +12,9 @@
     "@halving-massacre/nomad": "workspace:*",
     "@lawallet/react": "^0.1.4",
     "@lawallet/ui": "0.1.27",
+    "@lawallet/utils": "^0.1.2",
     "next": "^14.1.1",
+    "nostr-tools": "1.17",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
