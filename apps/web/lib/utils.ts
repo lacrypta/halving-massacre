@@ -17,3 +17,13 @@ export function removeObjectKeys(
   // Return the modified copy of obj1
   return result;
 }
+
+export function normalizeWalias(walias: string): string {
+  return walias.toLowerCase().trim();
+}
+
+export const validateEmail = (email: string): RegExpMatchArray | null => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  );
+};
