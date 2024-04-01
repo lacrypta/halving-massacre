@@ -13,6 +13,7 @@
     "@lawallet/react": "^0.1.4",
     "@lawallet/ui": "0.1.27",
     "@lawallet/utils": "^0.1.2",
+    "bolt11": "^1.4.1",
     "next": "^14.1.1",
     "nostr-tools": "1.17",
     "qrcode.react": "^3.1.0",
@@ -27,6 +28,7 @@
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
+    "@webbtc/webln-types": "^3.0.0",
     "eslint": "^8.57.0",
     "styled-components": "^6.1.8",
     "typescript": "^5.3.3"
