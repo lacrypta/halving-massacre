@@ -64,9 +64,9 @@ export async function POST(request: Request): Promise<NextResponse<SuccessRespon
     unsignedZapRequestEvent.tags.push(['e', eventIdReference]);
     unsignedZapRequestEvent.tags.push(['commitment', JSON.stringify(ticketEvent)]);
     unsignedZapRequestEvent.tags.push(['claimUrl', 'https://halving.lacrypta.ar/claim']);
-    const zapRequestEvent = finishEvent(unsignedZapRequestEvent, NOSTR_PRIVATE_KEY);
 
-    console.dir(zapRequestEvent);
+    // Sign ZapRequest Event
+    const zapRequestEvent = finishEvent(unsignedZapRequestEvent, NOSTR_PRIVATE_KEY);
 
     // URIEncode ZapRequest Event
     const zapRequestURI: string = encodeURI(JSON.stringify(zapRequestEvent));
