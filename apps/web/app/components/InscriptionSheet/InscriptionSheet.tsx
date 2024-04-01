@@ -7,6 +7,7 @@ import { useSubscription } from '@lawallet/react';
 import { type Event } from 'nostr-tools';
 
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
+const TICKET_PRICE = parseInt(process.env.NEXT_PUBLIC_TICKET_PRICE!);
 
 const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
@@ -58,7 +59,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount: 210 }),
+        body: JSON.stringify({}),
       });
       const data = (await res.json()) as SuccessResponse | ErrorResponse;
       if (data.success) {
@@ -85,8 +86,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
       });
       const data = (await res.json()) as SuccessResponse | ErrorResponse;
       if (data.success) {
-        alert('PERFECTOOOO!');
-        console.info('%%%%% DATA %%%%%');
+        console.info('%%%%% Ticket %%%%%');
         console.dir(data);
         setIsClaiming(false);
         return;
@@ -175,7 +175,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
               <>
                 <Flex gap={4} align="center" justify="center">
                   <Text size="small">Valor de inscripcion:</Text>
-                  <Text isBold>210 SATs</Text>
+                  <Text isBold>{TICKET_PRICE} SATs</Text>
                 </Flex>
                 <QRStyled size={250} value={invoicePayment} />
                 <Text size="small" color="gray">
