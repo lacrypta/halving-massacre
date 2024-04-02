@@ -13,7 +13,7 @@ export const PlayerContext = createContext({} as PlayerContextType);
 
 export function PlayerProvider({ children }: React.PropsWithChildren & { walias: string }) {
   const value = {
-    power: 200,
+    power: 1000,
     isAlive: true,
     hasTicket: true,
     totalZaps: 4,
