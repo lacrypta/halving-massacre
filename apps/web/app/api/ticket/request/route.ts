@@ -12,6 +12,7 @@ const NOSTR_PRIVATE_KEY = process.env.NOSTR_PRIVATE_KEY!;
 const NOSTR_PUBLIC_KEY = getPublicKey(NOSTR_PRIVATE_KEY);
 const DESTINATION_PUBKEY = process.env.NEXT_PUBLIC_TICKET_DESTINATION_PUBKEY!;
 const TICKET_PRICE = parseInt(process.env.NEXT_PUBLIC_TICKET_PRICE!);
+const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 
 // Response interfaces
 export interface SuccessResponse {
@@ -56,10 +57,19 @@ export async function POST(request: Request): Promise<NextResponse<SuccessRespon
 
     // Ticket Event for claiming
     const ticketEvent: EventTemplate = {
-      content: 'Ticket del Halving Massacre',
+      content: JSON.stringify({
+        player: walias,
+      }),
       created_at: nowInSeconds(),
       kind: 1112,
-      tags: [['e', eventIdReference]],
+      tags: [
+        ['e', eventIdReference],
+        ['L', 'halving-massacre'],
+        ['l', 'ticket', 'halving-massacre'],
+        ['l', MASSACRE_SETUP_ID],
+        ['i', walias],
+        ['block', '0'],
+      ],
     };
 
     // Build ZapRequest Event
