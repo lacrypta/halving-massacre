@@ -31,6 +31,9 @@ export async function POST(request: Request): Promise<NextResponse<SuccessRespon
     // Get walias from request body
     const { walias: _walias } = await request.json();
 
+    // console.info('await request.json()');
+    // console.dir(await request.json());
+
     // Validate walias
     // if (!validateEmail(_walias)) {
     //   return NextResponse.json({ success: false, error: 'Invalid email' }, { status: 400 });

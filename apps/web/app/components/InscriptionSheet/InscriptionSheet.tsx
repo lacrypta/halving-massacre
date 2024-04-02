@@ -2,7 +2,7 @@ import { ActionSheet, Button, Divider, Flex, Heading, Loader, Text } from '@lawa
 import { useEffect, useState } from 'react';
 import RulesSheet from '../Rules/RulesSheet';
 import { QRStyled } from '../QRCode';
-import type { ErrorResponse, SuccessResponse } from '@/api/ticket/route';
+import type { ErrorResponse, SuccessResponse } from '@/api/ticket/request/route';
 import { useSubscription } from '@lawallet/react';
 import { type Event } from 'nostr-tools';
 
@@ -54,12 +54,12 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   const handleClick = async () => {
     try {
       setIsInvoiceLoading(true);
-      const res = await fetch('/api/ticket', {
+      const res = await fetch('/api/ticket/request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ walias: 'test@lacrypta.ar' }),
       });
       const data = (await res.json()) as SuccessResponse | ErrorResponse;
       if (data.success) {
