@@ -47,7 +47,7 @@ export function PlayerDashboard({ walias, onAddPower, onBuyTicket }: PlayerDashb
   const { hasTicket, isAlive, power } = usePlayer();
   const { medianPower } = useMassacre();
 
-  const powerProgress = Math.min(((power * 1000) / medianPower) * 100, 100).toFixed(2);
+  const powerProgress = parseInt(Math.min(((power * 1000) / medianPower) * 100, 100).toFixed(2));
 
   const [showTab, setTab] = useState('rondas');
 
