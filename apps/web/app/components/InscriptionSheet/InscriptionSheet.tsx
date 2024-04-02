@@ -110,7 +110,6 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
       await window.webln.sendPayment(invoice);
     } catch (e) {
       alert((e as Error).message);
-    } finally {
       setIsPaying(false);
     }
   };
@@ -145,8 +144,8 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         ) : (
           <Flex direction="column" align="center" justify="center" gap={16}>
             <Divider y={32} />
-            <Heading align="center" as="h3">
-              Generando ticket...
+            <Heading align="center" as="h4">
+              Generando ticket
             </Heading>
             <Divider y={32} />
             <Loader />
