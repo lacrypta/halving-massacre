@@ -3,6 +3,7 @@ import type { Event } from 'nostr-tools';
 import { createContext, useEffect, useState } from 'react';
 import type { MassacreStatusEventContent } from '../types/massacre';
 import { calculateMedian } from '../lib/utils';
+import type { NDKKind } from '../types/ndk';
 
 const PUBLISHER_PUBKEY = process.env.NEXT_PUBLIC_PUBLISHER_PUBKEY!;
 export interface MassacreContextType extends MassacreStatusEventContent {
@@ -38,7 +39,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     filters: [
       {
         ids: [setupId],
-        kinds: [1112],
+        kinds: [1112 as NDKKind],
         authors: [PUBLISHER_PUBKEY],
       },
     ],
@@ -51,7 +52,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
   const { events: stateEvents } = useSubscription({
     filters: [
       {
-        kinds: [31111],
+        kinds: [31111 as NDKKind],
         authors: [PUBLISHER_PUBKEY],
         '#d': [`state:${setupId}`],
       },
