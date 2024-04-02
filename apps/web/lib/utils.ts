@@ -78,12 +78,15 @@ export function calculateMedian(valuesObj: { [key: string]: number }): number {
 
   const middleIndex = Math.floor(values.length / 2);
 
+  if (values.length === 0) {
+    return 0;
+  }
   // Check if the total number of values is odd or even
   if (values.length % 2 === 0) {
     // If even, the median is the average of the two middle numbers
-    return (values[middleIndex - 1] + values[middleIndex]) / 2;
+    return (values[middleIndex - 1]! + values[middleIndex]!) / 2;
   } else {
     // If odd, the median is the middle number
-    return values[middleIndex];
+    return values[middleIndex]!;
   }
 }
