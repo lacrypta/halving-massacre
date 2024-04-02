@@ -4,16 +4,11 @@ import { NostrProvider, ProfileCacheProvider, createConfig } from '@lawallet/rea
 import '@lawallet/ui/styles';
 import { appTheme } from '../config/exports';
 import Footer from './components/Footer';
+import { MassacreProvider } from '../context/MassacreContext';
+import relaysList from '../config/relays.json';
 
-const relaysList: string[] = [
-  'wss://relay.hodl.ar',
-  'wss://relay.lawallet.ar',
-  'wss://relay.primal.net',
-  'wss://relay.snort.social',
-  'wss://nos.lol',
-  'wss://relay.damus.io',
-  'wss://nostr-pub.wellorder.net',
-];
+const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
+
 const nostrConfig = createConfig({ relaysList });
 
 export default function Template({ children }: { children: React.ReactNode }) {
@@ -21,8 +16,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <NextProvider theme={appTheme}>
       <NostrProvider config={nostrConfig}>
         <ProfileCacheProvider>
-          {children}
-          <Footer />
+          <MassacreProvider setupId={MASSACRE_SETUP_ID}>
+            {children}
+            <Footer />
+          </MassacreProvider>
         </ProfileCacheProvider>
       </NostrProvider>
     </NextProvider>
