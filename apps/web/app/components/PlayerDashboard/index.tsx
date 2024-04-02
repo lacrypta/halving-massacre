@@ -55,12 +55,6 @@ export function PlayerDashboard({ walias, onAddPower, onBuyTicket }: PlayerDashb
     <Container size="small">
       <Flex justify="space-between" align="center">
         <Avatar alt={nip05?.displayName || walias} size={20} src={nip05Avatar || lud16Avatar || domainAvatar} />
-
-        <div>
-          <div>Median: {medianPower}</div>
-          <div>Power: {power}</div>
-          <div>PowerProgress: {powerProgress}</div>
-        </div>
         <div>
           {hasTicket ? (
             <Button onClick={() => onAddPower()} variant="bezeled" disabled={!isAlive}>
