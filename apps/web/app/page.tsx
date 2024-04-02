@@ -8,14 +8,14 @@ import Header from './components/Header';
 import Countdown from './components/Countdown';
 import Card from './components/Card';
 
-const PARTICIPANTES = ['fer@lawallet.ar', 'dios@lawallet.ar', 'agustin@lawallet.ar'];
+// const PARTICIPANTES = ['fer@lawallet.ar', 'dios@lawallet.ar', 'agustin@lawallet.ar'];
 
 export default function Page(): JSX.Element {
   return (
     <>
       <Divider y={64} />
       <Container>
-        <Flex direction='column' align='center'>
+        <Flex direction="column" align="center">
           <Header />
           <Divider y={24} />
           <Countdown />
@@ -23,19 +23,19 @@ export default function Page(): JSX.Element {
 
         <Divider y={24} />
 
-        <Flex direction='column' gap={8}>
-          <Flex direction='row' gap={8}>
-            <Card image='/emotes/crown.png'>
-              <Heading as='h2'>1</Heading>
+        <Flex direction="column" gap={8}>
+          <Flex direction="row" gap={8}>
+            <Card image="/emotes/crown.png">
+              <Heading as="h2">1</Heading>
               <Text color={appTheme.colors.gray50}>ganador.</Text>
             </Card>
-            <Card image='/emotes/rocket.png'>
-              <Heading as='h2'>25.000</Heading>
+            <Card image="/emotes/rocket.png">
+              <Heading as="h2">25.000</Heading>
               <Text color={appTheme.colors.gray50}>participantes.</Text>
             </Card>
           </Flex>
-          <Card image='/emotes/party.png' size='small'>
-            <Heading as='h2'>2.100.000</Heading>
+          <Card image="/emotes/party.png" size="small">
+            <Heading as="h2">2.100.000</Heading>
             <Text color={appTheme.colors.gray50}>SATs de premio inicial.</Text>
           </Card>
         </Flex>

@@ -60,7 +60,7 @@ export default function Countdown() {
   const router = useRouter();
   const [walias, setWalias] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
+  const [, setError] = useState<string>();
   const [openLNInfo, setOpenLNInfo] = useState(false);
 
   const [counterInfo, setCounterInfo] = useState<CounterType>(defaultCounter);
