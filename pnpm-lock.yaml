@@ -33,8 +33,8 @@ importers:
         specifier: 0.1.27
         version: 0.1.27(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       '@lawallet/utils':
-        specifier: ^0.1.2
-        version: 0.1.2(typescript@5.3.3)
+        specifier: ^0.1.3
+        version: 0.1.3(typescript@5.3.3)
       bolt11:
         specifier: ^1.4.1
         version: 1.4.1
@@ -453,7 +453,7 @@ packages:
     peerDependencies:
       react: ^18.2.0
     dependencies:
-      '@lawallet/utils': 0.1.2(typescript@5.3.3)
+      '@lawallet/utils': 0.1.3(typescript@5.3.3)
       '@nostr-dev-kit/ndk': 2.6.1(typescript@5.3.3)
       nostr-tools: /@lawallet/nostr-tools@1.17.0(typescript@5.3.3)
       react: 18.2.0
@@ -480,8 +480,8 @@ packages:
       styled-components: 6.1.8(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
-  /@lawallet/utils@0.1.2(typescript@5.3.3):
-    resolution: {integrity: sha512-tableCopRaWII5ggM2BhV2sGZO42A5U4gWg2cXkGZtxYNZ2BS4ZQU1WslyyCDSxoLxDyWWU1BZvrNL1FdLhxtA==}
+  /@lawallet/utils@0.1.3(typescript@5.3.3):
+    resolution: {integrity: sha512-B9m/c51U4E8HPb/ajQ1DMxvrlstwIFvuybWt23a+xdMLMee38etz42kOCUNEKdDOGRcX6LkKympHZJ31krkQzQ==}
     dependencies:
       '@nostr-dev-kit/ndk': 2.6.1(typescript@5.3.3)
       date-fns: 3.6.0
