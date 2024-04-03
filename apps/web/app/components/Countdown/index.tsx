@@ -13,6 +13,7 @@ import { useActionOnKeypress } from '../../../hooks/useActionOnKeypress';
 import LightingAddressSheet from '../InscriptionSheet/LightingAddressSheet';
 
 import { CountdownPrimitive, NumbersBox } from './style';
+import { resolveLud16 } from '../../../lib/utils';
 
 let timerInterval: NodeJS.Timeout;
 
@@ -65,7 +66,7 @@ export default function Countdown() {
   const router = useRouter();
   const [walias, setWalias] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [, setError] = useState<string>();
+  const [error, setError] = useState<string>();
   const [openLNInfo, setOpenLNInfo] = useState(false);
 
   const [counterInfo, setCounterInfo] = useState<CounterType>(defaultCounter);
@@ -88,20 +89,18 @@ export default function Countdown() {
     return () => clearInterval(timerInterval);
   }, []);
 
-  const checkValidLightningAddress = useCallback(() => {
+  const checkValidLightningAddress = useCallback(async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      try {
-        if (walias === '') {
-          setIsLoading(false);
-          throw new Error('Debe ingresar un Lightning Address valido');
-        }
-        router.push(`/profile/${walias}`);
-      } catch (error: unknown) {
-        setIsLoading(false);
-        setError((error as Error).message);
-      }
-    }, 2000);
+
+    const lud16 = await resolveLud16(walias);
+
+    if (!lud16) {
+      setIsLoading(false);
+      setError('Debes ingresar una LNURL válida');
+      return;
+    }
+
+    router.push(`/profile/${walias}`);
   }, [walias]);
 
   useActionOnKeypress('Enter', checkValidLightningAddress, [walias]);
@@ -151,7 +150,16 @@ export default function Countdown() {
             )}
           </Button>
         </Flex>
-        <Divider y={4} />
+
+        {error && (
+          <>
+            <Divider y={4} />
+            <Text size="small" align="center" color={appTheme.colors.error}>
+              {error}
+            </Text>
+          </>
+        )}
+
         <Flex>
           <Button variant="borderless" onClick={() => setOpenLNInfo(true)}>
             ¿Qué es esto?
