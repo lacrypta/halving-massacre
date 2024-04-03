@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 // @lawallet/ui
 import { Button, Container, Divider, Flex, Text, Heading } from '@lawallet/ui';
 
-// Local components
-import Ticket from '@/components/Icons/Ticket';
-
 // New ui-components
 import Badge from '@/components/Badge/index';
 import Progress from '@/components/Progress';
@@ -17,15 +14,7 @@ import { TabPanels } from '@/components/Tabs/TabPanels';
 import { TabPanel } from '@/components/Tabs/TabPanel';
 import { Card } from '@/components/CardV2';
 import { Icon } from '@/components/Icon';
-
-// Icons
-import Bolt from '@/components/Icons/Bolt';
-import Heart from '@/components/Icons/Heart';
-import Skull from '@/components/Icons/Skull';
-import Shield from '../Icons/Shield';
-import Crown from '@/components/Icons/Crown';
-// import Link from '@/components/Icons/Link';
-// import Sword from '@/components/Icons/Sword';
+import { Bolt, Heart, Skull, Shield, Ticket, Crown, Link, Sword } from '@/components/Icons';
 
 import { appTheme } from '../../../config/exports';
 
@@ -65,12 +54,12 @@ export function PlayerDashboard({ walias, onAddPower, onBuyTicket }: PlayerDashb
         <Avatar alt={nip05?.displayName || walias} size={20} src={nip05Avatar || lud16Avatar || domainAvatar} />
         <div>
           {hasTicket ? (
-            <Button onClick={() => onAddPower()} variant="bezeled" disabled={!isAlive}>
+            <Button onClick={() => onAddPower()} disabled={!isAlive}>
               <Bolt />
               Agregar poder
             </Button>
           ) : (
-            <Button onClick={() => onBuyTicket()} variant="bezeled">
+            <Button onClick={() => onBuyTicket()}>
               <Ticket />
               Comprar ticket
             </Button>
