@@ -11,6 +11,7 @@ export interface MassacreContextType extends MassacreStatusEventContent {
   totalAmount: number;
   medianPower: number;
   setupId: string;
+  publisherPubkey: string;
 }
 
 export interface MassacreSetup {
@@ -73,7 +74,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     setSetup(JSON.parse(setupEvent.content));
   }, [setupEvents]);
 
-  // Setup Events (Should be one)
+  // Status Events (Updatable - Pick the last one)
   useEffect(() => {
     if (stateEvents.length === 0) {
       return;
@@ -94,6 +95,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     medianPower: totalPlayers ? calculateMedian(status.players) : 0,
     setupId,
     setup,
+    publisherPubkey: PUBLISHER_PUBKEY,
     ...status,
   };
 

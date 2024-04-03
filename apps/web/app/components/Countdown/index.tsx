@@ -23,7 +23,7 @@ type CounterType = {
   formatted: FormattedCountdown;
 };
 
-const targetDate: Date = new Date('2024-04-04T12:00:00');
+const targetDate: Date = new Date('2024-04-13T12:00:00');
 
 const defaultCounter: CounterType = {
   time: 0,
