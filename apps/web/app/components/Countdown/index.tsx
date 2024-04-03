@@ -1,12 +1,17 @@
-import { Button, Divider, Flex, Heading, Input, Loader, Text } from '@lawallet/ui';
 import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button, Divider, Flex, Heading, Input, Text } from '@lawallet/ui';
+
+// New ui-components
+import { Icon } from '@/components/Icon';
+import { Loader } from '@/components/Icons';
 
 import { appTheme } from '../../../config/exports';
 
-import { useRouter } from 'next/navigation';
 import { useActionOnKeypress } from '../../../hooks/useActionOnKeypress';
-import Link from '../Icons/Link';
+
 import LightingAddressSheet from '../InscriptionSheet/LightingAddressSheet';
+
 import { CountdownPrimitive, NumbersBox } from './style';
 
 let timerInterval: NodeJS.Timeout;
@@ -136,12 +141,20 @@ export default function Countdown() {
         />
         <Divider y={8} />
         <Flex>
-          {isLoading ? <Loader /> : <Button onClick={() => checkValidLightningAddress()}>Anotarme ahora</Button>}
+          <Button onClick={() => checkValidLightningAddress()} disabled={isLoading}>
+            {isLoading ? (
+              <Icon size={6}>
+                <Loader />
+              </Icon>
+            ) : (
+              'Anotarme ahora'
+            )}
+          </Button>
         </Flex>
         <Divider y={4} />
         <Flex>
           <Button variant="borderless" onClick={() => setOpenLNInfo(true)}>
-            ¿Qué es esto? <Link />
+            ¿Qué es esto?
           </Button>
         </Flex>
       </CountdownPrimitive>
