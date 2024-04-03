@@ -1,4 +1,4 @@
-import { validateEvent, type Event } from 'nostr-tools';
+import { validateEvent, type Event, SimplePool, type Relay, relayInit } from 'nostr-tools';
 import type { ZapReceiptWithCommitment } from '../types/zap';
 
 import { decode as decodeBolt11 } from 'bolt11';
@@ -106,4 +106,15 @@ export async function resolveLud16(address: string): Promise<LNRequestResponse |
   } catch (_e) {
     return;
   }
+}
+
+export async function publishEvent(event: Event, relayList: string[]) {
+  const relays: Relay[] = relayList.map((url) => relayInit(url));
+
+  await Promise.all(
+    relays.map(async (relay) => {
+      await relay.connect();
+      relay.publish(event);
+    }),
+  );
 }
