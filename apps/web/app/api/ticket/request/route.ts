@@ -17,9 +17,8 @@ const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 // Response interfaces
 export interface SuccessResponse {
   success: true;
-  walias: string;
-  invoice: string;
-  eventIdReference: string;
+  pr: string;
+  eTag: string;
 }
 
 export interface ErrorResponse {
@@ -95,7 +94,7 @@ export async function POST(request: Request): Promise<NextResponse<SuccessRespon
     }
 
     // Return success response
-    return NextResponse.json({ success: true, walias, invoice: bolt11, eventIdReference });
+    return NextResponse.json({ success: true, walias, pr: bolt11, eTag: eventIdReference });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
