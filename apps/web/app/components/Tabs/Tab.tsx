@@ -6,16 +6,17 @@ import { TabStyle } from './style';
 interface TabProps {
   children: ReactNode;
   active?: boolean;
+  disabled?: boolean;
   // Valor opcional
   onClick?: () => void;
 }
 
 export function Tab(props: TabProps) {
-  const { children, active = false } = props;
+  const { children, active = false, disabled = false } = props;
 
   return (
     <TabStyle $active={active}>
-      <Button size="small" variant="borderless" {...props}>
+      <Button disabled={disabled} size="small" variant="borderless" {...props}>
         {children}
       </Button>
     </TabStyle>
