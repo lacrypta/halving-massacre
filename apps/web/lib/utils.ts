@@ -2,6 +2,8 @@ import { validateEvent, type Event } from 'nostr-tools';
 import type { ZapReceiptWithCommitment } from '../types/zap';
 
 import { decode as decodeBolt11 } from 'bolt11';
+import { NIP05_REGEX } from 'nostr-tools/nip05';
+import type { LNRequestResponse } from '@lawallet/utils/types';
 
 export function removeObjectKeys(
   obj1: { [key: string]: number },
@@ -88,5 +90,20 @@ export function calculateMedian(valuesObj: { [key: string]: number }): number {
   } else {
     // If odd, the median is the middle number
     return values[middleIndex]!;
+  }
+}
+
+export async function resolveLud16(address: string): Promise<LNRequestResponse | undefined> {
+  const match = address.match(NIP05_REGEX);
+  if (!match) return;
+
+  const [_, name = '_', domain] = match;
+
+  try {
+    const url = `https://${domain}/.well-known/lnurlp/${name}`;
+    const res = await (await fetch(url, { redirect: 'error' })).json();
+    return res;
+  } catch (_e) {
+    return;
   }
 }
