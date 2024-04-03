@@ -134,16 +134,15 @@ export default function Countdown() {
           type="email"
           placeholder="Lightning Address"
         />
-        <Divider y={4} />
-        <Flex flex={1} direction="row" align="center" justify="center" onClick={() => setOpenLNInfo(true)}>
-          <Text size="small" color="#56B68C">
-            ¿Qué es esto?
-          </Text>
-          <Link />
-        </Flex>
         <Divider y={8} />
         <Flex>
           {isLoading ? <Loader /> : <Button onClick={() => checkValidLightningAddress()}>Anotarme ahora</Button>}
+        </Flex>
+        <Divider y={4} />
+        <Flex>
+          <Button variant="borderless" onClick={() => setOpenLNInfo(true)}>
+            ¿Qué es esto? <Link />
+          </Button>
         </Flex>
       </CountdownPrimitive>
 
