@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Divider, Flex, Heading, Input, Text } from '@lawallet/ui';
+import { Button, Divider, Flex, Input, Text } from '@lawallet/ui';
 
 // New ui-components
 import { Icon } from '@/components/Icon';

@@ -1,4 +1,4 @@
-import { validateEvent, type Event, SimplePool, type Relay, relayInit } from 'nostr-tools';
+import { validateEvent, type Event, type Relay, relayInit } from 'nostr-tools';
 import type { ZapReceiptWithCommitment } from '../types/zap';
 
 import { decode as decodeBolt11 } from 'bolt11';
@@ -97,7 +97,8 @@ export async function resolveLud16(address: string): Promise<LNRequestResponse |
   const match = address.match(NIP05_REGEX);
   if (!match) return;
 
-  const [_, name = '_', domain] = match;
+  // eslint-disable-next-line no-unused-vars
+  const [, name = '_', domain] = match;
 
   try {
     const url = `https://${domain}/.well-known/lnurlp/${name}`;
