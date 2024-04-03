@@ -2,9 +2,20 @@ import { ActionSheet, Button, Divider, Flex, Heading, Loader, Text } from '@lawa
 import { useEffect, useState } from 'react';
 import RulesSheet from '../Rules/RulesSheet';
 import { QRStyled } from '../QRCode';
-import type { ErrorResponse, SuccessResponse } from '@/api/ticket/request/route';
-import { useSubscription } from '@lawallet/react';
+
+// Types
+import type {
+  ErrorResponse as RequestErrorResponse,
+  SuccessResponse as RequestSuccessResponse,
+} from '@/api/ticket/request/route';
+import type {
+  ErrorResponse as ClaimErrorResponse,
+  SuccessResponse as ClaimSuccessResponse,
+} from '@/api/ticket/claim/route';
 import { type Event } from 'nostr-tools';
+
+// Hooks
+import { useSubscription } from '@lawallet/react';
 import { usePlayer } from '../../../hooks/usePlayer';
 
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
@@ -63,7 +74,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         },
         body: JSON.stringify({ walias }),
       });
-      const data = (await res.json()) as SuccessResponse | ErrorResponse;
+      const data = (await res.json()) as RequestSuccessResponse | RequestErrorResponse;
       if (data.success) {
         setEventIdReference(data.eTag);
         setInvoicePayment(data.pr);
@@ -86,7 +97,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         },
         body: JSON.stringify(zap),
       });
-      const data = (await res.json()) as SuccessResponse | ErrorResponse;
+      const data = (await res.json()) as ClaimSuccessResponse | ClaimErrorResponse;
       if (data.success) {
         console.info('%%%%% Ticket %%%%%');
         console.dir(data);
@@ -97,8 +108,6 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
     } catch (e: unknown) {
       console.error((e as Error).message);
       throw e;
-    } finally {
-      // setIsClaiming(false);
     }
   };
 
