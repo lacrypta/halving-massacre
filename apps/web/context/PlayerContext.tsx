@@ -30,5 +30,8 @@ export function PlayerProvider({ walias, children }: React.PropsWithChildren & {
     walias,
   };
 
+  console.info('value:');
+  console.dir(value);
+
   return <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>;
 }
