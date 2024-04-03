@@ -9,3 +9,5 @@ export { Skull } from './Skull';
 export { Sword } from './Sword';
 export { Ticket } from './Ticket';
 export { Twitter } from './Twitter';
+// Custom
+export { Loader } from './Loader';
