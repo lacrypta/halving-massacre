@@ -5,6 +5,7 @@ import { QRStyled } from '../QRCode';
 import type { ErrorResponse, SuccessResponse } from '@/api/ticket/request/route';
 import { useSubscription } from '@lawallet/react';
 import { type Event } from 'nostr-tools';
+import { usePlayer } from '../../../hooks/usePlayer';
 
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
 const TICKET_PRICE = parseInt(process.env.NEXT_PUBLIC_TICKET_PRICE!);
@@ -17,6 +18,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isClaiming, setIsClaiming] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
+  const { walias } = usePlayer();
 
   // Subscription to the zap events
   const { events: zaps } = useSubscription({
@@ -59,12 +61,12 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ walias: 'test@lacrypta.ar' }),
+        body: JSON.stringify({ walias }),
       });
       const data = (await res.json()) as SuccessResponse | ErrorResponse;
       if (data.success) {
-        setEventIdReference(data.eventIdReference);
-        setInvoicePayment(data.invoice);
+        setEventIdReference(data.eTag);
+        setInvoicePayment(data.pr);
         return;
       }
       throw new Error(data.error);
