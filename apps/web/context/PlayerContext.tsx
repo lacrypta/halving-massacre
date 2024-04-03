@@ -16,8 +16,7 @@ export interface PlayerContextType {
 
 export const PlayerContext = createContext({} as PlayerContextType);
 
-export function PlayerProvider({ children }: React.PropsWithChildren & { walias: string }) {
-  const walias = 'agustin@lacrypta.ar';
+export function PlayerProvider({ walias, children }: React.PropsWithChildren & { walias: string }) {
   const { hasTicket, ticketEvent } = useTicket(walias);
   const { events: powerEvents } = usePowerEvents(walias);
   const value = {
