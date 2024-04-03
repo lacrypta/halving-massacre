@@ -1,22 +1,13 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import {
-  Text,
-  Button,
-  Container,
-  Flex,
-  baseTheme as theme,
-  Divider,
-} from "@lawallet/ui";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Text, Button, Container, Flex, baseTheme as theme, Divider } from '@lawallet/ui';
 
-import Twitter from "../Icons/Twitter";
-import Github from "../Icons/Github";
-import Discord from "../Icons/Discord";
-import Eggs from "../Eggs";
+import { Twitter, Github, Discord } from '@/components/Icons';
+import Eggs from '../Eggs';
 
-import { FooterPrimitive } from "./style";
+import { FooterPrimitive } from './style';
 
 export default function Footer() {
   return (
@@ -32,12 +23,7 @@ export default function Footer() {
               </Flex>
               <Divider y={8} />
               <Link href="https://lacrypta.ar/" target="_blank">
-                <Image
-                  src="/la-crypta-logo.svg"
-                  alt="LaCrypta logo"
-                  width={135}
-                  height={30}
-                />
+                <Image src="/la-crypta-logo.svg" alt="LaCrypta logo" width={135} height={30} />
               </Link>
             </div>
             <div className="social">

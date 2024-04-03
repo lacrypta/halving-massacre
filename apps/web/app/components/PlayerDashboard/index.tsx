@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 
-// Local components
-import Bolt from '@/components/Icons/Bolt';
-import Ticket from '@/components/Icons/Ticket';
+// @lawallet/ui
+import { Button, Container, Divider, Flex, Text, Heading } from '@lawallet/ui';
+
+// New ui-components
 import Badge from '@/components/Badge/index';
 import Progress from '@/components/Progress';
+import { Avatar } from '@/components/Avatar';
 import { Tabs } from '@/components/Tabs/Tabs';
 import { TabList } from '@/components/Tabs/TabList';
 import { Tab } from '@/components/Tabs/Tab';
 import { TabPanels } from '@/components/Tabs/TabPanels';
 import { TabPanel } from '@/components/Tabs/TabPanel';
-import { Avatar } from '@/components/Avatar';
-
-// Icons
-// import Link from '@/components/Icons/Link';
-import Heart from '@/components/Icons/Heart';
-// import Sword from '@/components/Icons/Sword';
-import Skull from '@/components/Icons/Skull';
-// import Crown from '@/components/Icons/Crown';
-
-// @lawallet/ui
-import { Button, Container, Divider, Flex, Text } from '@lawallet/ui';
+import { Card } from '@/components/CardV2';
+import { Icon } from '@/components/Icon';
+import { Bolt, Heart, Skull, Shield, Ticket, Crown, Link, Sword } from '@/components/Icons';
 
 import { appTheme } from '../../../config/exports';
 
@@ -51,18 +45,21 @@ export function PlayerDashboard({ walias, onAddPower, onBuyTicket }: PlayerDashb
 
   const [showTab, setTab] = useState('rondas');
 
+  // Mock data
+  const positionNumber = 554;
+
   return (
     <Container size="small">
       <Flex justify="space-between" align="center">
         <Avatar alt={nip05?.displayName || walias} size={20} src={nip05Avatar || lud16Avatar || domainAvatar} />
         <div>
           {hasTicket ? (
-            <Button onClick={() => onAddPower()} variant="bezeled" disabled={!isAlive}>
+            <Button onClick={() => onAddPower()} disabled={!isAlive}>
               <Bolt />
               Agregar poder
             </Button>
           ) : (
-            <Button onClick={() => onBuyTicket()} variant="bezeled">
+            <Button onClick={() => onBuyTicket()}>
               <Ticket />
               Comprar ticket
             </Button>
@@ -87,16 +84,55 @@ export function PlayerDashboard({ walias, onAddPower, onBuyTicket }: PlayerDashb
       )}
 
       <Divider y={12} />
-      <div>
-        {hasTicket ? <Badge color="primary">Ticket adquirido</Badge> : <Badge color="secondary">Sin Ticket</Badge>}
-      </div>
+
+      {isAlive ? (
+        <>
+          <div>
+            {hasTicket ? <Badge color="primary">Ticket adquirido</Badge> : <Badge color="secondary">Sin Ticket</Badge>}
+          </div>
+          <Divider y={12} />
+          <Text size="small" color={appTheme.colors.gray50}>
+            Chances de sobrevivir la ronda
+          </Text>
+          <Divider y={8} />
+          <Progress value={powerProgress} />
+        </>
+      ) : (
+        <>
+          <Card spacing={4} variant="filled">
+            <Flex align="center" gap={16}>
+              <Icon size={8}>
+                <Skull color={appTheme.colors.error} />
+              </Icon>
+              <Flex direction="column">
+                <Heading as="h4" color={appTheme.colors.error}>
+                  Masacrado
+                </Heading>
+                <Text color={appTheme.colors.error}>Posicion #${positionNumber}</Text>
+                <Text size="small">Fuiste shitcoineado.</Text>
+              </Flex>
+            </Flex>
+          </Card>
+        </>
+      )}
+
       <Divider y={12} />
-      <Text size="small" color={appTheme.colors.gray50}>
-        Chances de sobrevivir la ronda
-      </Text>
-      <Divider y={8} />
-      <Progress value={powerProgress} />
-      <Divider y={12} />
+
+      {/* Mostrar en el caso de haber salido ganador */}
+      {/* <Card spacing={4} variant="filled">
+        <Flex align="center" gap={16}>
+          <Icon size={8}>
+            <Crown color={appTheme.colors.secondary} />
+          </Icon>
+          <Flex direction="column">
+            <Heading as="h4" color={appTheme.colors.secondary}>
+              #1
+            </Heading>
+            <Text size="small">Saliste el mas capito.</Text>
+          </Flex>
+        </Flex>
+      </Card>
+      <Divider y={12} /> */}
 
       {/* Configurar para que al hacer click en la Tab se muestre el TabPanel correspondiente */}
       <Tabs>
@@ -110,6 +146,20 @@ export function PlayerDashboard({ walias, onAddPower, onBuyTicket }: PlayerDashb
         </TabList>
         <TabPanels>
           <TabPanel show={showTab === 'rondas'}>
+            <Divider y={12} />
+            <Card spacing={4} variant="filled">
+              <Flex align="center" gap={16}>
+                <Icon size={8}>
+                  <Shield color={appTheme.colors.success} />
+                </Icon>
+                <Flex direction="column">
+                  <Heading as="h4" color={appTheme.colors.success}>
+                    100.000
+                  </Heading>
+                  <Text size="small">de poder acumulado.</Text>
+                </Flex>
+              </Flex>
+            </Card>
             <Divider y={12} />
             {/* Mostrar en caso de que no tenga rondas actuales */}
             {/* <Flex direction="column" flex={1} align="center" justify="center">
@@ -156,6 +206,20 @@ export function PlayerDashboard({ walias, onAddPower, onBuyTicket }: PlayerDashb
             </Flex>
           </TabPanel>
           <TabPanel show={showTab === 'zapeos'}>
+            <Divider y={12} />
+            <Card spacing={4} variant="filled">
+              <Flex align="center" gap={16}>
+                <Icon size={8}>
+                  <Bolt color={appTheme.colors.primary} />
+                </Icon>
+                <Flex direction="column">
+                  <Heading as="h4" color={appTheme.colors.primary}>
+                    400
+                  </Heading>
+                  <Text size="small">de poder aportado.</Text>
+                </Flex>
+              </Flex>
+            </Card>
             <Divider y={12} />
             {mockZapEvents.map((zap: Zap, k) => (
               <React.Fragment key={k}>
