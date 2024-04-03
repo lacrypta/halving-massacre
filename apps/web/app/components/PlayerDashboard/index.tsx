@@ -16,10 +16,12 @@ import { Card } from '@/components/CardV2';
 import { Icon } from '@/components/Icon';
 import { Bolt, Heart, Skull, Shield, Ticket } from '@/components/Icons';
 
+const NEXT_PUBLIC_TARGET_COUNTDOWN = process.env.NEXT_PUBLIC_TARGET_COUNTDOWN! || '2024-04-13T12:00:00';
+const targetDate: Date = new Date(NEXT_PUBLIC_TARGET_COUNTDOWN);
+
 import { appTheme } from '../../../config/exports';
 
 // Mock Data
-import { zapEvents as mockZapEvents } from '../../../mocks/zapEvents';
 import { userRounds } from '../../../mocks/rounds';
 
 // Types
@@ -28,7 +30,7 @@ import type { Zap } from '../../../types/zap.js';
 // Hooks
 import { useProfile } from '@lawallet/react';
 import { usePlayer } from '../../../hooks/usePlayer';
-import { useMassacre } from '../../../hooks/useMassacre';
+import CountdownBox from '../CountdownBox';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -41,6 +43,12 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
   const { hasTicket, isAlive } = usePlayer();
   // const { medianPower } = useMassacre();
 
+  const powerEvent: Zap = {
+    author: walias,
+    amount: 1000, // millisats
+    comment: 'Disfrutá este tiro',
+    createdAt: new Date().getTime() - 25000,
+  };
   // const powerProgress = parseInt(Math.min(((power * 1000) / medianPower) * 100, 100).toFixed(2));
 
   const [showTab, setTab] = useState('zapeos');
@@ -223,30 +231,44 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
                   </Icon>
                   <Flex direction="column">
                     <Heading as="h4" color={appTheme.colors.primary}>
-                      400
+                      1
                     </Heading>
                     <Text size="small">de poder aportado.</Text>
                   </Flex>
                 </Flex>
               </Card>
-              <Divider y={12} />
-              {mockZapEvents.map((zap: Zap, k) => (
-                <React.Fragment key={k}>
-                  <Flex align="center" justify="space-between" gap={8}>
-                    <Flex align="center" gap={8}>
-                      <Bolt color={appTheme.colors.primary} />
-                      <Text>Poder agregado</Text>
-                    </Flex>
-                    <Text color={appTheme.colors.gray50}>+{zap.amount / 1000}</Text>
+              <Divider y={24} />
+
+              <React.Fragment>
+                {/* Mock PowerEvent */}
+                <Flex align="center" justify="space-between" gap={8}>
+                  <Flex align="center" gap={8}>
+                    <Bolt color={appTheme.colors.primary} />
+                    <Text>Poder agregado</Text>
                   </Flex>
-                  <Divider y={20} />
-                </React.Fragment>
-              ))}
+                  <Text color={appTheme.colors.gray50}>+{powerEvent.amount / 1000}</Text>
+                </Flex>
+                <Divider y={12} />
+                {/* Mock TicketEvent */}
+                <Flex align="center" justify="space-between" gap={8}>
+                  <Flex align="center" gap={8}>
+                    <Ticket color={appTheme.colors.primary} />
+                    <Text>Ticket comprado</Text>
+                  </Flex>
+                </Flex>
+                <Divider y={20} />
+              </React.Fragment>
             </TabPanel>
           </TabPanels>
         </Tabs>
       ) : (
-        <div>Countdown</div>
+        <div>
+          <Text size="small" align="center" color={appTheme.colors.gray50}>
+            Cierre de inscripcion en
+          </Text>
+          <Divider y={8} />
+          <CountdownBox targetDate={targetDate} />
+        </div>
       )}
     </Container>
   );
