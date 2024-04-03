@@ -3,7 +3,9 @@
 import { NextResponse } from 'next/server';
 import { finishEvent, getPublicKey, type Event } from 'nostr-tools';
 
-import { parseZapReceiptWithCommitment } from '../../../../lib/utils';
+import { parseZapReceiptWithCommitment, publishEvent } from '../../../../lib/utils';
+
+import relayList from '../../../../config/relays.json';
 
 // Load environment variables
 const NOSTR_PRIVATE_KEY = process.env.NOSTR_PRIVATE_KEY!;
@@ -50,6 +52,12 @@ export async function POST(request: Request): Promise<NextResponse<SuccessRespon
 
     // Sign the ticket event
     const ticketEvent = finishEvent(zap.commitment, NOSTR_PRIVATE_KEY);
+
+    // Publish
+    console.info('Publishing ticket event...');
+    console.dir('ticketEvent:');
+    console.dir(ticketEvent);
+    await publishEvent(ticketEvent, relayList);
 
     // Return success response
     return NextResponse.json({ success: true, ticketEvent: ticketEvent });
