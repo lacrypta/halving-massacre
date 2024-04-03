@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { PlayerContext } from '../context/PlayerContext';
 
 interface UsePlayerReturns {
+  walias: string;
   hasTicket: boolean;
   isAlive: boolean;
   power: number;
@@ -10,9 +11,10 @@ interface UsePlayerReturns {
 }
 
 export const usePlayer = (): UsePlayerReturns => {
-  const { hasTicket, isAlive, power, totalZaps, amountZapped } = useContext(PlayerContext);
+  const { walias, hasTicket, isAlive, power, totalZaps, amountZapped } = useContext(PlayerContext);
 
   return {
+    walias,
     hasTicket,
     isAlive,
     power,
