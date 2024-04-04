@@ -170,7 +170,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
       title="Comprá tu ticket"
       description="Para poder participar de la massacre necesitas adquirir un ticket. El pago se realiza una unica vez."
       onClose={restartModal}
-      cancelText="Cancelar"
+      cancelText={isPaid ? 'Volver' : 'Cancelar'}
     >
       {!invoicePayment ? (
         !isInvoiceLoading ? (
