@@ -36,8 +36,10 @@ export const TabStyle = styled.div<TabStyleProps>`
 
     color: ${appTheme.colors.text};
 
-    &:hover {
-      background-color: ${appTheme.colors.gray20};
+    :not(:disabled) {
+      &:hover {
+        background-color: ${appTheme.colors.gray20};
+      }
     }
   }
 `;
