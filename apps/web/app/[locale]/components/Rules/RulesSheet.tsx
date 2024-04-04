@@ -60,7 +60,7 @@ const RulesSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         </Heading>
         <Divider y={10}/>
         <Text align="center">
-          Sé el <b>ultimo jugador</b> en pie <b>acumulando sats</b> y <b>amuentando tu poder</b> para llevarte <b>TODO el tesoro recaudado</b>.
+          Sé el <b>ultimo jugador</b> en pie <b>acumulando sats</b> y <b>amuentando tu poder</b> para llevarte un gran porcentaje del <b>tesoro recaudado</b>.
           <div style={listContainerStyles}>
             <ol style={listOrderStyles}>
             <li>Comprá tu ticket.</li>
