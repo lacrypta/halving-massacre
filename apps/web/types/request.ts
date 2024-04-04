@@ -6,5 +6,5 @@ export interface RequestSuccessResponse {
 }
 export interface RequestErrorResponse {
   success: false;
-  error: string;
+  message: string;
 }
