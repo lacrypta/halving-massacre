@@ -6,6 +6,7 @@ import InscriptionSheet from '../../components/InscriptionSheet/InscriptionSheet
 
 import { PlayerProvider } from '@/../context/PlayerContext';
 import { PlayerDashboard } from '../../components/PlayerDashboard';
+import { Navbar } from '@/[locale]/components/Navbar';
 
 interface PageProps {
   params: {
@@ -22,8 +23,9 @@ export default function Page({ params }: PageProps): JSX.Element {
   };
   return (
     <>
+      <Navbar />
+      <Divider y={16} />
       <PlayerProvider walias={walias}>
-        <Divider y={64} />
         <PlayerDashboard walias={walias} onAddPower={onAddPower} onBuyTicket={() => setIsInscriptionOpen(true)} />
         <InscriptionSheet isOpen={isInscriptionOpen} onClose={() => setIsInscriptionOpen(false)} />
       </PlayerProvider>

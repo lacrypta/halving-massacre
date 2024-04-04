@@ -8,6 +8,7 @@ import Card from './components/Card';
 import Countdown from './components/Countdown';
 import Header from './components/Header';
 import LocaleSwitcher from './components/LocaleSwitcher/LocaleSwitcher';
+import { Navbar } from './components/Navbar';
 
 // const PARTICIPANTES = ['fer@lawallet.ar', 'dios@lawallet.ar', 'agustin@lawallet.ar'];
 
@@ -16,8 +17,8 @@ export default function Page(): JSX.Element {
 
   return (
     <>
-      <Divider y={64} />
-      <LocaleSwitcher />
+      <Navbar />
+      <Divider y={16} />
       <Container>
         <Flex direction="column" align="center">
           <Header />
