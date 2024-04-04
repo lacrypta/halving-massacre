@@ -106,7 +106,8 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         setInvoiceInfo({ pr: data.pr, expiry: invoiceExpiry });
         return;
       }
-      throw new Error(data.error);
+      alert(data.message);
+      throw new Error(data.message);
     } catch (e: unknown) {
       setIsInvoiceLoading(false);
       console.error((e as Error).message);
