@@ -7,7 +7,6 @@ import { useTranslations } from 'next-intl';
 import Card from './components/Card';
 import Countdown from './components/Countdown';
 import Header from './components/Header';
-import { Navbar } from './components/Navbar';
 import LocaleSwitcher from './components/LocaleSwitcher/LocaleSwitcher';
 import { Navbar } from './components/Navbar';
 
