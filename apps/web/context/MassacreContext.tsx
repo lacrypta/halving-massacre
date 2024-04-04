@@ -41,7 +41,6 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
       {
         ids: [setupId],
         kinds: [1112 as NDKKind],
-        authors: [PUBLISHER_PUBKEY],
       },
     ],
     enabled: !!setupId,
