@@ -99,7 +99,5 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     ...status,
   };
 
-  console.info('%%%% value %%%%');
-  console.dir(value);
   return <MassacreContext.Provider value={value}>{children}</MassacreContext.Provider>;
 }
