@@ -13,17 +13,6 @@ import RulesSheet from '../Rules/RulesSheet';
 import { Icon } from '../Icon';
 import { Loader } from '../Icons';
 
-// Types
-import type {
-  ErrorResponse as ClaimErrorResponse,
-  SuccessResponse as ClaimSuccessResponse,
-} from '@/api/ticket/claim/route';
-import type {
-  ErrorResponse as RequestErrorResponse,
-  SuccessResponse as RequestSuccessResponse,
-} from '@/api/ticket/request/route';
-import { type Event } from 'nostr-tools';
-
 // Hooks
 import { usePlayer } from '@/../hooks/usePlayer';
 import { copy } from '@/../utils/share';
@@ -32,6 +21,10 @@ import { useSubscription } from '@lawallet/react';
 // Theme
 import { appTheme } from '@/../config/exports';
 import { useTranslations } from 'next-intl';
+
+// Types
+import type { RequestErrorResponse, RequestSuccessResponse } from '../../../../types/request';
+import type { Event } from 'nostr-tools';
 
 // Config
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
@@ -47,7 +40,6 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   const [invoicePayment, setInvoicePayment] = useState<string>('');
   const [eventIdReference, setEventIdReference] = useState<string>();
   const [isPaid, setIsPaid] = useState<boolean>(false);
-  const [isClaiming, setIsClaiming] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
   const { walias } = usePlayer();
 
@@ -106,30 +98,6 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
     } catch (e: unknown) {
       setIsInvoiceLoading(false);
       console.error((e as Error).message);
-    }
-  };
-
-  const claimTicket = async (zap: Event) => {
-    try {
-      setIsClaiming(true);
-      const res = await fetch('/api/ticket/claim', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(zap),
-      });
-      const data = (await res.json()) as ClaimSuccessResponse | ClaimErrorResponse;
-      if (data.success) {
-        console.info('%%%%% Ticket %%%%%');
-        console.dir(data);
-        setIsClaiming(false);
-        return;
-      }
-      throw new Error(data.error);
-    } catch (e: unknown) {
-      console.error((e as Error).message);
-      throw e;
     }
   };
 
@@ -206,18 +174,12 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
               <>
                 <Flex gap={8} align="center" justify="center" direction="column">
                   <Divider y={16} />
-                  {!isClaiming ? (
-                    <>
-                      <Text isBold color={appTheme.colors.primary}>
-                        {t('HAVE_A_TICKET')}
-                      </Text>
-                      <Text size="small" color={appTheme.colors.gray50}>
-                        {t('WE_GIVE_POWER')}
-                      </Text>
-                    </>
-                  ) : (
-                    <Text color={appTheme.colors.gray50}>{t('CLAIMING')}</Text>
-                  )}
+                  <Text isBold color={appTheme.colors.primary}>
+                    {t('HAVE_A_TICKET')}
+                  </Text>
+                  <Text size="small" color={appTheme.colors.gray50}>
+                    {t('WE_GIVE_POWER')}
+                  </Text>
                   <Divider y={16} />
                 </Flex>
               </>
