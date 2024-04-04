@@ -1,47 +1,10 @@
-// import createMiddleware from 'next-intl/middleware';
+import createMiddleware from 'next-intl/middleware';
 
-// export default createMiddleware({
-//   locales: ['es', 'en'],
-//   defaultLocale: 'es',
-// });
-
-// export const config = {
-//   matcher: ['/', '/(es|en)/:path*', '/((?!_next|.*\\..*).*)'],
-// };
-
-import { NextRequest, NextResponse } from 'next/server';
-import { match } from '@formatjs/intl-localematcher';
-import Negotiator from 'negotiator';
-
-type AvailableLanguages = 'es' | 'en';
-const LanguagesList: AvailableLanguages[] = ['es', 'en'];
-const defaultLocale: AvailableLanguages = 'es';
-
-const cookieName = 'localeTranslation';
-
-function getLocale(request: NextRequest): string {
-  if (request.cookies.has(cookieName)) {
-    const lng = request.cookies.get(cookieName)?.value;
-    if (lng && LanguagesList.includes(lng as AvailableLanguages)) return lng;
-  }
-
-  const headers = new Headers(request.headers);
-  const acceptLanguage = headers.get('accept-language');
-
-  if (acceptLanguage) headers.set('accept-language', acceptLanguage.replaceAll('_', '-'));
-
-  const headersObject = Object.fromEntries(headers.entries());
-  const languages = new Negotiator({ headers: headersObject }).languages();
-  return match(languages, LanguagesList, defaultLocale);
-}
-
-export function middleware(request: NextRequest) {
-  const locale = getLocale(request) ?? defaultLocale;
-  const pathname = request.nextUrl.pathname;
-
-  const newUrl = new URL(`/${locale}${pathname}`, request.nextUrl);
-  return NextResponse.rewrite(newUrl);
-}
+export default createMiddleware({
+  locales: ['es', 'en'],
+  defaultLocale: 'es',
+  localePrefix: 'never',
+});
 
 export const config = {
   matcher: ['/((?!_next|api|favicon.ico|robots.txt|manifest.json|sw.js|workbox-*.js|_next/static|emotes/|images/).*)'],

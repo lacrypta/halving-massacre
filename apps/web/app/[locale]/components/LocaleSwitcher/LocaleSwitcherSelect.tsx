@@ -15,7 +15,7 @@ export default function LocaleSwitcherSelect({ children, defaultValue }: Props) 
     const nextLocale = event.target.value;
     startTransition(() => {
       const expire = new Date(Date.now() + 86400 * 365 * 1000).toUTCString();
-      document.cookie = `localeTranslation=${nextLocale}; expires=${expire}; path=/`;
+      document.cookie = `NEXT_LOCALE=${nextLocale}; expires=${expire}; path=/`;
       window.location.reload();
     });
   }

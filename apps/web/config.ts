@@ -4,6 +4,7 @@ export const locales = ['es', 'en'];
 
 export const pathnames = {
   '/': '/',
+  '/profile/[id]': '/profile/[id]',
 } satisfies Pathnames<typeof locales>;
 
 export const localePrefix = undefined;
