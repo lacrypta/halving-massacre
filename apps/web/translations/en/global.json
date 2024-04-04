@@ -51,5 +51,9 @@
   "ONLY_THIS_TIME": "for one-time only",
   "YOU_ARE_ADDED": "You're added",
   "ONE_POWER_SAT": "1 sat of power",
-  "CAN_CONTINUE_ADDING_POWER": "You can continue adding power whenever you want as long as you stay alive"
+  "CAN_CONTINUE_ADDING_POWER": "You can continue adding power whenever you want as long as you stay alive",
+  "LANGUAGE": "Language",
+  "CHANGE_LANGUAGE": "Change language",
+  "ENGLISH": "English",
+  "SPANISH": "Spanish"
 }
