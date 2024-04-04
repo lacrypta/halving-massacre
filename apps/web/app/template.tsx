@@ -1,16 +1,28 @@
 'use client';
-import { NextProvider } from '@lawallet/ui/next';
+
+// Libraries
 import { NostrProvider, ProfileCacheProvider } from '@lawallet/react';
-import '@lawallet/ui/styles';
-import { appTheme } from '../config/exports';
-import Footer from './components/Footer';
+import { NextProvider } from '@lawallet/ui/next';
+
+// Context
 import { MassacreProvider } from '../context/MassacreContext';
-import { mockConfig } from '../config/mock';
+import { NotificationsProvider } from '../context/NotificationsContext';
+
+// Components
+import Footer from './components/Footer';
+
+// Utils and hooks
 import type { ConfigProps } from '@lawallet/utils/types';
 
-const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
+// Theme
+import { appTheme } from '../config/exports';
+import '@lawallet/ui/styles';
 
+// Config
+import { mockConfig } from '../config/mock';
+const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 const nostrConfig = mockConfig as unknown as ConfigProps;
+
 // const nostrConfig = createConfig({ relaysList }); // TODO: Fix BUG: Ignoring relaysList
 
 export default function Template({ children }: { children: React.ReactNode }) {
@@ -19,8 +31,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <NostrProvider config={nostrConfig}>
         <ProfileCacheProvider>
           <MassacreProvider setupId={MASSACRE_SETUP_ID}>
-            {children}
-            <Footer />
+            <NotificationsProvider>
+              {children}
+              <Footer />
+            </NotificationsProvider>
           </MassacreProvider>
         </ProfileCacheProvider>
       </NostrProvider>
