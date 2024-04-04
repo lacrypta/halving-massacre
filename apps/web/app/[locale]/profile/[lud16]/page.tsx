@@ -1,12 +1,16 @@
 'use client';
 
-import { Divider } from '@lawallet/ui';
+// Libraries
 import { useState } from 'react';
-import InscriptionSheet from '../../components/InscriptionSheet/InscriptionSheet';
+import { Divider } from '@lawallet/ui';
 
+// Context
 import { PlayerProvider } from '@/../context/PlayerContext';
+
+// Generic components
+import InscriptionSheet from '../../components/InscriptionSheet/InscriptionSheet';
 import { PlayerDashboard } from '../../components/PlayerDashboard';
-import { Navbar } from '@/[locale]/components/Navbar';
+import { Navbar } from '../../components/Navbar';
 
 interface PageProps {
   params: {
