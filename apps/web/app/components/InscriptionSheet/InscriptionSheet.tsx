@@ -1,5 +1,9 @@
+// Libraries
 import { useEffect, useState } from 'react';
 import { ActionSheet, Button, Divider, Flex, Text } from '@lawallet/ui';
+
+// Context
+import { useNotifications } from '../../../context/NotificationsContext';
 
 // Generic components
 import RulesSheet from '../Rules/RulesSheet';
@@ -23,16 +27,20 @@ import { type Event } from 'nostr-tools';
 // Hooks
 import { useSubscription } from '@lawallet/react';
 import { usePlayer } from '../../../hooks/usePlayer';
+import { copy } from '../../..//utils/share';
 
 // Theme
 import { appTheme } from '../../../config/exports';
 
+// Config
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
 const TICKET_PRICE = parseInt(process.env.NEXT_PUBLIC_TICKET_PRICE!);
 const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 const MASSACRE_ENDPOINT = process.env.NEXT_PUBLIC_MASSACRE_ENDPOINT!;
 
 const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  const notifications = useNotifications();
+
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
   const [invoicePayment, setInvoicePayment] = useState<string>('');
@@ -147,6 +155,15 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
     onClose();
   };
 
+  const handleCopy = (text: string) => {
+    copy(text).then((res) => {
+      notifications.showAlert({
+        description: res ? 'Texto copiado al portapapeles' : 'Ocurrió un error al copiar al portapapeles',
+        type: res ? 'success' : 'error',
+      });
+    });
+  };
+
   return (
     <ActionSheet
       isOpen={isOpen}
@@ -213,7 +230,9 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
                 </Text>
 
                 <Flex gap={8}>
-                  <Button variant="borderless">Copiar</Button>
+                  <Button variant="borderless" onClick={() => handleCopy(invoicePayment)}>
+                    Copiar
+                  </Button>
                   {window.webln && (
                     <Button onClick={() => payWithWebLN(invoicePayment)} variant="bezeled" disabled={isPaying}>
                       Pagar con Alby
