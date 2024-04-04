@@ -1,7 +1,13 @@
-import { ActionSheet, Button, Divider, Flex, Heading, Loader, Text } from '@lawallet/ui';
 import { useEffect, useState } from 'react';
+import { ActionSheet, Button, Divider, Flex, Text } from '@lawallet/ui';
+
+// Generic components
 import RulesSheet from '../Rules/RulesSheet';
 import { QRStyled } from '../QRCode';
+
+// New ui-components
+import { Icon } from '@/components/Icon';
+import { Loader } from '@/components/Icons';
 
 // Types
 import type {
@@ -17,6 +23,9 @@ import { type Event } from 'nostr-tools';
 // Hooks
 import { useSubscription } from '@lawallet/react';
 import { usePlayer } from '../../../hooks/usePlayer';
+
+// Theme
+import { appTheme } from '../../../config/exports';
 
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
 const TICKET_PRICE = parseInt(process.env.NEXT_PUBLIC_TICKET_PRICE!);
@@ -157,15 +166,18 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
             <RulesSheet isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)} />
           </>
         ) : (
-          <Flex direction="column" align="center" justify="center" gap={16}>
-            <Divider y={32} />
-            <Heading align="center" as="h4">
-              Generando ticket
-            </Heading>
-            <Divider y={32} />
-            <Loader />
-            <Divider y={32} />
-          </Flex>
+          <>
+            <Divider y={16} />
+            <Flex direction="column" align="center" justify="center" gap={8}>
+              <Icon size={8}>
+                <Loader />
+              </Icon>
+              <Text size="small" color={appTheme.colors.gray50}>
+                Generando ticket
+              </Text>
+            </Flex>
+            <Divider y={16} />
+          </>
         )
       ) : (
         <>
@@ -173,16 +185,20 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
             {isPaid ? (
               <>
                 <Flex gap={8} align="center" justify="center" direction="column">
+                  <Divider y={16} />
                   {!isClaiming ? (
                     <>
-                      <Divider y={100} />
-                      <Heading as="h4">Ya tenes tu ticket</Heading>
-                      <Text>Te regalamos 1 sat de poder</Text>
-                      <Divider y={100} />
+                      <Text isBold color={appTheme.colors.primary}>
+                        Ya tenes tu ticket
+                      </Text>
+                      <Text size="small" color={appTheme.colors.gray50}>
+                        Te regalamos 1 sat de poder
+                      </Text>
                     </>
                   ) : (
-                    <>Esta claimeando...</>
+                    <Text color={appTheme.colors.gray50}>Esta claimeando...</Text>
                   )}
+                  <Divider y={16} />
                 </Flex>
               </>
             ) : (
