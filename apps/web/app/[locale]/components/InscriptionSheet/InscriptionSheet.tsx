@@ -16,15 +16,16 @@ import { Loader } from '../Icons';
 // Hooks
 import { usePlayer } from '@/../hooks/usePlayer';
 import { copy } from '@/../utils/share';
-import { useSubscription } from '@lawallet/react';
+import { decodeInvoice, useSubscription } from '@lawallet/react';
 
 // Theme
 import { appTheme } from '@/../config/exports';
 import { useTranslations } from 'next-intl';
 
 // Types
-import type { RequestErrorResponse, RequestSuccessResponse } from '../../../../types/request';
 import type { Event } from 'nostr-tools';
+import type { RequestErrorResponse, RequestSuccessResponse } from '../../../../types/request';
+import CountMinAndSec from '../CountdownBox/MinutesAndSeconds';
 
 // Config
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
@@ -32,12 +33,20 @@ const TICKET_PRICE = parseInt(process.env.NEXT_PUBLIC_TICKET_PRICE!);
 const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 const MASSACRE_ENDPOINT = process.env.NEXT_PUBLIC_MASSACRE_ENDPOINT!;
 
+type InvoiceInfoProps = {
+  pr: string;
+  expiry: Date | null;
+};
+
 const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const notifications = useNotifications();
 
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
-  const [invoicePayment, setInvoicePayment] = useState<string>('');
+  const [invoiceInfo, setInvoiceInfo] = useState<InvoiceInfoProps>({
+    pr: '',
+    expiry: null,
+  });
   const [eventIdReference, setEventIdReference] = useState<string>();
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
@@ -91,7 +100,10 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
       const data = (await res.json()) as RequestSuccessResponse | RequestErrorResponse;
       if (data.success) {
         setEventIdReference(data.eTag);
-        setInvoicePayment(data.pr);
+        const decodedInvoice = decodeInvoice(data.pr);
+        const invoiceExpiry =
+          decodedInvoice && decodedInvoice.timeExpireDate ? new Date(decodedInvoice.timeExpireDate * 1000) : null;
+        setInvoiceInfo({ pr: data.pr, expiry: invoiceExpiry });
         return;
       }
       throw new Error(data.error);
@@ -116,7 +128,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   };
 
   const restartModal = () => {
-    setInvoicePayment('');
+    setInvoiceInfo({ pr: '', expiry: null });
     setEventIdReference(undefined);
     setIsInvoiceLoading(false);
     setIsPaid(false);
@@ -127,7 +139,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   const handleCopy = (text: string) => {
     copy(text).then((res) => {
       notifications.showAlert({
-        description: res ? 'Texto copiado al portapapeles' : 'Ocurrió un error al copiar al portapapeles',
+        description: res ? t('SUCCESS_COPY') : t('ERROR_COPY'),
         type: res ? 'success' : 'error',
       });
     });
@@ -143,7 +155,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
       onClose={restartModal}
       cancelText={isPaid ? t('CLOSE') : t('CANCEL')}
     >
-      {!invoicePayment ? (
+      {!invoiceInfo.pr ? (
         !isInvoiceLoading ? (
           <>
             <Button onClick={handleClick}>{t('SIGN_UP')}</Button>
@@ -189,17 +201,19 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
                   <Text size="small">{t('INSCRIPTION_VALUE')}:</Text>
                   <Text isBold>{TICKET_PRICE} SATs</Text>
                 </Flex>
-                <QRStyled size={250} value={invoicePayment} />
-                <Text size="small" color="gray">
-                  {t('AVAILABLE_FOR')} 10 min, 15 seg.
-                </Text>
+                <QRStyled size={250} value={invoiceInfo.pr} />
+                {invoiceInfo.expiry && (
+                  <Text size="small" color="gray">
+                    {t('AVAILABLE_FOR')} <CountMinAndSec date={new Date(invoiceInfo.expiry)} />
+                  </Text>
+                )}
 
                 <Flex gap={8}>
-                  <Button variant="borderless" onClick={() => handleCopy(invoicePayment)}>
+                  <Button variant="borderless" onClick={() => handleCopy(invoiceInfo.pr)}>
                     {t('COPY')}
                   </Button>
                   {window.webln && (
-                    <Button onClick={() => payWithWebLN(invoicePayment)} variant="bezeled" disabled={isPaying}>
+                    <Button onClick={() => payWithWebLN(invoiceInfo.pr)} variant="bezeled" disabled={isPaying}>
                       {t('PAY_WITH_ALBY')}
                     </Button>
                   )}

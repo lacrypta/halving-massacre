@@ -55,5 +55,7 @@
   "LANGUAGE": "Idioma",
   "CHANGE_LANGUAGE": "Cambiar idioma",
   "ENGLISH": "Inglés",
-  "SPANISH": "Español"
+  "SPANISH": "Español",
+  "SUCCESS_COPY": "Texto copiado al portapapeles",
+  "ERROR_COPY": "Ocurrió un error al copiar al portapapeles"
 }
