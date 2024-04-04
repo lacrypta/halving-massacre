@@ -173,7 +173,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
       title={t('BUY_YOUR_TICKET')}
       description={t('BUY_TICKET_DESC')}
       onClose={restartModal}
-      cancelText={t('CANCEL')}
+      cancelText={isPaid ? t('CLOSE') : t('CANCEL')}
     >
       {!invoicePayment ? (
         !isInvoiceLoading ? (
