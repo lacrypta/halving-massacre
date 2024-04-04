@@ -15,7 +15,7 @@ export default function Card(props: CardProps) {
   return (
     <CardPrimitive $isSmall={size === 'small'}>
       <div>{children}</div>
-      <Image src={image} height={150} width={150} alt='' />
+      <Image src={image} height={150} width={150} alt="" />
     </CardPrimitive>
   );
 }

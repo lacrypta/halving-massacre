@@ -13,7 +13,7 @@ export default function Badge(props: BadgeProps) {
 
   return (
     <BadgePrimitive $color={color}>
-      <Text size='small'>{children}</Text>
+      <Text size="small">{children}</Text>
     </BadgePrimitive>
   );
 }

@@ -1,14 +1,8 @@
-"use client";
+'use client';
 
 export default function Eggs() {
   return (
-    <svg
-      width="33"
-      height="31"
-      viewBox="0 0 33 31"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="33" height="31" viewBox="0 0 33 31" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M29.2644 16.2676C27.7767 21.8198 23.8836 23.1677 19.8186 22.0785C15.7536 20.9893 13.056 17.8754 14.5437 12.3232C16.0314 6.77102 21.141 0.882984 25.206 1.9722C29.2711 3.06141 30.7521 10.7154 29.2644 16.2676Z"
         fill="url(#paint0_linear_2319_11122)"
@@ -39,21 +33,9 @@ export default function Eggs() {
           <feOffset dx="2" dy="4" />
           <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0.109804 0 0 0 0 0.109804 0 0 0 0 0.109804 0 0 0 0.65 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_2319_11122"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow_2319_11122"
-            result="shape"
-          />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.109804 0 0 0 0 0.109804 0 0 0 0 0.109804 0 0 0 0.65 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2319_11122" />
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2319_11122" result="shape" />
         </filter>
         <linearGradient
           id="paint0_linear_2319_11122"
