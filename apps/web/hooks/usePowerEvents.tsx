@@ -7,14 +7,16 @@ interface UsePowerEventsReturns {
   events: Event[];
 }
 
+const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
+
 export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
   const { setupId, publisherPubkey } = useMassacre();
   const { events: powerEvents } = useSubscription({
     filters: [
       {
         kinds: [1112 as NDKKind],
-        // '#L': 'halving-massacre',
         '#l': ['power-receipt'],
+        '#e': [MASSACRE_SETUP_ID],
         '#i': [walias],
         authors: [publisherPubkey],
       },

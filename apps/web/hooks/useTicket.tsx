@@ -8,14 +8,16 @@ interface UseTicketReturns {
   ticketEvent?: Event;
 }
 
+const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
+
 export const useTicket = (walias: string): UseTicketReturns => {
   const { setupId, publisherPubkey } = useMassacre();
   const { events: ticketEvents } = useSubscription({
     filters: [
       {
         kinds: [1112 as NDKKind],
-        // '#L': 'halving-massacre',
         '#l': ['ticket'],
+        '#e': [MASSACRE_SETUP_ID],
         '#i': [walias],
         authors: [publisherPubkey],
       },
