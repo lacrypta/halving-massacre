@@ -6,6 +6,8 @@
         "name": "next"
       }
     ],
+    "declaration": false,
+    "declarationMap": false,
     "baseUrl": "./app",
     "paths": {
       "@/*": ["./*"]
