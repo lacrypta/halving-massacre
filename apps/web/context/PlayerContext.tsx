@@ -1,7 +1,6 @@
-import { createContext } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useTicket } from '../hooks/useTicket';
 import type { Event } from 'nostr-tools';
-import { usePowerEvents } from '../hooks/usePowerEvents';
 
 export interface PlayerContextType {
   power: number;
@@ -11,22 +10,19 @@ export interface PlayerContextType {
   walias: string;
   hasTicket: boolean;
   ticketEvent?: Event;
-  zapEvents?: Event[];
 }
 
 export const PlayerContext = createContext({} as PlayerContextType);
 
 export function PlayerProvider({ walias, children }: React.PropsWithChildren & { walias: string }) {
   const { hasTicket, ticketEvent } = useTicket(walias);
-  const { events: powerEvents } = usePowerEvents(walias);
-  const value = {
+  const value: PlayerContextType = {
     power: 21000,
     isAlive: true,
     hasTicket,
     totalZaps: 1,
     amountZapped: 700,
     ticketEvent,
-    powerEvents,
     walias,
   };
 
