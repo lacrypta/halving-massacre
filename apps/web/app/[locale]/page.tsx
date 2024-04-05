@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 
 import { appTheme } from '@/../config/exports';
@@ -22,6 +23,7 @@ export default function Page(): JSX.Element {
       <Divider y={16} />
       <Container>
         <Flex direction="column" align="center">
+          {/* <Image width={240} height={77} alt="Halving Massacre by La Crypta" src={`/logo.png`} /> */}
           <Header />
           <Divider y={24} />
           <Countdown />
