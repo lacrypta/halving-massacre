@@ -1,8 +1,8 @@
 import { Flex, Heading, Text } from '@lawallet/ui';
 import { NumbersBox } from '../Countdown/style';
-import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useCountdown } from '../../../../hooks/useCountdown';
+import { Loader } from '../Icons/Loader';
 
 interface CountdownBoxProps {
   targetDate: Date;
@@ -11,6 +11,13 @@ interface CountdownBoxProps {
 export default function CountdownBox({ targetDate }: CountdownBoxProps) {
   const { counterInfo } = useCountdown({ targetDate });
   const t = useTranslations();
+
+  // if (counterInfo.loading)
+  //   return (
+  //     <Flex justify="center">
+  //       <Loader />
+  //     </Flex>
+  //   );
 
   return (
     <NumbersBox>
