@@ -21,6 +21,9 @@ export default function RootLayout({ children, params: { locale } }: Readonly<La
 
   return (
     <html lang={locale}>
+      <head>
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+      </head>
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={inter.className}>{children}</body>
       </NextIntlClientProvider>
