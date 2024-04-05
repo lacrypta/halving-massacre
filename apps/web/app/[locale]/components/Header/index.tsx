@@ -3,7 +3,7 @@ import { Heading, Divider, Text, Flex } from '@lawallet/ui';
 import { HeaderPrimitive } from './style';
 import { useTranslations } from 'next-intl';
 
-import pngLogo from '../../../../public/logo.png';
+import pngLogo from '../../../../public/images/logo.png';
 import Image from 'next/image';
 
 export default function Header() {
