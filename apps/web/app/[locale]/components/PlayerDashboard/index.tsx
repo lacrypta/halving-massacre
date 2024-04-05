@@ -48,7 +48,7 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
 
   const powerEvent: Zap = {
     author: walias,
-    amount: 1000, // millisats
+    amount: 21000, // millisats
     comment: 'Disfrutá este tiro',
     createdAt: new Date().getTime() - 25000,
   };
