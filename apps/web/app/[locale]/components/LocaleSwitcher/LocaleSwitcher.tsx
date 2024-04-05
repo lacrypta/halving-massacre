@@ -26,7 +26,7 @@ export default function LocaleSwitcher() {
 
   return (
     <>
-      <Flex align="center" justify="end" gap={8}>
+      <Flex align="center" justify="end" gap={8} flex={0}>
         <Text size="small" color={appTheme.colors.gray50}>
           {t('LANGUAGE')}:
         </Text>
