@@ -37,7 +37,7 @@ export default function Page(): JSX.Element {
               <Text color={appTheme.colors.gray50}>{t('WINNERS')}.</Text>
             </Card>
             <Card image="/emotes/rocket.png">
-              <Heading as="h2">{totalPlayers || '...'}</Heading>
+              <Heading as="h2">{totalPlayers}</Heading>
               <Text color={appTheme.colors.gray50}>{t('PARTICIPANTS')}.</Text>
             </Card>
           </Flex>
