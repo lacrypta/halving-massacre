@@ -14,6 +14,7 @@ import { PlayerDashboard } from '../../components/PlayerDashboard';
 import { Navbar } from '../../components/Navbar';
 
 import pngIso from '../../../../public/images/iso.png';
+import Link from 'next/link';
 
 interface PageProps {
   params: {
@@ -31,7 +32,9 @@ export default function Page({ params }: PageProps): JSX.Element {
   return (
     <>
       <Navbar>
-        <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={pngIso.src} />
+        <Link href="/">
+          <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={pngIso} />
+        </Link>
       </Navbar>
       <Divider y={16} />
       <PlayerProvider walias={walias}>
