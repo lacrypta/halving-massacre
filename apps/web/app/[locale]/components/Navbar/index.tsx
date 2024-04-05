@@ -14,7 +14,8 @@ export function Navbar(props: NavbarProps) {
   return (
     <NavbarStyle>
       <Container>
-        <Flex flex={1} align="center" justify="end">
+        <Flex flex={1} align="center" justify="space-between">
+          {children}
           <LocaleSwitcher />
         </Flex>
       </Container>
