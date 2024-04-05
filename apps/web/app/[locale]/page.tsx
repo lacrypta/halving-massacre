@@ -31,8 +31,8 @@ export default function Page(): JSX.Element {
         <Flex direction="column" gap={8}>
           <Flex direction="row" gap={8}>
             <Card image="/emotes/crown.png">
-              <Heading as="h2">1</Heading>
-              <Text color={appTheme.colors.gray50}>{t('WINNER')}.</Text>
+              <Heading as="h2">4-7</Heading>
+              <Text color={appTheme.colors.gray50}>{t('WINNERS')}.</Text>
             </Card>
             <Card image="/emotes/rocket.png">
               <Heading as="h2">25.000</Heading>
