@@ -7,7 +7,6 @@ import { useNotifications } from '@/../context/NotificationsContext';
 
 // Generic components
 import { QRStyled } from '../QRCode';
-import RulesSheet from '../Rules/RulesSheet';
 
 // New ui-components
 import { Icon } from '../Icon';
@@ -39,6 +38,7 @@ type InvoiceInfoProps = {
 };
 
 const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  const t = useTranslations();
   const notifications = useNotifications();
 
   const [isRulesOpen, setIsRulesOpen] = useState(false);
@@ -146,8 +146,6 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
     });
   };
 
-  const t = useTranslations();
-
   return (
     <ActionSheet
       isOpen={isOpen}
@@ -158,14 +156,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
     >
       {!invoiceInfo.pr ? (
         !isInvoiceLoading ? (
-          <>
-            <Button onClick={handleClick}>{t('SIGN_UP')}</Button>
-            <Button onClick={() => setIsRulesOpen(true)} variant="borderless">
-              {t('SEE_RULES')}
-            </Button>
-
-            <RulesSheet isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)} />
-          </>
+          <Button onClick={handleClick}>{t('SIGN_UP')}</Button>
         ) : (
           <>
             <Divider y={16} />
