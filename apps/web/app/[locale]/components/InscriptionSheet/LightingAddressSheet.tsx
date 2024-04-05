@@ -1,5 +1,5 @@
 import { Button, Container, Divider, Flex, Sheet, Text } from '@lawallet/ui';
-import Link from 'next/link';
+import { Link } from '../../../../navigation';
 import { appTheme } from '@/../config/exports';
 import { useTranslations } from 'next-intl';
 

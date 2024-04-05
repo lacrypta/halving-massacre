@@ -107,5 +107,6 @@
   "CLEAN_GAME_DESC": "Todas las transacciones son publicadas en NOSTR. Logrando así transparencia y auditabilidad. Las manipulaciones externas del juego no están permitidas.",
   "TRANSACTION_COST": "Coste de transacciones",
   "TRANSACTION_COST_DESC": "Los participantes son los responsables de los costos de las tansacciones por enviar satoshis a través de Lightning Network.",
-  "TO_PLAY": "¡A jugar!"
+  "TO_PLAY": "¡A jugar!",
+  "INVALID_LNURL_ERROR": "Debes ingresar una LNURL válida"
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { Text, Button, Container, Flex, baseTheme as theme, Divider } from '@lawallet/ui';
 
 import { Twitter, Github, Discord } from '../Icons';
@@ -9,6 +8,7 @@ import Eggs from '../Eggs';
 
 import { FooterPrimitive } from './style';
 import { useTranslations } from 'next-intl';
+import { Link } from '../../../../navigation';
 
 export default function Footer() {
   const t = useTranslations();

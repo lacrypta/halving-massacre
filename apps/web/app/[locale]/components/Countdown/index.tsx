@@ -1,5 +1,4 @@
 import { Button, Divider, Flex, Input, Text } from '@lawallet/ui';
-import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
 // New ui-components
@@ -16,6 +15,7 @@ import { resolveLud16 } from '@/../lib/utils';
 import CountdownBox from '../CountdownBox';
 import { CountdownPrimitive } from './style';
 import { useTranslations } from 'next-intl';
+import { useRouter } from '../../../../navigation';
 
 const NEXT_PUBLIC_TARGET_COUNTDOWN = process.env.NEXT_PUBLIC_TARGET_COUNTDOWN! || '2024-04-13T12:00:00';
 
@@ -37,7 +37,7 @@ export default function Countdown() {
 
     if (!lud16) {
       setIsLoading(false);
-      setError('Debes ingresar una LNURL válida');
+      setError(t('INVALID_LNURL_ERROR'));
       return;
     }
 

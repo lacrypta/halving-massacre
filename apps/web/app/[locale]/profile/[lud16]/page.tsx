@@ -14,7 +14,7 @@ import { PlayerDashboard } from '../../components/PlayerDashboard';
 import { Navbar } from '../../components/Navbar';
 
 import pngIso from '../../../../public/images/iso.png';
-import Link from 'next/link';
+import { Link } from '../../../../navigation';
 
 interface PageProps {
   params: {
