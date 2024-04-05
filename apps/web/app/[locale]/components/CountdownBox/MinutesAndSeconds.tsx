@@ -1,8 +1,10 @@
 import React from 'react';
 import { useCountdown } from '../../../../hooks/useCountdown';
 
-const CountMinAndSec = ({ date }: { date: Date }) => {
-  const { counterInfo } = useCountdown({ targetDate: date });
+type CountMinAndSecProps = { date: Date; onFinish?: () => void };
+
+const CountMinAndSec = ({ date, onFinish }: CountMinAndSecProps) => {
+  const { counterInfo } = useCountdown({ targetDate: date, onFinish });
 
   return (
     <>

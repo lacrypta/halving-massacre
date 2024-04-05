@@ -10,6 +10,7 @@ type FormattedCountdown = {
 type CounterType = {
   time: number;
   formatted: FormattedCountdown;
+  loading: boolean;
 };
 
 const defaultCounter: CounterType = {
@@ -20,6 +21,7 @@ const defaultCounter: CounterType = {
     minutes: '0',
     seconds: '0',
   },
+  loading: false,
 };
 
 export const formatTime = (time: number): FormattedCountdown => {
@@ -43,24 +45,32 @@ export const formatTime = (time: number): FormattedCountdown => {
   };
 };
 
-export const useCountdown = ({ targetDate }: { targetDate: Date }) => {
-  const [counterInfo, setCounterInfo] = useState<CounterType>(defaultCounter);
+type UseCountdownProps = { targetDate: Date; onFinish?: () => void };
+
+export const useCountdown = ({ targetDate, onFinish }: UseCountdownProps) => {
+  const [counterInfo, setCounterInfo] = useState<CounterType>({ ...defaultCounter, loading: true });
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout>();
 
   const calculateTimeLeft = (date: Date) => {
     const difference = +date - Date.now();
     if (difference > 0) {
       const timeLeftInSeconds = Math.floor(difference / 1000);
-      setCounterInfo({ time: timeLeftInSeconds, formatted: formatTime(timeLeftInSeconds) });
+      setCounterInfo({ time: timeLeftInSeconds, formatted: formatTime(timeLeftInSeconds), loading: false });
     } else {
-      clearInterval(timerInterval);
-      setCounterInfo(defaultCounter);
+      stopCountdown();
     }
   };
 
   const startCountdown = (date: Date) => {
     calculateTimeLeft(date);
     setTimerInterval(setInterval(() => calculateTimeLeft(date), 1000));
+  };
+
+  const stopCountdown = () => {
+    clearInterval(timerInterval);
+    setCounterInfo(defaultCounter);
+
+    if (onFinish) onFinish();
   };
 
   useEffect(() => {

@@ -196,7 +196,7 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
                 <QRStyled size={250} value={invoiceInfo.pr} />
                 {invoiceInfo.expiry && (
                   <Text size="small" color="gray">
-                    {t('AVAILABLE_FOR')} <CountMinAndSec date={new Date(invoiceInfo.expiry)} />
+                    {t('AVAILABLE_FOR')} <CountMinAndSec date={new Date(invoiceInfo.expiry)} onFinish={restartModal} />
                   </Text>
                 )}
 
