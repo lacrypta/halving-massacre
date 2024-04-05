@@ -2,14 +2,11 @@ import { useSubscription } from '@lawallet/react';
 import type { Event } from 'nostr-tools';
 import { createContext, useEffect, useState } from 'react';
 import type { MassacreStatusEventContent } from '../types/massacre';
-import { calculateMedian } from '../lib/utils';
 import type { NDKKind } from '../types/ndk';
 
 const PUBLISHER_PUBKEY = process.env.NEXT_PUBLIC_PUBLISHER_PUBKEY!;
 export interface MassacreContextType extends MassacreStatusEventContent {
-  totalPlayers: number;
-  totalAmount: number;
-  medianPower: number;
+  playerCount: number;
   setupId: string;
   publisherPubkey: string;
 }
@@ -25,11 +22,11 @@ export interface MassacreSetup {
 export const MassacreContext = createContext({} as MassacreContextType);
 
 export function MassacreProvider({ setupId, children }: { setupId: string } & React.PropsWithChildren) {
-  const [lastUpdated, setLastUpdated] = useState(0);
   const [setup, setSetup] = useState<MassacreSetup>();
   const [status, setStatus] = useState<MassacreStatusEventContent>({
     currentBlock: 0,
-    players: {},
+    topPlayers: {},
+    playerCount: 0,
     nextFreeze: 0,
     nextMassacre: 0,
     status: 'SETUP',
@@ -41,6 +38,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
       {
         ids: [setupId],
         kinds: [1112 as NDKKind],
+        authors: [PUBLISHER_PUBKEY],
       },
     ],
     enabled: !!setupId,
@@ -87,11 +85,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     setStatus(status);
   }, [stateEvents]);
 
-  const totalPlayers = Object.keys(status.players || {}).length;
   const value = {
-    totalPlayers,
-    totalAmount: totalPlayers ? Object.values(status.players).reduce((a, b) => a + b) : 0,
-    medianPower: totalPlayers ? calculateMedian(status.players) : 0,
     setupId,
     setup,
     publisherPubkey: PUBLISHER_PUBKEY,

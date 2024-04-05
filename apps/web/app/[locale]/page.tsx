@@ -15,7 +15,7 @@ import { useMassacre } from '../../hooks/useMassacre';
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
-  const { totalPlayers } = useMassacre();
+  const { playerCount } = useMassacre();
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function Page(): JSX.Element {
               <Text color={appTheme.colors.gray50}>{t('WINNERS')}.</Text>
             </Card>
             <Card image="/emotes/rocket.png">
-              <Heading as="h2">{totalPlayers}</Heading>
+              <Heading as="h2">{playerCount || 0}</Heading>
               <Text color={appTheme.colors.gray50}>{t('PARTICIPANTS')}.</Text>
             </Card>
           </Flex>
