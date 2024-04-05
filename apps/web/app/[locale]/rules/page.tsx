@@ -43,13 +43,13 @@ const listOrderStyles: React.CSSProperties = {
   listStyleType: 'decimal',
   textAlign: 'left',
   margin: '0 auto',
-  marginLeft: '48px',
+  paddingLeft: '48px',
 };
 const listUnorderStyles: React.CSSProperties = {
   width: '100%',
   listStyleType: 'disc',
   margin: '0 auto',
-  marginLeft: '48px',
+  paddingLeft: '48px',
 };
 
 export default function Page(): JSX.Element {
