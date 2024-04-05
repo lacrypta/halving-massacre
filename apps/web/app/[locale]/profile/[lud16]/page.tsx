@@ -13,6 +13,8 @@ import InscriptionSheet from '../../components/InscriptionSheet/InscriptionSheet
 import { PlayerDashboard } from '../../components/PlayerDashboard';
 import { Navbar } from '../../components/Navbar';
 
+import pngIso from '../../../../public/images/iso.png';
+
 interface PageProps {
   params: {
     lud16: string;
@@ -29,7 +31,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   return (
     <>
       <Navbar>
-        <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={`/images/iso.png`} />
+        <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={pngIso.src} />
       </Navbar>
       <Divider y={16} />
       <PlayerProvider walias={walias}>
