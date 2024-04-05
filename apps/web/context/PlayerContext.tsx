@@ -20,18 +20,15 @@ export function PlayerProvider({ walias, children }: React.PropsWithChildren & {
   const { hasTicket, ticketEvent } = useTicket(walias);
   const { events: powerEvents } = usePowerEvents(walias);
   const value = {
-    power: 1000,
+    power: 21000,
     isAlive: true,
     hasTicket,
-    totalZaps: 4,
+    totalZaps: 1,
     amountZapped: 700,
     ticketEvent,
     powerEvents,
     walias,
   };
-
-  console.info('value:');
-  console.dir(value);
 
   return <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>;
 }
