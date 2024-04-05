@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // @lawallet/ui
 import { Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
@@ -25,13 +25,14 @@ import { appTheme } from '@/../config/exports';
 import { userRounds } from '@/../mocks/rounds';
 
 // Types
-import type { Zap } from '@/../types/zap.js';
+import type { Power } from '../../../../types/power';
 
 // Hooks
 import { usePlayer } from '@/../hooks/usePlayer';
 import { useProfile } from '@lawallet/react';
 import CountdownBox from '../CountdownBox';
 import { useTranslations } from 'next-intl';
+import { usePowerEvents } from '../../../../hooks/usePowerEvents';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -41,23 +42,44 @@ export interface PlayerDashboardInterface {
 
 export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
-  const { hasTicket, isAlive } = usePlayer();
+  const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
+  const { events, powerActions } = usePowerEvents(walias);
+  const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
+
   // const { medianPower } = useMassacre();
 
   const t = useTranslations();
 
-  const powerEvent: Zap = {
-    author: walias,
-    amount: 21000, // millisats
-    comment: 'Disfrutá este tiro',
-    createdAt: new Date().getTime() - 25000,
-  };
   // const powerProgress = parseInt(Math.min(((power * 1000) / medianPower) * 100, 100).toFixed(2));
 
   const [showTab, setTab] = useState('zapeos');
 
   // Mock data
   const positionNumber = 554;
+
+  useEffect(() => {
+    setTotalPower(powerActions.reduce((a, b) => a + b.amount, 0));
+  }, [powerActions]);
+
+  useEffect(() => {
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.info('&&&&&&&&&& events &&&&&&&&&&');
+    console.dir(events);
+
+    console.info('&&&&&&&&&& END &&&&&&&&&&');
+    console.info('&&&&&&&&&& END &&&&&&&&&&');
+    console.info('&&&&&&&&&& END &&&&&&&&&&');
+    console.info('&&&&&&&&&& END &&&&&&&&&&');
+    console.info('&&&&&&&&&& END &&&&&&&&&&');
+    console.info('&&&&&&&&&& END &&&&&&&&&&');
+    console.info('&&&&&&&&&& END &&&&&&&&&&');
+  }, [events]);
 
   return (
     <Container size="small">
@@ -240,7 +262,7 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
                   </Icon>
                   <Flex direction="column">
                     <Heading as="h4" color={appTheme.colors.primary}>
-                      21
+                      {totalPower / 1000}
                     </Heading>
                     <Text size="small">{t('CONTRIBUTED_POWER')}</Text>
                   </Flex>
@@ -249,15 +271,20 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
               <Divider y={24} />
 
               <React.Fragment>
-                {/* Mock PowerEvent */}
-                <Flex align="center" justify="space-between" gap={8}>
-                  <Flex align="center" gap={8}>
-                    <Bolt color={appTheme.colors.primary} />
-                    <Text>{t('ADDED_POWER')}</Text>
-                  </Flex>
-                  <Text color={appTheme.colors.gray50}>+{powerEvent.amount / 1000}</Text>
-                </Flex>
-                <Divider y={12} />
+                {/* Mock Power Events */}
+                {powerActions.map((powerEvent, k) => (
+                  <React.Fragment>
+                    <Flex align="center" justify="space-between" gap={8}>
+                      <Flex align="center" gap={8}>
+                        <Bolt color={appTheme.colors.primary} />
+                        <Text>{t('ADDED_POWER')}</Text>
+                      </Flex>
+                      <Text color={appTheme.colors.gray50}>+{powerEvent.amount / 1000}</Text>
+                    </Flex>
+                    <Divider y={12} />
+                  </React.Fragment>
+                ))}
+
                 {/* Mock TicketEvent */}
                 <Flex align="center" justify="space-between" gap={8}>
                   <Flex align="center" gap={8}>
