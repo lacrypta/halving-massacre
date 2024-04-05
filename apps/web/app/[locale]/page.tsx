@@ -23,7 +23,7 @@ export default function Page(): JSX.Element {
       <Divider y={16} />
       <Container>
         <Flex direction="column" align="center">
-          <Image width={240} height={77} alt="Halving Massacre by La Crypta" src={`/logo.png`} />
+          <Image width={240} height={77} alt="Halving Massacre by La Crypta" src={`/images/logo.png`} />
           <Header />
           <Divider y={24} />
           <Countdown />

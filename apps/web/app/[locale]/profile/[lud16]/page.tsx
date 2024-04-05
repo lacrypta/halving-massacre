@@ -29,7 +29,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   return (
     <>
       <Navbar>
-        <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={`/iso.png`} />
+        <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={`/images/iso.png`} />
       </Navbar>
       <Divider y={16} />
       <PlayerProvider walias={walias}>
