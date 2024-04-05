@@ -7,13 +7,14 @@ import { useTranslations } from 'next-intl';
 import Card from './components/Card';
 import Countdown from './components/Countdown';
 import Header from './components/Header';
-import LocaleSwitcher from './components/LocaleSwitcher/LocaleSwitcher';
 import { Navbar } from './components/Navbar';
+import { useMassacre } from '../../hooks/useMassacre';
 
 // const PARTICIPANTES = ['fer@lawallet.ar', 'dios@lawallet.ar', 'agustin@lawallet.ar'];
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
+  const { totalPlayers } = useMassacre();
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function Page(): JSX.Element {
               <Text color={appTheme.colors.gray50}>{t('WINNERS')}.</Text>
             </Card>
             <Card image="/emotes/rocket.png">
-              <Heading as="h2">25.000</Heading>
+              <Heading as="h2">{totalPlayers || '...'}</Heading>
               <Text color={appTheme.colors.gray50}>{t('PARTICIPANTS')}.</Text>
             </Card>
           </Flex>
