@@ -121,6 +121,7 @@ export default function Page(): JSX.Element {
         <Heading as="h2">Massacres</Heading>
         <Divider y={10} />
         <Text>{t('DIVIDE_PLAYERS_DESC')}</Text>
+        <Divider y={10} />
         {/* Cambiar X por la cantidad de bloques que pactemos */}
         <ul style={listUnorderStyles}>
           <li>
