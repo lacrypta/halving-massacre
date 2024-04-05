@@ -240,7 +240,7 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
                   </Icon>
                   <Flex direction="column">
                     <Heading as="h4" color={appTheme.colors.primary}>
-                      1
+                      21
                     </Heading>
                     <Text size="small">{t('CONTRIBUTED_POWER')}</Text>
                   </Flex>
