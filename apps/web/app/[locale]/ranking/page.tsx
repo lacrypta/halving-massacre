@@ -53,7 +53,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                     </Flex>
                     <Flex justify="end">
                       <Text color={appTheme.colors.primary}>
-                        <Bolt /> {String(players[walias]) || '21'} sats
+                        <Bolt /> {String(players[walias]! / 1000) || '21'} sats
                       </Text>
                     </Flex>
                   </Flex>
