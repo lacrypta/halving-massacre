@@ -28,9 +28,9 @@ import CountMinAndSec from '../CountdownBox/MinutesAndSeconds';
 
 // Config
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
-const TICKET_PRICE = parseInt(process.env.NEXT_PUBLIC_TICKET_PRICE!);
 const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 const MASSACRE_ENDPOINT = process.env.NEXT_PUBLIC_MASSACRE_ENDPOINT!;
+const MINIMUM_POWER_AMOUNT = parseInt(process.env.NEXT_PUBLIC_MINIMUM_POWER_AMOUNT!);
 
 type InvoiceInfoProps = {
   pr: string;
@@ -42,7 +42,7 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   const notifications = useNotifications();
 
   const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
-  const [amount, setAmount] = useState(1000);
+  const [amount, setAmount] = useState(MINIMUM_POWER_AMOUNT);
   const [invoiceInfo, setInvoiceInfo] = useState<InvoiceInfoProps>({
     pr: '',
     expiry: null,
