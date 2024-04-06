@@ -101,13 +101,18 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
 
       {isAlive ? (
         <>
-          <div>
+          <Flex gap={4}>
             {hasTicket ? (
-              <Badge color="primary">{t('PURCHASED_TICKET')}</Badge>
+              <>
+                <Badge color="primary">{t('PURCHASED_TICKET')}</Badge>
+                {/* <Badge color="secondary">
+                  {t('POSITION')} <strong>#30</strong>
+                </Badge> */}
+              </>
             ) : (
               <Badge color="secondary">{t('NO_TICKET')}</Badge>
             )}
-          </div>
+          </Flex>
           <>
             {/* <Divider y={12} />
             <Text size="small" color={appTheme.colors.gray50}>
