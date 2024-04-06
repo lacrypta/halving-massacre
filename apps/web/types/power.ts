@@ -3,4 +3,5 @@ export interface Power {
   amount: number; // Millisats
   comment?: string; // From zap
   createdAt: number; // Timestamp
+  id: string; // Timestamp
 }

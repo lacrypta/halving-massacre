@@ -47,6 +47,7 @@ export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
       const { amount, walias, comment } = JSON.parse(event.content) as Power;
 
       return {
+        id: event.id,
         amount,
         walias,
         createdAt: event.created_at,
