@@ -11,8 +11,8 @@ export const AvatarPrimitive = styled.div<AvatarPrimitiveProps>`
   position: relative;
   overflow: hidden;
 
-  width: ${(props) => props.$size * slot}px;
-  height: ${(props) => props.$size * slot}px;
+  min-width: ${(props) => props.$size * slot}px;
+  min-height: ${(props) => props.$size * slot}px;
 
   background-color: ${appTheme.colors.gray20};
   border-radius: 50%;
