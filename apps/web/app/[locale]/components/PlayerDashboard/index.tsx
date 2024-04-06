@@ -248,7 +248,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
               <React.Fragment>
                 {/* Mock Power Events */}
                 {powerActions.map((powerEvent) => (
-                  <React.Fragment k={powerEvent.id}>
+                  <React.Fragment key={powerEvent.id}>
                     <Flex align="center" justify="space-between" gap={8}>
                       <Flex align="center" gap={8}>
                         <Bolt color={appTheme.colors.primary} />
