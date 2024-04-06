@@ -61,26 +61,6 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
     setTotalPower(powerActions.reduce((a, b) => a + b.amount, 0));
   }, [powerActions]);
 
-  useEffect(() => {
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.info('&&&&&&&&&& events &&&&&&&&&&');
-    console.dir(events);
-
-    console.info('&&&&&&&&&& END &&&&&&&&&&');
-    console.info('&&&&&&&&&& END &&&&&&&&&&');
-    console.info('&&&&&&&&&& END &&&&&&&&&&');
-    console.info('&&&&&&&&&& END &&&&&&&&&&');
-    console.info('&&&&&&&&&& END &&&&&&&&&&');
-    console.info('&&&&&&&&&& END &&&&&&&&&&');
-    console.info('&&&&&&&&&& END &&&&&&&&&&');
-  }, [events]);
-
   return (
     <Container size="small">
       <Flex justify="space-between" align="center">
