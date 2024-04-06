@@ -2,7 +2,7 @@ export type MassacreStatus = 'SETUP' | 'INITIAL' | 'NORMAL' | 'FREEZE' | 'FINAL'
 
 export interface MassacreStatusEventContent {
   currentBlock: number;
-  topPlayers: { [walias: string]: number };
+  top100Players: { [walias: string]: number };
   playerCount: number;
   nextFreeze: number;
   nextMassacre: number;

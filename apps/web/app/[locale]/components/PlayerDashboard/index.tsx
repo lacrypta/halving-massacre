@@ -24,9 +24,6 @@ import { appTheme } from '@/../config/exports';
 // Mock Data
 import { userRounds } from '@/../mocks/rounds';
 
-// Types
-import type { Power } from '../../../../types/power';
-
 // Hooks
 import { usePlayer } from '@/../hooks/usePlayer';
 import { useProfile } from '@lawallet/react';
@@ -43,7 +40,7 @@ export interface PlayerDashboardInterface {
 export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
   const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
-  const { events, powerActions } = usePowerEvents(walias);
+  const { powerActions } = usePowerEvents(walias);
   const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
 
   // const { medianPower } = useMassacre();

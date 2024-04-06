@@ -25,7 +25,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
   const [setup, setSetup] = useState<MassacreSetup>();
   const [status, setStatus] = useState<MassacreStatusEventContent>({
     currentBlock: 0,
-    topPlayers: {},
+    top100Players: {},
     playerCount: 0,
     nextFreeze: 0,
     nextMassacre: 0,

@@ -11,8 +11,6 @@ import Header from './components/Header';
 import { Navbar } from './components/Navbar';
 import { useMassacre } from '../../hooks/useMassacre';
 
-// const PARTICIPANTES = ['fer@lawallet.ar', 'dios@lawallet.ar', 'agustin@lawallet.ar'];
-
 export default function Page(): JSX.Element {
   const t = useTranslations();
   const { playerCount } = useMassacre();
@@ -48,25 +46,6 @@ export default function Page(): JSX.Element {
         </Flex>
 
         <Divider y={20} />
-
-        {/* <Heading align='center' as='h3'>
-          Participantes
-        </Heading>
-
-        <Divider y={20} />
-
-        {PARTICIPANTES.map((lud16: string) => (
-          <React.Fragment key={lud16}>
-            <Flex align='center' gap={8}>
-              <Avatar>
-                <AvatarImage src='/favicon.ico' alt='asd' />
-              </Avatar>
-
-              <Text>{lud16}</Text>
-            </Flex>
-            <Divider y={12} />
-          </React.Fragment>
-        ))} */}
       </Container>
     </>
   );

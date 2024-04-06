@@ -22,13 +22,18 @@ export function Navbar(props: NavbarProps) {
           <Flex flex={1} align="center" justify="space-between">
             <Link href="/">{children}</Link>
             <Flex gap={16} align="center" justify="end">
-              <div>
-                <Link href="/rules">
-                  <Button size="small" variant="borderless">
-                    {t('SEE_RULES')}
-                  </Button>
-                </Link>
-              </div>
+              <Link href="/ranking">
+                <Button size="small" variant="borderless">
+                  Top 100
+                </Button>
+              </Link>
+
+              <Link href="/rules">
+                <Button size="small" variant="borderless">
+                  {t('SEE_RULES')}
+                </Button>
+              </Link>
+
               <LocaleSwitcher />
             </Flex>
           </Flex>

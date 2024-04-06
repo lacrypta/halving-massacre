@@ -15,13 +15,14 @@ export interface PlayerContextType {
 export const PlayerContext = createContext({} as PlayerContextType);
 
 export function PlayerProvider({ walias, children }: React.PropsWithChildren & { walias: string }) {
+  // TODO: Needs to listen for updatable profile event
   const { hasTicket, ticketEvent } = useTicket(walias);
   const value: PlayerContextType = {
     power: 21000,
+    amountZapped: 700,
+    totalZaps: 1,
     isAlive: true,
     hasTicket,
-    totalZaps: 1,
-    amountZapped: 700,
     ticketEvent,
     walias,
   };

@@ -8,7 +8,7 @@ interface AutoAvatarProps {
 
 export function AutoAvatar(props: AutoAvatarProps) {
   const { walias, size } = props;
-  const { nip05Avatar, lud16Avatar, domainAvatar, isLoading } = useProfile({ walias });
+  const { nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
 
-  return <Avatar alt={walias} size={size} src={(isLoading && nip05Avatar) || lud16Avatar || domainAvatar} />;
+  return <Avatar alt={walias} size={size} src={nip05Avatar || lud16Avatar || domainAvatar!} />;
 }
