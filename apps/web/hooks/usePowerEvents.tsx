@@ -38,7 +38,7 @@ export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
 
   useEffect(() => {
     const deduplicated = Object.values(Object.fromEntries(_powerEvents.map((event) => [event.id, event as Event])));
-    setPowerEventsDeduplicated(deduplicated);
+    setPowerEventsDeduplicated(deduplicated.sort((a, b) => b.created_at - a.created_at));
   }, [_powerEvents]);
 
   return {
