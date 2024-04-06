@@ -30,7 +30,7 @@ export function Navbar(props: NavbarProps) {
 
               <Link href="/rules">
                 <Button size="small" variant="borderless">
-                  {t('SEE_RULES')}
+                  {t('RULES')}
                 </Button>
               </Link>
 
