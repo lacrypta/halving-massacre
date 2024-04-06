@@ -9,7 +9,8 @@ import { Divider } from '@lawallet/ui';
 import { PlayerProvider } from '@/../context/PlayerContext';
 
 // Generic components
-import InscriptionSheet from '../../components/InscriptionSheet/InscriptionSheet';
+import AddPowerSheet from '@/[locale]/components/AddPowerSheet/AddPowerSheet';
+import InscriptionSheet from '@/[locale]/components/InscriptionSheet/InscriptionSheet';
 import { PlayerDashboard } from '../../components/PlayerDashboard';
 import { Navbar } from '../../components/Navbar';
 
@@ -24,10 +25,11 @@ interface PageProps {
 
 export default function Page({ params }: PageProps): JSX.Element {
   const walias = decodeURIComponent(params.lud16);
+  const [isAddPowerOpen, setIsAddPowerOpen] = useState(false);
   const [isInscriptionOpen, setIsInscriptionOpen] = useState(false);
 
   const onAddPower = () => {
-    alert('Not implemented yet');
+    setIsAddPowerOpen(true);
   };
   return (
     <>
@@ -38,7 +40,12 @@ export default function Page({ params }: PageProps): JSX.Element {
       </Navbar>
       <Divider y={16} />
       <PlayerProvider walias={walias}>
-        <PlayerDashboard walias={walias} onAddPower={onAddPower} onBuyTicket={() => setIsInscriptionOpen(true)} />
+        <PlayerDashboard
+          walias={walias}
+          onAddPower={() => setIsAddPowerOpen(true)}
+          onBuyTicket={() => setIsInscriptionOpen(true)}
+        />
+        <AddPowerSheet isOpen={isAddPowerOpen} onClose={() => setIsAddPowerOpen(false)} />
         <InscriptionSheet isOpen={isInscriptionOpen} onClose={() => setIsInscriptionOpen(false)} />
       </PlayerProvider>
     </>

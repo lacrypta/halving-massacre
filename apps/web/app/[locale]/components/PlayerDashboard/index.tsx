@@ -37,7 +37,7 @@ export interface PlayerDashboardInterface {
   onBuyTicket: Function;
 }
 
-export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterface) {
+export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
   const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
   const { powerActions } = usePowerEvents(walias);
@@ -66,12 +66,10 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
           <div>
             {hasTicket ? (
               <>
-                {/*
-            Hidden while developing
-            <Button onClick={() => onAddPower()} disabled={!isAlive}>
-              <Bolt />
-              Agregar poder
-            </Button> */}
+                <Button onClick={() => onAddPower()} disabled={!isAlive}>
+                  <Bolt />
+                  {t('ADD_POWER')}
+                </Button>
               </>
             ) : (
               <Button onClick={() => onBuyTicket()}>
@@ -249,8 +247,8 @@ export function PlayerDashboard({ walias, onBuyTicket }: PlayerDashboardInterfac
 
               <React.Fragment>
                 {/* Mock Power Events */}
-                {powerActions.map((powerEvent, k) => (
-                  <React.Fragment>
+                {powerActions.map((powerEvent) => (
+                  <React.Fragment k={powerEvent.id}>
                     <Flex align="center" justify="space-between" gap={8}>
                       <Flex align="center" gap={8}>
                         <Bolt color={appTheme.colors.primary} />
