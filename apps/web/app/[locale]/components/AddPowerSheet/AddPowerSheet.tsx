@@ -232,8 +232,8 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
             ) : (
               <>
                 <Flex gap={4} align="center" justify="center">
-                  <Text size="small">{t('INSCRIPTION_VALUE')}:</Text>
-                  <Text isBold>{amount / 1000} SATs</Text>
+                  <Text size="small">{t('POWER_AMOUNT')}:</Text>
+                  <Text isBold>{amount} SATs</Text>
                 </Flex>
                 <QRStyled size={250} value={invoiceInfo.pr} />
                 {invoiceInfo.expiry && (

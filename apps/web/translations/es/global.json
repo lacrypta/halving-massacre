@@ -114,5 +114,6 @@
   "ADD_POWER_DESC": "Agregá poder para aumentar tus chances de sobrevivir a la próxima masacre",
   "MESSAGE": "Mensaje",
   "OPTIONAL": "opcional",
-  "CUSTOM_AMOUNT": "Monto personalizado"
+  "CUSTOM_AMOUNT": "Monto personalizado",
+  "POWER_AMOUNT": "Cantidad de Power"
 }

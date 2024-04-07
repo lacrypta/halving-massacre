@@ -114,5 +114,6 @@
   "ADD_POWER_DESC": "Zap sats to increase the chances to survive next massacre",
   "MESSAGE": "Message",
   "OPTIONAL": "optional",
-  "CUSTOM_AMOUNT": "Custom amount"
+  "CUSTOM_AMOUNT": "Custom amount",
+  "POWER_AMOUNT": "Power amount"
 }
