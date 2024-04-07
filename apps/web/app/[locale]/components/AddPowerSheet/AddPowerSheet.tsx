@@ -220,8 +220,7 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
             {isPaid ? (
               <>
                 <Flex gap={8} align="center" justify="center" direction="column">
-                  <Divider y={16} />
-                  <Text isBold color={appTheme.colors.primary}>
+                  <Text size="small" color={appTheme.colors.gray50}>
                     {t('ADDED_POWER')}
                   </Text>
                   <Divider y={16} />

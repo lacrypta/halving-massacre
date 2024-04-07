@@ -177,13 +177,10 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
             {isPaid ? (
               <>
                 <Flex gap={8} align="center" justify="center" direction="column">
-                  <Divider y={16} />
-                  <Text isBold color={appTheme.colors.primary}>
+                  <Text size="small" color={appTheme.colors.gray50}>
                     {t('HAVE_A_TICKET')}
                   </Text>
-                  <Text size="small" color={appTheme.colors.gray50}>
-                    {t('WE_GIVE_POWER')}
-                  </Text>
+                  <Text isBold>{t('WE_GIVE_POWER')}</Text>
                   <Divider y={16} />
                 </Flex>
               </>
