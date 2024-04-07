@@ -44,14 +44,14 @@ export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
   return {
     events: powerEventsDeduplicated as Event[],
     powerActions: (powerEventsDeduplicated as Event[]).map((event) => {
-      const { amount, walias, comment } = JSON.parse(event.content) as Power;
+      const { amount, walias, message } = JSON.parse(event.content) as Power;
 
       return {
         id: event.id,
         amount,
         walias,
         createdAt: event.created_at,
-        comment: comment,
+        message,
       };
     }),
   };

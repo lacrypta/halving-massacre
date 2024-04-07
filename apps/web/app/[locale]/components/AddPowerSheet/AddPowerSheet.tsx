@@ -191,12 +191,12 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               />
             </Flex>
             <Divider y={12} />
-            {/* <Input
+            <Input
               placeholder={`${t('MESSAGE')} (${t('OPTIONAL')})`}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <Divider y={12} /> */}
+            <Divider y={12} />
             <Button disabled={amount < MINIMUM_POWER_AMOUNT} onClick={handleClick}>
               {t('ADD_POWER')}
             </Button>

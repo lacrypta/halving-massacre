@@ -261,7 +261,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
                         text={t('ADDED_POWER')}
                         type="power"
                         value={powerEvent.amount}
-                        message={powerEvent.comment}
+                        message={powerEvent.message}
                       />
                     </React.Fragment>
                   );
