@@ -1,6 +1,6 @@
 // Libraries
-import { ActionSheet, Button, Divider, Flex, Text } from '@lawallet/ui';
 import { useEffect, useState } from 'react';
+import { ActionSheet, Button, Divider, Flex, Input, Text } from '@lawallet/ui';
 
 // Context
 import { useNotifications } from '@/../context/NotificationsContext';
@@ -40,6 +40,7 @@ type InvoiceInfoProps = {
 const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const t = useTranslations();
   const notifications = useNotifications();
+  const { walias } = usePlayer();
 
   const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
   const [amount, setAmount] = useState(MINIMUM_POWER_AMOUNT);
@@ -50,7 +51,7 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   const [eventIdReference, setEventIdReference] = useState<string>();
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
-  const { walias } = usePlayer();
+  const [zapSelected, setZapSelected] = useState<number>(0);
 
   // Subscription to the zap events
   const { events: zaps } = useSubscription({
@@ -158,7 +159,49 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     >
       {!invoiceInfo.pr ? (
         !isInvoiceLoading ? (
-          <Button onClick={handleClick}>{t('ADD_POWER')}</Button>
+          <>
+            <Flex gap={4} justify="center">
+              <Button variant={zapSelected === 21 ? 'bezeled' : 'borderless'} onClick={() => setZapSelected(21)}>
+                21 sat
+              </Button>
+              <Button variant={zapSelected === 420 ? 'bezeled' : 'borderless'} onClick={() => setZapSelected(420)}>
+                420 sat
+              </Button>
+              <Button variant={zapSelected === 10000 ? 'bezeled' : 'borderless'} onClick={() => setZapSelected(10000)}>
+                10K sat
+              </Button>
+            </Flex>
+            <Flex gap={4} justify="center">
+              <Button
+                variant={zapSelected === 100000 ? 'bezeled' : 'borderless'}
+                onClick={() => setZapSelected(100000)}
+              >
+                100K sat
+              </Button>
+              <Button
+                variant={zapSelected === 1000000 ? 'bezeled' : 'borderless'}
+                onClick={() => setZapSelected(1000000)}
+              >
+                1M sat
+              </Button>
+            </Flex>
+            <Divider y={8} />
+            <Flex gap={4} align="center">
+              <Flex>
+                <Text size="small">{t('CUSTOM_AMOUNT')}:</Text>
+              </Flex>
+              <Input
+                placeholder="0 sats"
+                value={zapSelected.toString()}
+                onChange={(e) => setZapSelected(e.target.value)}
+                type="number"
+              />
+            </Flex>
+            <Divider y={12} />
+            <Input placeholder={`${t('MESSAGE')} (${t('OPTIONAL')})`} />
+            <Divider y={12} />
+            <Button onClick={handleClick}>{t('ADD_POWER')}</Button>
+          </>
         ) : (
           <>
             <Divider y={16} />
