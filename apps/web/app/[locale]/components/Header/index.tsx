@@ -15,6 +15,7 @@ export default function Header() {
         <Image width={240} height={77} alt="Halving Massacre by La Crypta" src={pngLogo.src} />
         <Divider y={12} />
         <Text align="center">{t('HEADER_DESC')}</Text>
+        <Text align="center">{t('HEADER_DESC2')}</Text>
       </Flex>
     </HeaderPrimitive>
   );
