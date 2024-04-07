@@ -50,7 +50,13 @@ export default function RootLayout({ children, params: { locale } }: Readonly<La
       </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {EMERGENCY_LOCK ? 'Fixing bugs. By right back' : <AppProvider>{children}</AppProvider>}
+          {EMERGENCY_LOCK ? (
+            <div>
+              Fixing bugs. By right back. <a href="https://discord.lacrypta.ar">More Info on La Crypta Discord</a>
+            </div>
+          ) : (
+            <AppProvider>{children}</AppProvider>
+          )}
         </NextIntlClientProvider>
       </body>
     </html>
