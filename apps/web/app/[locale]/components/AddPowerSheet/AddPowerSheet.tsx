@@ -90,9 +90,8 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     try {
       setIsInvoiceLoading(true);
 
-      // const res = await fetch('/api/ticket/request', {
       const res = await fetch(
-        `${MASSACRE_ENDPOINT}/massacre/games/${MASSACRE_SETUP_ID}/power?amount=${amount * 1000}&walias=${walias}`,
+        `${MASSACRE_ENDPOINT}/massacre/games/${MASSACRE_SETUP_ID}/power?amount=${amount * 1000}&walias=${walias}&message=${encodeURIComponent(message)}`,
         {
           method: 'GET',
           headers: {
