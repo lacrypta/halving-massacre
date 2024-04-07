@@ -1,9 +1,9 @@
 'use client';
 
 // Libraries
-import { useState } from 'react';
-import Image from 'next/image';
 import { Divider } from '@lawallet/ui';
+import Image from 'next/image';
+import { useState } from 'react';
 
 // Context
 import { PlayerProvider } from '@/../context/PlayerContext';
@@ -11,12 +11,11 @@ import { PlayerProvider } from '@/../context/PlayerContext';
 // Generic components
 import AddPowerSheet from '@/[locale]/components/AddPowerSheet/AddPowerSheet';
 import InscriptionSheet from '@/[locale]/components/InscriptionSheet/InscriptionSheet';
-import { PlayerDashboard } from '../../components/PlayerDashboard';
 import { Navbar } from '../../components/Navbar';
+import { PlayerDashboard } from '../../components/PlayerDashboard';
 
-import pngIso from '../../../../public/images/iso.png';
 import { Link } from '../../../../navigation';
-import { GameTime } from '@/[locale]/components/GameTime';
+import pngIso from '../../../../public/images/iso.png';
 
 interface PageProps {
   params: {

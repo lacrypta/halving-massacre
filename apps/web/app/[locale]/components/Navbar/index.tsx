@@ -1,10 +1,10 @@
+import { Button, Container, Flex } from '@lawallet/ui';
+import { useTranslations } from 'next-intl';
 import { type ReactNode } from 'react';
 import { Link } from '../../../../navigation';
-import { useTranslations } from 'next-intl';
-import { Container, Flex, Button } from '@lawallet/ui';
 
-import { NavbarStyle } from './style';
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
+import { NavbarStyle } from './style';
 
 interface NavbarProps {
   children?: ReactNode;
@@ -20,7 +20,7 @@ export function Navbar(props: NavbarProps) {
       <NavbarStyle>
         <Container>
           <Flex flex={1} align="center" justify="space-between">
-            <Link href="/">{children}</Link>
+            {children}
             <Flex gap={16} align="center" justify="end">
               <Link href="/ranking">
                 <Button size="small" variant="borderless">
