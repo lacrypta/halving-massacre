@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 
 import { appTheme } from '@/../config/exports';
@@ -11,10 +11,14 @@ import Card from './components/Card';
 import Countdown from './components/Countdown';
 import Header from './components/Header';
 import { Navbar } from './components/Navbar';
+import { formatToPreference } from '@lawallet/utils';
+import type { AvailableLanguages } from '@lawallet/utils/types';
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
-  const { playerCount } = useMassacre();
+  const { playerCount, currentPool } = useMassacre();
+  const locale = useLocale();
+  const totalPrice = formatToPreference('SAT', currentPool / 1000, locale as AvailableLanguages, false);
 
   return (
     <>
@@ -42,7 +46,7 @@ export default function Page(): JSX.Element {
             </Card>
           </Flex>
           <Card image="/emotes/party.png" size="small">
-            <Heading as="h2">2.100.000</Heading>
+            <Heading as="h2">{totalPrice}</Heading>
             <Text color={appTheme.colors.gray50}>{t('INITIAL_PRIZE_DESC')}.</Text>
           </Card>
         </Flex>
