@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   description: 'Lightning Network Halving Game',
 };
 
+const EMERGENCY_LOCK = true;
+
 export default function RootLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
   unstable_setRequestLocale(locale);
   const messages = useMessages();
@@ -48,7 +50,7 @@ export default function RootLayout({ children, params: { locale } }: Readonly<La
       </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AppProvider>{children}</AppProvider>
+          {EMERGENCY_LOCK ? 'Fixing bugs. By right back' : <AppProvider>{children}</AppProvider>}
         </NextIntlClientProvider>
       </body>
     </html>
