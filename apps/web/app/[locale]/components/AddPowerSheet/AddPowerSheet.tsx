@@ -44,6 +44,7 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
 
   const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
   const [amount, setAmount] = useState(MINIMUM_POWER_AMOUNT);
+  const [message, setMessage] = useState('');
   const [invoiceInfo, setInvoiceInfo] = useState<InvoiceInfoProps>({
     pr: '',
     expiry: null,
@@ -51,7 +52,6 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   const [eventIdReference, setEventIdReference] = useState<string>();
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
-  const [zapSelected, setZapSelected] = useState<number>(0);
 
   // Subscription to the zap events
   const { events: zaps } = useSubscription({
@@ -161,27 +161,21 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         !isInvoiceLoading ? (
           <>
             <Flex gap={4} justify="center">
-              <Button variant={zapSelected === 21 ? 'bezeled' : 'borderless'} onClick={() => setZapSelected(21)}>
+              <Button variant={amount === 21 ? 'bezeled' : 'borderless'} onClick={() => setAmount(21)}>
                 21 sat
               </Button>
-              <Button variant={zapSelected === 420 ? 'bezeled' : 'borderless'} onClick={() => setZapSelected(420)}>
+              <Button variant={amount === 420 ? 'bezeled' : 'borderless'} onClick={() => setAmount(420)}>
                 420 sat
               </Button>
-              <Button variant={zapSelected === 10000 ? 'bezeled' : 'borderless'} onClick={() => setZapSelected(10000)}>
+              <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
                 10K sat
               </Button>
             </Flex>
             <Flex gap={4} justify="center">
-              <Button
-                variant={zapSelected === 100000 ? 'bezeled' : 'borderless'}
-                onClick={() => setZapSelected(100000)}
-              >
+              <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
                 100K sat
               </Button>
-              <Button
-                variant={zapSelected === 1000000 ? 'bezeled' : 'borderless'}
-                onClick={() => setZapSelected(1000000)}
-              >
+              <Button variant={amount === 1000000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000000)}>
                 1M sat
               </Button>
             </Flex>
@@ -192,14 +186,18 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               </Flex>
               <Input
                 placeholder="0 sats"
-                value={zapSelected.toString()}
-                onChange={(e) => setZapSelected(e.target.value)}
+                value={amount.toString()}
+                onChange={(e) => setAmount(parseInt(e.target.value))}
                 type="number"
               />
             </Flex>
             <Divider y={12} />
-            <Input placeholder={`${t('MESSAGE')} (${t('OPTIONAL')})`} />
-            <Divider y={12} />
+            {/* <Input
+              placeholder={`${t('MESSAGE')} (${t('OPTIONAL')})`}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <Divider y={12} /> */}
             <Button onClick={handleClick}>{t('ADD_POWER')}</Button>
           </>
         ) : (
