@@ -1,6 +1,6 @@
 // Libraries
-import { ActionSheet, Button, Divider, Flex, Text } from '@lawallet/ui';
 import { useEffect, useState } from 'react';
+import { ActionSheet, Button, Divider, Flex, Input, Text } from '@lawallet/ui';
 
 // Context
 import { useNotifications } from '@/../context/NotificationsContext';
@@ -40,9 +40,11 @@ type InvoiceInfoProps = {
 const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const t = useTranslations();
   const notifications = useNotifications();
+  const { walias } = usePlayer();
 
   const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
   const [amount, setAmount] = useState(MINIMUM_POWER_AMOUNT);
+  const [message, setMessage] = useState('');
   const [invoiceInfo, setInvoiceInfo] = useState<InvoiceInfoProps>({
     pr: '',
     expiry: null,
@@ -50,7 +52,6 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   const [eventIdReference, setEventIdReference] = useState<string>();
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
-  const { walias } = usePlayer();
 
   // Subscription to the zap events
   const { events: zaps } = useSubscription({
@@ -89,9 +90,8 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     try {
       setIsInvoiceLoading(true);
 
-      // const res = await fetch('/api/ticket/request', {
       const res = await fetch(
-        `${MASSACRE_ENDPOINT}/massacre/games/${MASSACRE_SETUP_ID}/power?amount=${amount * 1000}&walias=${walias}`,
+        `${MASSACRE_ENDPOINT}/massacre/games/${MASSACRE_SETUP_ID}/power?amount=${amount * 1000}&walias=${walias}&message=${encodeURIComponent(message)}`,
         {
           method: 'GET',
           headers: {
@@ -158,7 +158,49 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     >
       {!invoiceInfo.pr ? (
         !isInvoiceLoading ? (
-          <Button onClick={handleClick}>{t('ADD_POWER')}</Button>
+          <>
+            <Flex gap={4} justify="center">
+              <Button variant={amount === 121 ? 'bezeled' : 'borderless'} onClick={() => setAmount(21)}>
+                121 sat
+              </Button>
+              <Button variant={amount === 420 ? 'bezeled' : 'borderless'} onClick={() => setAmount(420)}>
+                420 sat
+              </Button>
+              <Button variant={amount === 1000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
+                1K sat
+              </Button>
+            </Flex>
+            <Flex gap={4} justify="center">
+              <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
+                10K sat
+              </Button>
+              <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000000)}>
+                100K sat
+              </Button>
+            </Flex>
+            <Divider y={8} />
+            <Flex gap={4} align="center">
+              <Flex>
+                <Text size="small">{t('CUSTOM_AMOUNT')}:</Text>
+              </Flex>
+              <Input
+                placeholder="0 sats"
+                value={amount.toString()}
+                onChange={(e) => setAmount(parseInt(e.target.value))}
+                type="number"
+              />
+            </Flex>
+            <Divider y={12} />
+            {/* <Input
+              placeholder={`${t('MESSAGE')} (${t('OPTIONAL')})`}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <Divider y={12} /> */}
+            <Button disabled={amount < MINIMUM_POWER_AMOUNT} onClick={handleClick}>
+              {t('ADD_POWER')}
+            </Button>
+          </>
         ) : (
           <>
             <Divider y={16} />

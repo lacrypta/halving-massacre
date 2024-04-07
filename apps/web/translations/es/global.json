@@ -113,5 +113,8 @@
   "INVALID_LNURL_ERROR": "Debes ingresar una LNURL válida",
   "ADD_POWER": "Agregar Poder",
   "ADD_POWER_DESC": "Agregá poder para aumentar tus chances de sobrevivir a la próxima masacre",
+  "MESSAGE": "Mensaje",
+  "OPTIONAL": "opcional",
+  "CUSTOM_AMOUNT": "Monto personalizado",
   "POWER_AMOUNT": "Cantidad de Power"
 }
