@@ -7,16 +7,12 @@ import { Icon } from '../Icon';
 import { Bolt } from '../Icons';
 
 import { RankingListStyle, ItemStyle, NumberStyle, WaliasStyle } from './style';
+import { formatAmount } from '../../../../lib/utils';
 
 interface RankingListProps {
   players: any;
   type?: 'global' | 'massacre';
 }
-
-const formatAmount = (_amount: number): String => {
-  const amount = _amount / 1000;
-  return amount > 9999 ? (amount / 1000).toFixed(1) + 'K' : String(amount);
-};
 
 export function RankingList(props: RankingListProps) {
   const { players, type = 'global' } = props;
