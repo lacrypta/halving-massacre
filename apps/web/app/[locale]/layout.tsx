@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider, useMessages, useTranslations } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
+import { AppProvider } from '../../context/AppProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -46,7 +47,9 @@ export default function RootLayout({ children, params: { locale } }: Readonly<La
         <meta name="twitter:url" content="https://lacrypta.ar/" />
       </head>
       <NextIntlClientProvider locale={locale} messages={messages}>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <AppProvider>{children}</AppProvider>
+        </body>
       </NextIntlClientProvider>
     </html>
   );
