@@ -30,6 +30,7 @@ import { useProfile } from '@lawallet/react';
 import CountdownBox from '../CountdownBox';
 import { useTranslations } from 'next-intl';
 import { usePowerEvents } from '../../../../hooks/usePowerEvents';
+import { ItemTxs } from '../ItemTxs';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -252,26 +253,22 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
 
               <React.Fragment>
                 {/* Mock Power Events */}
-                {powerActions.map((powerEvent) => (
-                  <React.Fragment key={powerEvent.id}>
-                    <Flex align="center" justify="space-between" gap={8}>
-                      <Flex align="center" gap={8}>
-                        <Bolt color={appTheme.colors.primary} />
-                        <Text>{t('ADDED_POWER')}</Text>
-                      </Flex>
-                      <Text color={appTheme.colors.gray50}>+{powerEvent.amount / 1000}</Text>
-                    </Flex>
-                    <Divider y={12} />
-                  </React.Fragment>
-                ))}
+                {powerActions.map((powerEvent) => {
+                  return (
+                    <React.Fragment key={powerEvent.id}>
+                      <ItemTxs
+                        icon={<Bolt color={appTheme.colors.primary} />}
+                        text={t('ADDED_POWER')}
+                        type="power"
+                        value={powerEvent.amount}
+                        message={powerEvent.comment}
+                      />
+                    </React.Fragment>
+                  );
+                })}
 
                 {/* Mock TicketEvent */}
-                <Flex align="center" justify="space-between" gap={8}>
-                  <Flex align="center" gap={8}>
-                    <Ticket color={appTheme.colors.primary} />
-                    <Text>{t('PURCHASED_TICKET')}</Text>
-                  </Flex>
-                </Flex>
+                <ItemTxs icon={<Ticket color={appTheme.colors.primary} />} text={t('PURCHASED_TICKET')} />
                 <Divider y={20} />
               </React.Fragment>
             </TabPanel>
