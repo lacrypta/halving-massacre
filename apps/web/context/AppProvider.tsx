@@ -10,6 +10,7 @@ import { NotificationsProvider } from '@/../context/NotificationsContext';
 
 // Components
 import Footer from '@/[locale]/components/Footer';
+import { EmergencyLock } from '@/[locale]/components/EmergencyLock';
 
 // Utils and hooks
 import type { ConfigProps } from '@lawallet/utils/types';
@@ -21,10 +22,13 @@ import '@lawallet/ui/styles';
 // Config
 import { mockConfig } from '@/../config/mock';
 import { Suspense } from 'react';
+
 const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 const nostrConfig = mockConfig as unknown as ConfigProps;
 
 // const nostrConfig = createConfig({ relaysList }); // TODO: Fix BUG: Ignoring relaysList
+
+const EMERGENCY_LOCK = true;
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -34,7 +38,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           <ProfileCacheProvider>
             <MassacreProvider setupId={MASSACRE_SETUP_ID}>
               <NotificationsProvider>
-                {children}
+                {EMERGENCY_LOCK ? <EmergencyLock /> : children}
                 <Footer />
               </NotificationsProvider>
             </MassacreProvider>

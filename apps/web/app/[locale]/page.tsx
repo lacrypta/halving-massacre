@@ -11,34 +11,12 @@ import Card from './components/Card';
 import Countdown from './components/Countdown';
 import Header from './components/Header';
 import { Navbar } from './components/Navbar';
-import Link from 'next/link';
-
-import ratsPng from '../../public/images/ratas.png';
-import Image from 'next/image';
-
-const EMERGENCY_LOCK = true;
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
   const { playerCount } = useMassacre();
 
-  return EMERGENCY_LOCK ? (
-    <>
-      <Container>
-        <Heading as="h3" align="center">
-          <Divider y={32} />
-          Fixing bugs. Be right back.{' '}
-          <Flex direction="column" justify="center" align="center" gap={8}>
-            <Link href="https://discord.lacrypta.ar">
-              <Button>La Crypta Discord</Button>
-            </Link>
-
-            <Image alt="" src={ratsPng} width={400} height={400} />
-          </Flex>
-        </Heading>
-      </Container>
-    </>
-  ) : (
+  return (
     <>
       <Navbar />
       {/* <GameTime round={10} block="820.000" time="20" /> */}
