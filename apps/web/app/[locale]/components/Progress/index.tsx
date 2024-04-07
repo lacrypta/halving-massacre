@@ -3,7 +3,7 @@ import { Text } from '@lawallet/ui';
 import { ProgressPrimitive, Value, TextValue } from './style';
 
 export interface ProgressProps {
-  value: Number;
+  value: number;
 }
 
 export default function Progress(props: ProgressProps) {
