@@ -28,7 +28,7 @@ const nostrConfig = mockConfig as unknown as ConfigProps;
 
 // const nostrConfig = createConfig({ relaysList }); // TODO: Fix BUG: Ignoring relaysList
 
-const EMERGENCY_LOCK = true;
+const EMERGENCY_LOCK = !!process.env.NEXT_PUBLIC_EMERGENCY_LOCK;
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
