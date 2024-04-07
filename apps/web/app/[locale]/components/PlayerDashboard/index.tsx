@@ -9,7 +9,7 @@ import Badge from '../Badge/index';
 import { Avatar } from '../Avatar';
 import { Card } from '../CardV2';
 import { Icon } from '../Icon';
-import { Bolt, Heart, Shield, Skull, Ticket } from '../Icons';
+import { Bolt, Heart, Loader, Shield, Skull, Ticket } from '../Icons';
 import { Tab } from '../Tabs/Tab';
 import { TabList } from '../Tabs/TabList';
 import { TabPanel } from '../Tabs/TabPanel';
@@ -58,6 +58,18 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
   useEffect(() => {
     setTotalPower(powerActions.reduce((a, b) => a + b.amount, 0));
   }, [powerActions]);
+
+  if (!lud16)
+    return (
+      <Flex direction="column" flex={1} align="center" justify="center" gap={8}>
+        <Icon size={8}>
+          <Loader />
+        </Icon>
+        <Text size="small" color={appTheme.colors.gray50}>
+          {t('LOADING')}...
+        </Text>
+      </Flex>
+    );
 
   return (
     <Container size="small">

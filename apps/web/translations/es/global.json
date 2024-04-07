@@ -116,5 +116,6 @@
   "MESSAGE": "Mensaje",
   "OPTIONAL": "opcional",
   "CUSTOM_AMOUNT": "Monto personalizado",
-  "POWER_AMOUNT": "Cantidad de Power"
+  "POWER_AMOUNT": "Cantidad de Power",
+  "LOADING": "Cargando"
 }

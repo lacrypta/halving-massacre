@@ -116,5 +116,6 @@
   "MESSAGE": "Message",
   "OPTIONAL": "optional",
   "CUSTOM_AMOUNT": "Custom amount",
-  "POWER_AMOUNT": "Power amount"
+  "POWER_AMOUNT": "Power amount",
+  "LOADING": "Loading"
 }
