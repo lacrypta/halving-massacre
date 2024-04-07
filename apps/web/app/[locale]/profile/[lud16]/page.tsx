@@ -16,6 +16,7 @@ import { Navbar } from '../../components/Navbar';
 
 import pngIso from '../../../../public/images/iso.png';
 import { Link } from '../../../../navigation';
+import { GameTime } from '@/[locale]/components/GameTime';
 
 interface PageProps {
   params: {
@@ -38,6 +39,7 @@ export default function Page({ params }: PageProps): JSX.Element {
           <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={pngIso} />
         </Link>
       </Navbar>
+      {/* <GameTime round={10} block="820.000" time="20" /> */}
       <Divider y={16} />
       <PlayerProvider walias={walias}>
         <PlayerDashboard

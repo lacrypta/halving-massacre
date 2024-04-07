@@ -1,15 +1,17 @@
 'use client';
 
-import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 
 import { appTheme } from '@/../config/exports';
-import { useTranslations } from 'next-intl';
+
+import { useMassacre } from '../../hooks/useMassacre';
+
 import Card from './components/Card';
 import Countdown from './components/Countdown';
 import Header from './components/Header';
 import { Navbar } from './components/Navbar';
-import { useMassacre } from '../../hooks/useMassacre';
+import { GameTime } from './components/GameTime';
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
@@ -18,6 +20,7 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Navbar />
+      {/* <GameTime round={10} block="820.000" time="20" /> */}
       <Divider y={16} />
       <Container>
         <Flex direction="column" align="center">
