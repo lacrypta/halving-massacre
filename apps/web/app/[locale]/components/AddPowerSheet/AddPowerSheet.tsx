@@ -161,22 +161,22 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         !isInvoiceLoading ? (
           <>
             <Flex gap={4} justify="center">
-              <Button variant={amount === 21 ? 'bezeled' : 'borderless'} onClick={() => setAmount(21)}>
-                21 sat
+              <Button variant={amount === 121 ? 'bezeled' : 'borderless'} onClick={() => setAmount(21)}>
+                121 sat
               </Button>
               <Button variant={amount === 420 ? 'bezeled' : 'borderless'} onClick={() => setAmount(420)}>
                 420 sat
               </Button>
-              <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
-                10K sat
+              <Button variant={amount === 1000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
+                1K sat
               </Button>
             </Flex>
             <Flex gap={4} justify="center">
-              <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
-                100K sat
+              <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
+                10K sat
               </Button>
-              <Button variant={amount === 1000000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000000)}>
-                1M sat
+              <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000000)}>
+                100K sat
               </Button>
             </Flex>
             <Divider y={8} />
@@ -198,7 +198,9 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               onChange={(e) => setMessage(e.target.value)}
             />
             <Divider y={12} /> */}
-            <Button onClick={handleClick}>{t('ADD_POWER')}</Button>
+            <Button disabled={amount < MINIMUM_POWER_AMOUNT} onClick={handleClick}>
+              {t('ADD_POWER')}
+            </Button>
           </>
         ) : (
           <>
