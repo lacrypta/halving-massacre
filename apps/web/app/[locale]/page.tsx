@@ -27,7 +27,7 @@ export default function Page(): JSX.Element {
       <Container>
         <Heading as="h3" align="center">
           <Divider y={32} />
-          Fixing bugs. By right back.{' '}
+          Fixing bugs. Be right back.{' '}
           <Flex direction="column" justify="center" align="center" gap={8}>
             <Link href="https://discord.lacrypta.ar">
               <Button>La Crypta Discord</Button>
