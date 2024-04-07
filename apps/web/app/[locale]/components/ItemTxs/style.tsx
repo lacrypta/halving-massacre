@@ -36,6 +36,11 @@ export const MessageStyle = styled.div`
     justify-content: center;
     width: 37px;
   }
+
+  > div:last-child {
+    overflow: hidden;
+    max-width: 270px;
+  }
 `;
 
 export const IndicatorStyle = styled.div`
