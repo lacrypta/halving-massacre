@@ -160,21 +160,21 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         !isInvoiceLoading ? (
           <>
             <Flex gap={4} justify="center">
-              <Button variant={amount === 121 ? 'bezeled' : 'borderless'} onClick={() => setAmount(21)}>
+              <Button variant={amount === 121 ? 'bezeled' : 'borderless'} onClick={() => setAmount(121)}>
                 121 sat
               </Button>
               <Button variant={amount === 420 ? 'bezeled' : 'borderless'} onClick={() => setAmount(420)}>
                 420 sat
               </Button>
-              <Button variant={amount === 1000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
+              <Button variant={amount === 1000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000)}>
                 1K sat
               </Button>
             </Flex>
             <Flex gap={4} justify="center">
-              <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
+              <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
                 10K sat
               </Button>
-              <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000000)}>
+              <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
                 100K sat
               </Button>
             </Flex>
