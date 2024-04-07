@@ -13,6 +13,11 @@ interface RankingListProps {
   type?: 'global' | 'massacre';
 }
 
+const formatAmount = (_amount: number): String => {
+  const amount = _amount / 1000;
+  return amount > 9999 ? (amount / 1000).toFixed(1) + 'K' : String(amount);
+};
+
 export function RankingList(props: RankingListProps) {
   const { players, type = 'global' } = props;
 
@@ -39,7 +44,7 @@ export function RankingList(props: RankingListProps) {
                     <Bolt color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error} />
                   </Icon>
                   <Text color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error}>
-                    {String(players[walias]! / 1000) || '21'}
+                    {formatAmount(players[walias]!) || '21'}
                   </Text>
                 </Flex>
               </Flex>
