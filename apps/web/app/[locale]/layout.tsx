@@ -16,8 +16,6 @@ export const metadata: Metadata = {
   description: 'Lightning Network Halving Game',
 };
 
-const EMERGENCY_LOCK = true;
-
 export default function RootLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
   unstable_setRequestLocale(locale);
   const messages = useMessages();
@@ -38,25 +36,19 @@ export default function RootLayout({ children, params: { locale } }: Readonly<La
         <meta property="og:description" content={t('HEADER_DESC')} />
         <meta property="og:locale" content={`${locale}_${locale.toLocaleUpperCase()}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/social/facebook.jpg" />
+        <meta property="og:image" content="/images/social/facebook-1200x630.jpg" />
         <meta property="og:url" content="https://lacrypta.ar/" />
 
         {/* Twitter */}
         <meta name="twitter:title" content="Halving Massacre | LaWallet.io" />
         <meta name="twitter:description" content={t('HEADER_DESC')} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="/images/social/twitter.jpg" />
+        <meta name="twitter:image" content="/images/social/twitter-600x330.jpg" />
         <meta name="twitter:url" content="https://lacrypta.ar/" />
       </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {EMERGENCY_LOCK ? (
-            <div>
-              Fixing bugs. By right back. <a href="https://discord.lacrypta.ar">More Info on La Crypta Discord</a>
-            </div>
-          ) : (
-            <AppProvider>{children}</AppProvider>
-          )}
+          <AppProvider>{children}</AppProvider>
         </NextIntlClientProvider>
       </body>
     </html>
