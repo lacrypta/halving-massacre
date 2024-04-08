@@ -3,6 +3,7 @@ import { NextIntlClientProvider, useMessages, useTranslations } from 'next-intl'
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { AppProvider } from '../../context/AppProvider';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -45,6 +46,17 @@ export default function RootLayout({ children, params: { locale } }: Readonly<La
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="/images/social/twitter-600x330.jpg" />
         <meta name="twitter:url" content="https://lacrypta.ar/" />
+
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_TAG_ID}`} />
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', '${process.env.GOOGLE_TAG_ID}');
+        `}
+        </Script>
       </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
