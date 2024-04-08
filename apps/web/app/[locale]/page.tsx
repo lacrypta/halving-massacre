@@ -47,7 +47,7 @@ export default function Page(): JSX.Element {
           </Flex>
           <Card image="/emotes/party.png" size="small">
             <Heading as="h2">{totalPrice}</Heading>
-            <Text color={appTheme.colors.gray50}>{t('INITIAL_PRIZE_DESC')}.</Text>
+            <Text color={appTheme.colors.gray50}>{t('TOTAL_PRIZE')}.</Text>
           </Card>
         </Flex>
 
