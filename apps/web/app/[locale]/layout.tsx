@@ -13,7 +13,7 @@ export type LayoutProps = {
 
 export const metadata: Metadata = {
   title: 'Halving Massacre | LaWallet.io',
-  description: 'Lightning Network Halving Game',
+  description: 'Accumulate Satoshis, survive the blocks, and secure your prize in the Bitcoin halving!',
 };
 
 export default function RootLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
