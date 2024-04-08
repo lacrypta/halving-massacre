@@ -52,6 +52,7 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   const [eventIdReference, setEventIdReference] = useState<string>();
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
+  const [typePower, setTypePower] = useState<null | string>(null);
 
   // Subscription to the zap events
   const { events: zaps } = useSubscription({
@@ -131,6 +132,7 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   };
 
   const restartModal = () => {
+    setTypePower(null);
     setInvoiceInfo({ pr: '', expiry: null });
     setEventIdReference(undefined);
     setIsInvoiceLoading(false);
@@ -156,105 +158,131 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
       onClose={restartModal}
       cancelText={isPaid ? t('CLOSE') : t('CANCEL')}
     >
-      {!invoiceInfo.pr ? (
-        !isInvoiceLoading ? (
-          <>
-            <Flex gap={4} justify="center">
-              <Button variant={amount === 121 ? 'bezeled' : 'borderless'} onClick={() => setAmount(121)}>
-                121 sat
-              </Button>
-              <Button variant={amount === 420 ? 'bezeled' : 'borderless'} onClick={() => setAmount(420)}>
-                420 sat
-              </Button>
-              <Button variant={amount === 1000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000)}>
-                1K sat
-              </Button>
-            </Flex>
-            <Flex gap={4} justify="center">
-              <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
-                10K sat
-              </Button>
-              <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
-                100K sat
-              </Button>
-            </Flex>
-            <Divider y={8} />
-            <Flex gap={4} align="center">
-              <Flex>
-                <Text size="small">{t('CUSTOM_AMOUNT')}:</Text>
-              </Flex>
-              <Input
-                placeholder="0 sats"
-                value={amount.toString()}
-                onChange={(e) => setAmount(parseInt(e.target.value))}
-                type="number"
-              />
-            </Flex>
-            <Divider y={12} />
-            <Input
-              placeholder={`${t('MESSAGE')} (${t('OPTIONAL')})`}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-            <Divider y={12} />
-            <Button disabled={amount < MINIMUM_POWER_AMOUNT} onClick={handleClick}>
-              {t('ADD_POWER')}
-            </Button>
-          </>
-        ) : (
-          <>
-            <Divider y={16} />
-            <Flex direction="column" align="center" justify="center" gap={8}>
-              <Icon size={8}>
-                <Loader />
-              </Icon>
-              <Text size="small" color={appTheme.colors.gray50}>
-                {t('GENERATING_TICKET')}
-              </Text>
-            </Flex>
-            <Divider y={16} />
-          </>
-        )
-      ) : (
+      {!typePower && (
         <>
-          <Flex direction="column" gap={8} align="center">
-            {isPaid ? (
-              <>
-                <Flex gap={8} align="center" justify="center" direction="column">
-                  <Text size="small" color={appTheme.colors.gray50}>
-                    {t('ADDED_POWER')}
-                  </Text>
-                  <Divider y={16} />
-                </Flex>
-              </>
-            ) : (
-              <>
-                <Flex gap={4} align="center" justify="center">
-                  <Text size="small">{t('POWER_AMOUNT')}:</Text>
-                  <Text isBold>{amount} SATs</Text>
-                </Flex>
-                <QRStyled size={250} value={invoiceInfo.pr} />
-                {invoiceInfo.expiry && (
-                  <Text size="small" color="gray">
-                    {t('AVAILABLE_FOR')} <CountMinAndSec date={new Date(invoiceInfo.expiry)} onFinish={restartModal} />
-                  </Text>
-                )}
-
-                <Flex gap={8}>
-                  <Button variant="borderless" onClick={() => handleCopy(invoiceInfo.pr)}>
-                    {t('COPY')}
-                  </Button>
-                  {window.webln && (
-                    <Button onClick={() => payWithWebLN(invoiceInfo.pr)} variant="bezeled" disabled={isPaying}>
-                      {t('PAY_WITH_ALBY')}
-                    </Button>
-                  )}
-                </Flex>
-              </>
-            )}
-          </Flex>
+          <Button variant="bezeled" onClick={() => setTypePower('lightning')}>
+            Lightning
+          </Button>
+          <Button variant="bezeled" onClick={() => setTypePower('onchain')} disabled={true}>
+            Onchain
+          </Button>
         </>
       )}
+      {typePower === 'onchain' && (
+        <>
+          <Text align="center" size="small">
+            Proximamente
+          </Text>
+          {/* <QRStyled size={250} value={'bc1ph4kwttqa24fdu70jyskxtardt76hrqq5uce3v8thc3yexjp89nvqj4z7qj'} />
+          <Divider y={8} />
+          <Text size="small" color={appTheme.colors.gray50}>
+            Billetera de Onchain
+          </Text> */}
+          {/* <Input value={'bc1ph4kwttqa24fdu70jyskxtardt76hrqq5uce3v8thc3yexjp89nvqj4z7qj'} readOnly={true} /> */}
+        </>
+      )}
+      {typePower === 'lightning' ? (
+        !invoiceInfo.pr ? (
+          !isInvoiceLoading ? (
+            <>
+              <Flex gap={4} justify="center">
+                <Button variant={amount === 121 ? 'bezeled' : 'borderless'} onClick={() => setAmount(121)}>
+                  121 sat
+                </Button>
+                <Button variant={amount === 420 ? 'bezeled' : 'borderless'} onClick={() => setAmount(420)}>
+                  420 sat
+                </Button>
+                <Button variant={amount === 1000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(1000)}>
+                  1K sat
+                </Button>
+              </Flex>
+              <Flex gap={4} justify="center">
+                <Button variant={amount === 10000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(10000)}>
+                  10K sat
+                </Button>
+                <Button variant={amount === 100000 ? 'bezeled' : 'borderless'} onClick={() => setAmount(100000)}>
+                  100K sat
+                </Button>
+              </Flex>
+              <Divider y={8} />
+              <Flex gap={4} align="center">
+                <Flex>
+                  <Text size="small">{t('CUSTOM_AMOUNT')}:</Text>
+                </Flex>
+                <Input
+                  placeholder="0 sats"
+                  value={amount.toString()}
+                  onChange={(e) => setAmount(parseInt(e.target.value))}
+                  type="number"
+                />
+              </Flex>
+              <Divider y={12} />
+              <Input
+                placeholder={`${t('MESSAGE')} (${t('OPTIONAL')})`}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <Divider y={12} />
+              <Button disabled={amount < MINIMUM_POWER_AMOUNT} onClick={handleClick}>
+                {t('ADD_POWER')}
+              </Button>
+            </>
+          ) : (
+            <>
+              <Divider y={16} />
+              <Flex direction="column" align="center" justify="center" gap={8}>
+                <Icon size={8}>
+                  <Loader />
+                </Icon>
+                <Text size="small" color={appTheme.colors.gray50}>
+                  {t('GENERATING_TICKET')}
+                </Text>
+              </Flex>
+              <Divider y={16} />
+            </>
+          )
+        ) : (
+          <>
+            <Flex direction="column" gap={8} align="center">
+              {isPaid ? (
+                <>
+                  <Flex gap={8} align="center" justify="center" direction="column">
+                    <Text size="small" color={appTheme.colors.gray50}>
+                      {t('ADDED_POWER')}
+                    </Text>
+                    <Divider y={16} />
+                  </Flex>
+                </>
+              ) : (
+                <>
+                  <Flex gap={4} align="center" justify="center">
+                    <Text size="small">{t('POWER_AMOUNT')}:</Text>
+                    <Text isBold>{amount} SATs</Text>
+                  </Flex>
+                  <QRStyled size={250} value={invoiceInfo.pr} />
+                  {invoiceInfo.expiry && (
+                    <Text size="small" color="gray">
+                      {t('AVAILABLE_FOR')}{' '}
+                      <CountMinAndSec date={new Date(invoiceInfo.expiry)} onFinish={restartModal} />
+                    </Text>
+                  )}
+
+                  <Flex gap={8}>
+                    <Button variant="borderless" onClick={() => handleCopy(invoiceInfo.pr)}>
+                      {t('COPY')}
+                    </Button>
+                    {window.webln && (
+                      <Button onClick={() => payWithWebLN(invoiceInfo.pr)} variant="bezeled" disabled={isPaying}>
+                        {t('PAY_WITH_ALBY')}
+                      </Button>
+                    )}
+                  </Flex>
+                </>
+              )}
+            </Flex>
+          </>
+        )
+      ) : null}
     </ActionSheet>
   );
 };
