@@ -15,6 +15,17 @@ export type LayoutProps = {
 export const metadata: Metadata = {
   title: 'Halving Massacre | LaWallet.io',
   description: 'Accumulate Satoshis, survive the blocks, and secure your prize in the Bitcoin halving!',
+  metadataBase: new URL('https://massacre.lawallet.io/'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-EN': '/en',
+      'es-ES': '/es',
+    },
+  },
+  openGraph: {
+    images: '/images/social/twitter.png',
+  },
 };
 
 export default function RootLayout({ children, params: { locale } }: Readonly<LayoutProps>) {
