@@ -30,8 +30,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/nomad
       '@lawallet/react':
-        specifier: ^0.1.4
-        version: 0.1.4(react@18.2.0)(typescript@5.3.3)
+        specifier: ^0.1.5
+        version: 0.1.5(react@18.2.0)(typescript@5.3.3)
       '@lawallet/ui':
         specifier: 0.1.27
         version: 0.1.27(next@14.1.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
@@ -511,8 +511,8 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@lawallet/react@0.1.4(react@18.2.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-Kdv2H/EDTiyBrAUU0DpXpHVwgio+efeVGqQU6WHUX6a0zoV76pHWOhAGo1wex0lpIyeqBvHk2a9qZUiBNrSlrg==}
+  /@lawallet/react@0.1.5(react@18.2.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-5343aj636eidqf6sY6AH2YoZ3KYR4SSMkCpsVa+xtnOczEVdeZUE35r3oTaWpatQuIGE0k7Ej/c9UHTLpr+sdw==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
