@@ -28,7 +28,7 @@ export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
 
   // BUG: Duplicated events
   // TODO: deduplicate events
-  const { events: _powerEvents } = useSubscription({
+  const { events: _powerEvents, subscription } = useSubscription({
     filters: [filters],
     enabled: !!setupId,
     options: {
@@ -40,6 +40,15 @@ export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
     const deduplicated = Object.values(Object.fromEntries(_powerEvents.map((event) => [event.id, event as Event])));
     setPowerEventsDeduplicated(deduplicated.sort((a, b) => b.created_at - a.created_at));
   }, [_powerEvents]);
+
+  // Unsubscribe subscription on unmount
+  useEffect(() => {
+    return () => {
+      if (subscription) {
+        subscription.stop();
+      }
+    };
+  }, [subscription]);
 
   return {
     events: powerEventsDeduplicated as Event[],

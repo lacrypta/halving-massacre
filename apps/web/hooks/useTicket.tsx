@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { NDKKind } from '../types/ndk';
 import { useMassacre } from './useMassacre';
 import { useSubscription } from '@lawallet/react';
@@ -12,7 +13,7 @@ const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 
 export const useTicket = (walias: string): UseTicketReturns => {
   const { setupId, publisherPubkey } = useMassacre();
-  const { events: ticketEvents } = useSubscription({
+  const { events: ticketEvents, subscription } = useSubscription({
     filters: [
       {
         kinds: [1112 as NDKKind],
@@ -27,6 +28,15 @@ export const useTicket = (walias: string): UseTicketReturns => {
       closeOnEose: false,
     },
   });
+
+  // Unsubscribe subscription on unmount
+  useEffect(() => {
+    return () => {
+      if (subscription) {
+        subscription.stop();
+      }
+    };
+  }, [subscription]);
 
   return {
     hasTicket: !!ticketEvents?.[0],
