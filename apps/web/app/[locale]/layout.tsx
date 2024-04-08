@@ -47,14 +47,14 @@ export default function RootLayout({ children, params: { locale } }: Readonly<La
         <meta name="twitter:image" content="/images/social/twitter-600x330.jpg" />
         <meta name="twitter:url" content="https://lacrypta.ar/" />
 
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_TAG_ID}`} />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_TAG_ID || ''}`} />
         <Script id="google-analytics">
           {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
         
-          gtag('config', '${process.env.GOOGLE_TAG_ID}');
+          gtag('config', '${process.env.GOOGLE_TAG_ID || ''}');
         `}
         </Script>
       </head>
