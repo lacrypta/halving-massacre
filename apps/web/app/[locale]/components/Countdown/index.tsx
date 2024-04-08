@@ -1,5 +1,5 @@
 import { Button, Divider, Flex, Input, Text } from '@lawallet/ui';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // New ui-components
 import { Icon } from '../Icon';
@@ -16,6 +16,7 @@ import CountdownBox from '../CountdownBox';
 import { CountdownPrimitive } from './style';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '../../../../navigation';
+import { useSearchParams } from 'next/navigation';
 
 const NEXT_PUBLIC_TARGET_COUNTDOWN = process.env.NEXT_PUBLIC_TARGET_COUNTDOWN! || '2024-04-13T12:00:00';
 
@@ -43,6 +44,15 @@ export default function Countdown() {
 
     router.push(`/profile/${walias}`);
   }, [walias]);
+
+  const query = useSearchParams();
+
+  useEffect(() => {
+    const queryAddress = query.get('address');
+    if (!queryAddress) return;
+
+    setWalias(queryAddress);
+  }, []);
 
   useActionOnKeypress('Enter', checkValidLightningAddress, [walias]);
 
