@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 
@@ -59,7 +60,9 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Navbar>
-        <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={pngIso.src} />
+        <Link href="/">
+          <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={pngIso.src} />
+        </Link>
       </Navbar>
       {/* <GameTime round={10} block="820.000" time="20" /> */}
       <Divider y={16} />
