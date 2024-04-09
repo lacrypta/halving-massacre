@@ -1,7 +1,17 @@
 'use client';
 
+import { useState } from 'react';
+import './styles.css';
+
 export default function Eggs() {
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
+     <div
+      className={`egg ${isHovered ? 'shake' : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
     <svg width="33" height="31" viewBox="0 0 33 31" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M29.2644 16.2676C27.7767 21.8198 23.8836 23.1677 19.8186 22.0785C15.7536 20.9893 13.056 17.8754 14.5437 12.3232C16.0314 6.77102 21.141 0.882984 25.206 1.9722C29.2711 3.06141 30.7521 10.7154 29.2644 16.2676Z"
@@ -62,6 +72,7 @@ export default function Eggs() {
           <stop offset="1" stopColor="#BDB7AF" />
         </linearGradient>
       </defs>
-    </svg>
+      </svg>
+      </div>
   );
 }
