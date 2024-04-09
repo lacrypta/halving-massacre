@@ -55,7 +55,7 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   const [typePower, setTypePower] = useState<null | string>(null);
 
   // Subscription to the zap events
-  const { events: zaps } = useSubscription({
+  const { events: zaps, subscription } = useSubscription({
     filters: [
       {
         kinds: [9735],
@@ -74,6 +74,15 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     }
     onZap(zaps[0] as Event);
   }, [zaps]);
+
+  // Unsubscribe on unmount
+  useEffect(() => {
+    return () => {
+      if (subscription) {
+        subscription.stop();
+      }
+    };
+  }, [subscription]);
 
   const onZap = async (_zapReceipt: Event) => {
     // TODO: _zapReceipt is NDKEvent

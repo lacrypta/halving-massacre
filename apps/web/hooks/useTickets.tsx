@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { NDKKind } from '../types/ndk';
 import { useMassacre } from './useMassacre';
 import { useSubscription } from '@lawallet/react';
@@ -9,7 +10,7 @@ interface UseTicketReturns {
 
 export const useTickets = (walias: string): UseTicketReturns => {
   const { setupId, publisherPubkey } = useMassacre();
-  const { events: ticketEvents } = useSubscription({
+  const { events: ticketEvents, subscription } = useSubscription({
     filters: [
       {
         kinds: [1112 as NDKKind],
@@ -22,6 +23,15 @@ export const useTickets = (walias: string): UseTicketReturns => {
       closeOnEose: false,
     },
   });
+
+  // Unsubscribe subscription on unmount
+  useEffect(() => {
+    return () => {
+      if (subscription) {
+        subscription.stop();
+      }
+    };
+  }, [subscription]);
 
   return {
     ticketEvents: ticketEvents as Event[],
