@@ -26,12 +26,12 @@ import { userRounds } from '@/../mocks/rounds';
 
 // Hooks
 import { usePlayer } from '@/../hooks/usePlayer';
-import { formatToPreference, useProfile } from '@lawallet/react';
-import CountdownBox from '../CountdownBox';
+import { useFormatter, useProfile } from '@lawallet/react';
+import type { AvailableLanguages } from '@lawallet/utils/types';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePowerEvents } from '../../../../hooks/usePowerEvents';
+import CountdownBox from '../CountdownBox';
 import { ItemTxs } from '../ItemTxs';
-import type { AvailableLanguages } from '@lawallet/utils/types';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -48,7 +48,9 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
   // const { medianPower } = useMassacre();
 
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useLocale() as AvailableLanguages;
+
+  const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
   // const powerProgress = parseInt(Math.min(((power * 1000) / medianPower) * 100, 100).toFixed(2));
 
@@ -257,7 +259,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
                   </Icon>
                   <Flex direction="column">
                     <Heading as="h4" color={appTheme.colors.primary}>
-                      {formatToPreference('SAT', totalPower / 1000, locale as AvailableLanguages)}
+                      {formatAmount(totalPower / 1000)}
                     </Heading>
                     <Text size="small">{t('CONTRIBUTED_POWER')}</Text>
                   </Flex>
