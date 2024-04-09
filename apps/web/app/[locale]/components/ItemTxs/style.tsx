@@ -6,6 +6,11 @@ export const ItemTxsStyle = styled.div`
   position: relative;
 
   width: 100%;
+
+  > div:first-child {
+    position: relative;
+    z-index: 1;
+  }
 `;
 
 export const IconStyle = styled.div`
