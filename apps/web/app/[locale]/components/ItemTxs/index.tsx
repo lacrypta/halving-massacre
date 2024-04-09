@@ -17,7 +17,7 @@ import { formatDistanceEN } from '../../../../utils/formatDistance/formatDistanc
 import { formatDistanceES } from '../../../../utils/formatDistance/formatDistanceES';
 import { useRouter } from '../../../../navigation';
 
-import { IconStyle, IndicatorStyle, ItemTxsStyle, MessageStyle } from './style';
+import { IconStyle, IndicatorStyle, ItemTxsStyle, MessageStyle, WaliasStyle } from './style';
 
 interface MessageTxsProps {
   message?: string;
@@ -55,9 +55,11 @@ export function ItemTxs(props: MessageTxsProps) {
           )}
           {type === 'last-zap' ? (
             <Flex direction="column" onClick={() => router.push(`/profile/${walias}`)}>
-              <Link href={`/profile/${walias}`} title={walias}>
-                <Text>{walias}</Text>
-              </Link>
+              <WaliasStyle>
+                <Link href={`/profile/${walias}`} title={walias}>
+                  <Text>{walias}</Text>
+                </Link>
+              </WaliasStyle>
               <Text size="small" color={appTheme.colors.gray50}>
                 {/* {dateFormatter(locale as AvailableLanguages, new Date(time!))} */}
                 {formatDistance(new Date(time!), Date.now(), {

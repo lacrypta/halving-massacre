@@ -61,3 +61,13 @@ export const IndicatorStyle = styled.div`
   border-left: 2px solid ${appTheme.colors.gray20};
   border-bottom: 2px solid ${appTheme.colors.gray20};
 `;
+
+export const WaliasStyle = styled.div`
+  p {
+    width: 100%;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
