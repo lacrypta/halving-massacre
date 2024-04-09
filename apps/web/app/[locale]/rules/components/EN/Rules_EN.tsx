@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { appTheme } from '@/../config/exports';
 import { Navbar } from '@/[locale]/components/Navbar';
-import { listOrderStyles, listUnorderStyles, tablaStyles, tdCenterStyles, tdStyles, thStyles } from '../../page';
+import { listOrderStyles, listUnorderStyles, tablaStyles, tdCenterStyles, tdStyles, thStyles } from '../rulesStyle';
 
 const Rules_EN = () => {
   return (
