@@ -153,7 +153,7 @@ export default function Page(): JSX.Element {
           </li>
         </ul>
         <Divider y={20} />
-        <Heading as="h3">Massacrados</Heading>
+        <Heading as="h3">{t('MASSACRATEDS')}</Heading>
         <Divider y={10} />
         <ul style={listUnorderStyles}>
           <li>
@@ -168,6 +168,28 @@ export default function Page(): JSX.Element {
         </ul>
         <Divider y={20} />
         <Heading as="h2">{t('WINNERS')}</Heading>
+        <Divider y={10} />
+        <Heading as="h3">{t('INITIAL_TRESURY')}</Heading>
+        <Divider y={10} />
+        <ul style={listUnorderStyles}>
+          <li>
+            <Text>
+              {t('INITIAL_TRESURY_DESC_1A')} <b>2.100.000 {t('SATOSHIS')}</b> {t('INITIAL_TRESURY_DESC_1B')}
+            </Text>
+          </li>
+          <li>
+            <Text>
+              {t('INITIAL_TRESURY_DESC_2')}
+            </Text>
+          </li>
+          <li>
+            <Text>
+              {t('INITIAL_TRESURY_DESC_3')}
+            </Text>
+          </li>
+        </ul>
+        <Divider y={10} />
+        <Heading as="h3">{t('GAME_OVER')}</Heading>
         <Divider y={10} />
         <Text>{t('WINNERS_DESC_1')}</Text>
         <Divider y={10} />
@@ -251,6 +273,8 @@ export default function Page(): JSX.Element {
           </tbody>
         </table>
         <Divider y={20} />
+        <Text>{t('SEND_SATOSHIS')}</Text>
+        <Divider y={20} />
         <Heading as="h2">{t('CLEAN_GAME')}</Heading>
         <Divider y={10} />
         <Text>{t('CLEAN_GAME_DESC')} </Text>
@@ -260,10 +284,36 @@ export default function Page(): JSX.Element {
         <Divider y={10} />
         <Text>{t('TRANSACTION_COST_DESC')}</Text>
         <Divider y={20} />
+        <Divider y={20} />
+        <Heading as="h2">{t('DISCLAIMER')}</Heading>
+        <Divider y={10} />
+        <ul style={listUnorderStyles}>
+          <li>
+            <Text>
+              {t('DISCLAIMER_DESC_1')}
+            </Text>
+          </li>
+          <li>
+            <Text>
+              {t('DISCLAIMER_DESC_2')}
+            </Text>
+          </li>
+        </ul>      
+        <Divider y={20} />
+        <Heading as="h2">{t('SUBJECT_TO_CHANGES')}</Heading>
+        <Divider y={10} />
+        <Text>{t('SUBJECT_TO_CHANGES_DESC')}</Text>
+        <Divider y={20} />
+        <Heading as="h2">{t('OPEN_SOURCE')}</Heading>
+        <Divider y={10} />
+        <Text>{t('OPEN_SOURCE_DESC')}</Text>
+        <Divider y={20} />
         <Flex justify="center">
-          <Heading as="h4" color={appTheme.colors.primary}>
+          <Link href="/">
+            <Heading as="h4" color={appTheme.colors.primary}>
             {t('TO_PLAY')}
-          </Heading>
+            </Heading>
+          </Link>
         </Flex>
       </Container>
     </>
