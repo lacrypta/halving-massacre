@@ -79,7 +79,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
           <div>
             {hasTicket ? (
               <>
-                <Button onClick={() => onAddPower()} disabled={!isAlive}>
+                <Button onClick={() => onAddPower()} variant="bezeled" disabled={!isAlive}>
                   <Bolt />
                   {t('ADD_POWER')}
                 </Button>
