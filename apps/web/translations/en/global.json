@@ -133,5 +133,6 @@
   "SUBJECT_TO_CHANGES": "Subject to changes",
   "SUBJECT_TO_CHANGES_DESC": "This rules is subject to change. In any case, sensitive parts such as the distribution of the prize or game algorithms will not be affected, only modifications in terms of clarification of the game.",
   "OPEN_SOURCE": "Open source",
-  "OPEN_SOURCE_DESC": "This is an open source game, so you can check all the details, changes and algorithms used on our GitHub. They can also collaborate."
+  "OPEN_SOURCE_DESC": "This is an open source game, so you can check all the details, changes and algorithms used on our GitHub. They can also collaborate.",
+  "BUY_FIRST_TICKET": "Gift for purchasing your ticket"
 }

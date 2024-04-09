@@ -26,11 +26,12 @@ import { userRounds } from '@/../mocks/rounds';
 
 // Hooks
 import { usePlayer } from '@/../hooks/usePlayer';
-import { useProfile } from '@lawallet/react';
+import { formatToPreference, useProfile } from '@lawallet/react';
 import CountdownBox from '../CountdownBox';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePowerEvents } from '../../../../hooks/usePowerEvents';
 import { ItemTxs } from '../ItemTxs';
+import type { AvailableLanguages } from '@lawallet/utils/types';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -41,12 +42,13 @@ export interface PlayerDashboardInterface {
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
   const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
-  const { powerActions } = usePowerEvents(walias);
+  const { powerActions } = usePowerEvents({ walias });
   const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
 
   // const { medianPower } = useMassacre();
 
   const t = useTranslations();
+  const locale = useLocale();
 
   // const powerProgress = parseInt(Math.min(((power * 1000) / medianPower) * 100, 100).toFixed(2));
 
@@ -178,15 +180,15 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
       {hasTicket ? (
         <Tabs>
           <TabList>
-            <Tab active={showTab === 'zapeos'} onClick={() => setTab('zapeos')}>
+            <Tab active={Boolean(showTab === 'zapeos')} onClick={() => setTab('zapeos')}>
               {t('HISTORY')}
             </Tab>
-            <Tab disabled={true} active={showTab === 'rondas'} onClick={() => setTab('rondas')}>
+            <Tab disabled={true} active={Boolean(showTab === 'rondas')} onClick={() => setTab('rondas')}>
               {t('ROUNDS')}
             </Tab>
           </TabList>
           <TabPanels>
-            <TabPanel show={showTab === 'rondas'}>
+            <TabPanel show={Boolean(showTab === 'rondas')}>
               <Divider y={12} />
               <Card spacing={4} variant="filled">
                 <Flex align="center" gap={16}>
@@ -255,7 +257,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
                   </Icon>
                   <Flex direction="column">
                     <Heading as="h4" color={appTheme.colors.primary}>
-                      {totalPower / 1000}
+                      {formatToPreference('SAT', totalPower / 1000, locale as AvailableLanguages)}
                     </Heading>
                     <Text size="small">{t('CONTRIBUTED_POWER')}</Text>
                   </Flex>

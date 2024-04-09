@@ -16,7 +16,7 @@ export function Tab(props: TabProps) {
 
   return (
     <TabStyle $active={active}>
-      <Button disabled={disabled} size="small" variant="borderless" {...props}>
+      <Button disabled={disabled} size="small" variant="borderless">
         {children}
       </Button>
     </TabStyle>
