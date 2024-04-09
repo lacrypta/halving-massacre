@@ -1,7 +1,9 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
+import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
+import { formatToPreference } from '@lawallet/utils';
+import type { AvailableLanguages } from '@lawallet/utils/types';
 
 import { appTheme } from '@/../config/exports';
 
@@ -11,8 +13,7 @@ import Card from './components/Card';
 import Countdown from './components/Countdown';
 import Header from './components/Header';
 import { Navbar } from './components/Navbar';
-import { formatToPreference } from '@lawallet/utils';
-import type { AvailableLanguages } from '@lawallet/utils/types';
+import { ItemTxs } from './components/ItemTxs';
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
@@ -50,9 +51,21 @@ export default function Page(): JSX.Element {
             <Text color={appTheme.colors.gray50}>{t('TOTAL_PRIZE')}.</Text>
           </Card>
         </Flex>
+      </Container>
+      {/* <Container size="small">
+        <Divider y={24} />
+
+        <Flex direction="column" gap={8}>
+          <Heading as="h3">{'Últimos 10 zappeos'}</Heading>
+          <Divider y={8} />
+          <Flex direction="column" gap={4}>
+            <ItemTxs walias="fer@lawallet.ar" time="" message="asdasd" value={100000} type="last-zap" />
+            <ItemTxs walias="agustin@lacrypta.ar" time="" message="" value={100000} type="last-zap" />
+          </Flex>
+        </Flex>
 
         <Divider y={20} />
-      </Container>
+      </Container> */}
     </>
   );
 }
