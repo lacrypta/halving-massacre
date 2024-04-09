@@ -1,6 +1,9 @@
-import { Container, Divider, Flex, Heading } from '@lawallet/ui';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { Container, Divider, Flex, Heading } from '@lawallet/ui';
+
 import { usePowerEvents } from '../../../../hooks/usePowerEvents';
+
 import { ItemTxs } from '../ItemTxs';
 
 const LastPowerActions = () => {
@@ -19,7 +22,6 @@ const LastPowerActions = () => {
         <Divider y={8} />
         <Flex direction="column" gap={4}>
           {powerActions.splice(0, 10).map((action) => (
-            // <Link href={`/profile/${action.player}`}>
             <ItemTxs
               key={action.id}
               walias={action.player}
@@ -28,7 +30,6 @@ const LastPowerActions = () => {
               value={action.amount}
               type="last-zap"
             />
-            // </Link>
           ))}
         </Flex>
       </Flex>
