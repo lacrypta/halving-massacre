@@ -11,6 +11,10 @@ export const ItemTxsStyle = styled.div`
     position: relative;
     z-index: 1;
   }
+
+  a {
+    color: ${appTheme.colors.text};
+  }
 `;
 
 export const IconStyle = styled.div`
