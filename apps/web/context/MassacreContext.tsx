@@ -34,7 +34,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     roundLength: 0,
     freezeDuration: 0,
   });
-  const { events: setupEvents, setupSubscription } = useSubscription({
+  const { events: setupEvents, subscription: setupSubscription } = useSubscription({
     filters: [
       {
         ids: [setupId],
@@ -48,7 +48,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     },
   });
 
-  const { events: stateEvents, stateSubscription } = useSubscription({
+  const { events: stateEvents, subscription: stateSubscription } = useSubscription({
     filters: [
       {
         kinds: [31111 as NDKKind],
