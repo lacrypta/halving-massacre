@@ -1,22 +1,17 @@
-import type { ReactNode } from 'react';
-import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
-import { formatDistance } from 'date-fns';
-import { enUS } from 'date-fns/locale/en-US';
-import { es } from 'date-fns/locale/es';
 import { Divider, Flex, Text } from '@lawallet/ui';
-import { formatToPreference } from '@lawallet/utils';
 import type { AvailableLanguages } from '@lawallet/utils/types';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 import { appTheme } from '../../../../config/exports';
 
-import { Icon } from '../Icon';
 import { AutoAvatar } from '../AutoAvatar';
+import { Icon } from '../Icon';
 
-import { formatDistanceEN } from '../../../../utils/formatDistance/formatDistanceEN';
-import { formatDistanceES } from '../../../../utils/formatDistance/formatDistanceES';
 import { useRouter } from '../../../../navigation';
 
+import { useFormatter } from '@lawallet/react';
 import { IconStyle, IndicatorStyle, ItemTxsStyle, MessageStyle, WaliasStyle } from './style';
 
 interface MessageTxsProps {
@@ -35,8 +30,10 @@ const DEFAULT_BUY_TICKET_MESSAGE = 'Your first power!';
 export function ItemTxs(props: MessageTxsProps) {
   const { icon, walias = '', time, text, value = 0, message = '', type = 'undefined', href = '' } = props;
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useLocale() as AvailableLanguages;
   const router = useRouter();
+
+  const { formatAmount, formatDistance } = useFormatter({ currency: 'SAT', locale });
 
   return (
     <ItemTxsStyle>
@@ -62,23 +59,14 @@ export function ItemTxs(props: MessageTxsProps) {
               </WaliasStyle>
               <Text size="small" color={appTheme.colors.gray50}>
                 {/* {dateFormatter(locale as AvailableLanguages, new Date(time!))} */}
-                {formatDistance(new Date(time!), Date.now(), {
-                  locale:
-                    locale === 'es'
-                      ? { ...es, formatDistance: formatDistanceES }
-                      : { ...enUS, formatDistance: formatDistanceEN },
-                })}
+                {formatDistance(new Date(time!), new Date())}
               </Text>
             </Flex>
           ) : (
             <Text size="small">{text}</Text>
           )}
         </Flex>
-        {type !== 'undefined' && (
-          <Text color={appTheme.colors.primary}>
-            +{formatToPreference('SAT', value / 1000, locale as AvailableLanguages)}
-          </Text>
-        )}
+        {type !== 'undefined' && <Text color={appTheme.colors.primary}>+{formatAmount(value / 1000)}</Text>}
       </Flex>
       {message && (
         <MessageStyle>
