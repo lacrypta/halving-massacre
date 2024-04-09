@@ -15,7 +15,7 @@ const LastPowerActions = () => {
       <Divider y={24} />
 
       <Flex direction="column" gap={8}>
-        <Heading as="h3">{'Últimos 10 zappeos'}</Heading>
+        <Heading as="h3">{t('LAST_10_ZAPS')}</Heading>
         <Divider y={8} />
         <Flex direction="column" gap={4}>
           {powerActions.splice(0, 10).map((action) => (
