@@ -1,6 +1,7 @@
 // Libraries
 import { useEffect, useState } from 'react';
 import { ActionSheet, Button, Divider, Flex, Input, Text } from '@lawallet/ui';
+import { getProviders, getProviderById } from 'sats-connect';
 
 // Context
 import { useNotifications } from '@/../context/NotificationsContext';
@@ -32,11 +33,16 @@ const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 const MASSACRE_ENDPOINT = process.env.NEXT_PUBLIC_MASSACRE_ENDPOINT!;
 const MINIMUM_POWER_AMOUNT = parseInt(process.env.NEXT_PUBLIC_MINIMUM_POWER_AMOUNT!);
 
+// Sats Connect
+const providers = getProviders();
+const satsConnectProvider = providers[0];
+
 type InvoiceInfoProps = {
   pr: string;
   expiry: Date | null;
 };
 
+const btcAddress = 'bc1prt2ca50dugw4wc64lg2pz2t7r5gvh7cuduuwdy78garkt5y4pfesypn5ud';
 const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const t = useTranslations();
   const notifications = useNotifications();
@@ -140,6 +146,21 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     }
   };
 
+  const payWithSatsConnect = async (address: string) => {
+    const providerObject = getProviderById(satsConnectProvider!.id);
+
+    const amount = 1000000;
+    const response = await providerObject.request('sendTransfer', {
+      recipients: [
+        {
+          address: address,
+          amount: Number(amount),
+        },
+      ],
+    });
+    console.dir('response', response);
+  };
+
   const restartModal = () => {
     setTypePower(null);
     setInvoiceInfo({ pr: '', expiry: null });
@@ -172,22 +193,28 @@ const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
           <Button variant="bezeled" onClick={() => setTypePower('lightning')}>
             Lightning
           </Button>
-          <Button variant="bezeled" onClick={() => setTypePower('onchain')} disabled={true}>
+          <Button variant="bezeled" onClick={() => setTypePower('onchain')}>
             Onchain
           </Button>
         </>
       )}
       {typePower === 'onchain' && (
         <>
-          <Text align="center" size="small">
+          {/* <Text align="center" size="small">
             Proximamente
-          </Text>
-          {/* <QRStyled size={250} value={'bc1ph4kwttqa24fdu70jyskxtardt76hrqq5uce3v8thc3yexjp89nvqj4z7qj'} />
+          </Text> */}
+          <QRStyled size={250} value={'bc1ph4kwttqa24fdu70jyskxtardt76hrqq5uce3v8thc3yexjp89nvqj4z7qj'} />
           <Divider y={8} />
           <Text size="small" color={appTheme.colors.gray50}>
             Billetera de Onchain
-          </Text> */}
-          {/* <Input value={'bc1ph4kwttqa24fdu70jyskxtardt76hrqq5uce3v8thc3yexjp89nvqj4z7qj'} readOnly={true} /> */}
+          </Text>
+          {/* neeeds readonly */}
+          <Input placeholder="" value={btcAddress} />
+          {satsConnectProvider && (
+            <Button onClick={() => payWithSatsConnect(btcAddress)} variant="bezeled" disabled={isPaying}>
+              Pagar con SatsConnect
+            </Button>
+          )}
         </>
       )}
       {typePower === 'lightning' ? (
