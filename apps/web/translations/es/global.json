@@ -133,5 +133,6 @@
   "SUBJECT_TO_CHANGES": "Sujeto a cambios",
   "SUBJECT_TO_CHANGES_DESC": "Este reglamento esta sujeto a cambios. De todas maneras, no afectarán partes sensibles como la distribución del premio ni algoritmos del juego, solo modificaciones en cuanto a clarificación del juego.",
   "OPEN_SOURCE": "Código abierto",
-  "OPEN_SOURCE_DESC": "Este es un juego de código abierto, por lo tanto pueden verificar todos los detalles, cambios y algoritmos utilizados en nuestro GitHub. También pueden colaborar."
+  "OPEN_SOURCE_DESC": "Este es un juego de código abierto, por lo tanto pueden verificar todos los detalles, cambios y algoritmos utilizados en nuestro GitHub. También pueden colaborar.",
+  "BUY_FIRST_TICKET": "Regalo por comprar tu ticket"
 }

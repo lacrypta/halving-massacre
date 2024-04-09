@@ -12,7 +12,12 @@ interface UsePowerEventsReturns {
 
 const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 
-export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
+type UsePowerEventsProps = {
+  walias?: string;
+  limit?: number;
+};
+
+export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): UsePowerEventsReturns => {
   const [powerEventsDeduplicated, setPowerEventsDeduplicated] = useState<Event[]>([]);
   const { setupId, publisherPubkey } = useMassacre();
   const filters = {
@@ -20,9 +25,10 @@ export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
     '#l': ['power-receipt'],
     '#e': [MASSACRE_SETUP_ID],
     authors: [publisherPubkey],
+    limit,
   } as any;
 
-  if (walias) {
+  if (walias.length) {
     filters['#i'] = [walias];
   }
 
@@ -53,12 +59,12 @@ export const usePowerEvents = (walias: string): UsePowerEventsReturns => {
   return {
     events: powerEventsDeduplicated as Event[],
     powerActions: (powerEventsDeduplicated as Event[]).map((event) => {
-      const { amount, walias, message } = JSON.parse(event.content) as Power;
+      const { amount, player, message } = JSON.parse(event.content) as Power;
 
       return {
         id: event.id,
         amount,
-        walias,
+        player,
         createdAt: event.created_at,
         message,
       };
