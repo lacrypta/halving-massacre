@@ -8,10 +8,10 @@ import { Loader } from '../Icons';
 import { appTheme } from '@/../config/exports';
 
 import { useActionOnKeypress } from '@/../hooks/useActionOnKeypress';
+import { useNostrContext, useProfileCache } from '@lawallet/react';
 
 import LightingAddressSheet from '../InscriptionSheet/LightingAddressSheet';
 
-import { resolveLud16 } from '@/../lib/utils';
 import CountdownBox from '../CountdownBox';
 import { CountdownPrimitive } from './style';
 import { useTranslations } from 'next-intl';
@@ -29,20 +29,29 @@ export default function Countdown() {
   const [error, setError] = useState<string>();
   const [openLNInfo, setOpenLNInfo] = useState(false);
 
+  const { ndk } = useNostrContext({});
+  const { getLud16, getNip05 } = useProfileCache();
+
   const t = useTranslations();
 
   const checkValidLightningAddress = useCallback(async () => {
     setIsLoading(true);
 
-    const lud16 = await resolveLud16(walias);
+    const lud16 = await getLud16(walias);
 
-    if (!lud16) {
-      setIsLoading(false);
-      setError(t('INVALID_LNURL_ERROR'));
+    if (lud16) {
+      router.push(`/profile/${walias}`);
       return;
     }
 
-    router.push(`/profile/${walias}`);
+    const nip05 = await getNip05(walias);
+    if (nip05?.lud06 || nip05?.lud16) {
+      router.push(`/profile/${walias}`);
+      return;
+    }
+
+    setIsLoading(false);
+    setError(t('INVALID_LNURL_ERROR'));
   }, [walias]);
 
   const query = useSearchParams();
