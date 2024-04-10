@@ -37,7 +37,7 @@ export const WaliasStyle = styled.div`
 
   p {
     width: 100%;
-    max-width: 150px;
+    max-width: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -46,4 +46,9 @@ export const WaliasStyle = styled.div`
       max-width: 200px;
     }
   }
+`;
+
+export const ValueStyle = styled.div`
+  width: 100%;
+  max-width: 64px;
 `;
