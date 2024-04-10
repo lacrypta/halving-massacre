@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Flex, Text } from '@lawallet/ui';
 
 import { appTheme } from '../../../../config/exports';
@@ -22,28 +23,30 @@ export function RankingList(props: RankingListProps) {
       <Flex align="center" gap={4} direction="column" justify="center">
         {Object.keys(players).map((walias, index) => {
           return (
-            <ItemStyle key={walias} href={`/profile/${walias}`} title={walias}>
-              <Flex flex={1} align="center" gap={8}>
-                <NumberStyle>
-                  <Text size="small" color={appTheme.colors.gray50}>
-                    {index + 1}.
-                  </Text>
-                </NumberStyle>
-                <Flex align="center" gap={8}>
-                  <AutoAvatar walias={walias} size={12} />
-                  <WaliasStyle>
-                    <Text>{walias}</Text>
-                  </WaliasStyle>
+            <ItemStyle key={walias}>
+              <Link href={`/profile/${walias}`} title={walias}>
+                <Flex flex={1} align="center" gap={8}>
+                  <NumberStyle>
+                    <Text size="small" color={appTheme.colors.gray50}>
+                      {index + 1}.
+                    </Text>
+                  </NumberStyle>
+                  <Flex align="center" gap={8}>
+                    <AutoAvatar walias={walias} size={12} />
+                    <WaliasStyle>
+                      <Text>{walias}</Text>
+                    </WaliasStyle>
+                  </Flex>
+                  <Flex align="center" flex={0} gap={4}>
+                    <Icon>
+                      <Bolt color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error} />
+                    </Icon>
+                    <Text color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error}>
+                      {formatAmount(players[walias]!) || '21'}
+                    </Text>
+                  </Flex>
                 </Flex>
-                <Flex align="center" flex={0} gap={4}>
-                  <Icon>
-                    <Bolt color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error} />
-                  </Icon>
-                  <Text color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error}>
-                    {formatAmount(players[walias]!) || '21'}
-                  </Text>
-                </Flex>
-              </Flex>
+              </Link>
             </ItemStyle>
           );
         })}

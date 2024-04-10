@@ -17,7 +17,9 @@ export const ItemStyle = styled.a<ItemStyleProps>`
   background-color: ${(props) => (props.$isActive ? appTheme.colors.gray20 : 'transparent')};
   border-radius: 50px;
 
-  color: ${appTheme.colors.text};
+  a {
+    color: ${appTheme.colors.text};
+  }
 
   &:hover {
     background-color: ${appTheme.colors.gray20};
