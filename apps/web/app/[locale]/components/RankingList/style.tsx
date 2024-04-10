@@ -9,7 +9,7 @@ interface ItemStyleProps {
   $isActive?: boolean;
 }
 
-export const ItemStyle = styled.a<ItemStyleProps>`
+export const ItemStyle = styled.div<ItemStyleProps>`
   width: 100%;
 
   padding: 8px;
