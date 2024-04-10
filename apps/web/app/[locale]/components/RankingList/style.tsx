@@ -9,7 +9,7 @@ interface ItemStyleProps {
   $isActive?: boolean;
 }
 
-export const ItemStyle = styled.a<ItemStyleProps>`
+export const ItemStyle = styled.div<ItemStyleProps>`
   width: 100%;
 
   padding: 8px;
@@ -17,7 +17,9 @@ export const ItemStyle = styled.a<ItemStyleProps>`
   background-color: ${(props) => (props.$isActive ? appTheme.colors.gray20 : 'transparent')};
   border-radius: 50px;
 
-  color: ${appTheme.colors.text};
+  a {
+    color: ${appTheme.colors.text};
+  }
 
   &:hover {
     background-color: ${appTheme.colors.gray20};
@@ -35,7 +37,7 @@ export const WaliasStyle = styled.div`
 
   p {
     width: 100%;
-    max-width: 150px;
+    max-width: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -44,4 +46,9 @@ export const WaliasStyle = styled.div`
       max-width: 200px;
     }
   }
+`;
+
+export const ValueStyle = styled.div`
+  width: 100%;
+  max-width: 64px;
 `;

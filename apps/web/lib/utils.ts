@@ -71,22 +71,6 @@ export const parseZapReceiptWithCommitment = (zapReceipt: Event): ZapReceiptWith
   };
 };
 
-export async function resolveLud16(address: string): Promise<LNRequestResponse | undefined> {
-  const match = address.match(NIP05_REGEX);
-  if (!match) return;
-
-  // eslint-disable-next-line no-unused-vars
-  const [, name = '_', domain] = match;
-
-  try {
-    const url = `https://${domain}/.well-known/lnurlp/${name}`;
-    const res = await (await fetch(url, { redirect: 'error' })).json();
-    return res;
-  } catch (_e) {
-    return;
-  }
-}
-
 export async function publishEvent(event: Event, relayList: string[]) {
   const relays: Relay[] = relayList.map((url) => relayInit(url));
 

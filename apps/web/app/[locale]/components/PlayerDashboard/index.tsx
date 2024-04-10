@@ -63,7 +63,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
     setTotalPower(powerActions.reduce((a, b) => a + b.amount, 0));
   }, [powerActions]);
 
-  if (!lud16)
+  if (!lud16 && !nip05?.lud16 && !nip05?.lud06)
     return (
       <Flex direction="column" flex={1} align="center" justify="center" gap={8}>
         <Icon size={8}>
@@ -79,7 +79,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
     <Container size="small">
       <Flex justify="space-between" align="center">
         <Avatar alt={nip05?.displayName || walias} size={20} src={nip05Avatar || lud16Avatar || domainAvatar} />
-        {lud16 && (
+        {(lud16 || nip05?.lud16 || nip05?.lud06) && (
           <div>
             {hasTicket ? (
               <>

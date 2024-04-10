@@ -48,8 +48,6 @@ export const TabPanelsStyle = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  padding: 0 16px;
 `;
 
 interface TabPanelStyleProps {
