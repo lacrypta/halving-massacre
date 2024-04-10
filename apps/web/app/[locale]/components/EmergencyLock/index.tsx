@@ -12,8 +12,7 @@ export function EmergencyLock() {
     <Flex direction="column" flex={1} align="center" justify="center" gap={8}>
       <Image src={errorImage} width={400} height={400} alt="" />
       <Divider y={16} />
-      <Heading color={appTheme.colors.error}>404</Heading>
-      <Text>Fixing bugs. Be right back</Text>
+      <Heading color={appTheme.colors.error}>Fixing bugs. Be right back</Heading>
     </Flex>
   );
 }
