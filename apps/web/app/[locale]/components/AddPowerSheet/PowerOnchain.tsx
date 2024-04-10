@@ -20,7 +20,6 @@ import { useTranslations } from 'next-intl';
 
 // Config
 const URLX_PUBKEY = process.env.NEXT_PUBLIC_URLX_PUBKEY!;
-const MINIMUM_POWER_AMOUNT = parseInt(process.env.NEXT_PUBLIC_MINIMUM_POWER_AMOUNT!);
 
 // Sats Connect
 const providers = getProviders();
@@ -45,19 +44,11 @@ const PowerOnchain = (props: PowerProps) => {
 
   const t = useTranslations();
   const notifications = useNotifications();
-  const { walias } = usePlayer();
 
-  const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
-  const [amount, setAmount] = useState(MINIMUM_POWER_AMOUNT);
-  const [message, setMessage] = useState('');
-  const [invoiceInfo, setInvoiceInfo] = useState<InvoiceInfoProps>({
-    pr: '',
-    expiry: null,
-  });
   const [eventIdReference, setEventIdReference] = useState<string>();
-  const [isPaid, setIsPaid] = useState<boolean>(false);
+  // const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
-  const [typePower, setTypePower] = useState<null | string>(null);
+  // const [typePower, setTypePower] = useState<null | string>(null);
 
   // Subscription to the zap events
   const { events: zaps, subscription } = useSubscription({
