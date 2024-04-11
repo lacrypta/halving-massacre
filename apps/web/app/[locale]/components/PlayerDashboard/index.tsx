@@ -155,7 +155,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
                   {t('MASSACRED')}
                 </Heading>
                 <Text color={appTheme.colors.error}>
-                  {t('POSITION')} #${positionNumber}
+                  {t('POSITION')} {`#${positionNumber}`}
                 </Text>
                 <Text size="small">{t('SHITCOINED')}</Text>
               </Flex>

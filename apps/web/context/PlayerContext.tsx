@@ -86,7 +86,7 @@ export function PlayerProvider({ walias, children }: React.PropsWithChildren & {
       player: playerInfo,
       totalZaps,
       amountZapped,
-      isAlive: playerInfo.deathRound === null,
+      isAlive: !playerInfo ? true : Boolean(playerInfo.deathRound === null),
       hasTicket,
       ticketEvent,
     };
