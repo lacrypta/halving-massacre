@@ -10,11 +10,7 @@ import { listOrderStyles, listUnorderStyles, tablaStyles, tdCenterStyles, tdStyl
 const Rules_EN = () => {
   return (
     <>
-      <Navbar>
-        <Link href="/">
-          <Image width={23} height={30} alt="Halving Massacre by La Crypta" src={'/images/iso.png'} />
-        </Link>
-      </Navbar>
+      <Navbar />
       {/* <GameTime round={10} block="820.000" time="20" /> */}
       <Divider y={16} />
       <Container>
