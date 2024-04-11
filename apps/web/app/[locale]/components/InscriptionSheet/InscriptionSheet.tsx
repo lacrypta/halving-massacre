@@ -115,10 +115,16 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         setInvoiceInfo({ pr: data.pr, expiry: invoiceExpiry });
         return;
       }
-      alert(data.message);
+
       throw new Error(data.message);
     } catch (e: unknown) {
       setIsInvoiceLoading(false);
+
+      notifications.showAlert({
+        description: (e as Error).message,
+        type: 'error',
+      });
+
       console.error((e as Error).message);
     }
   };
@@ -132,7 +138,10 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
       await window.webln.enable();
       await window.webln.sendPayment(invoice);
     } catch (e) {
-      alert((e as Error).message);
+      notifications.showAlert({
+        description: (e as Error).message,
+        type: 'error',
+      });
       setIsPaying(false);
     }
   };

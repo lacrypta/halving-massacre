@@ -26,13 +26,13 @@ export const ImageM1 = styled.img`
   z-index: 2;
 `;
 
-export const ImageSword = styled.img<{ isAnimating: boolean }>`
+export const ImageSword = styled.img<{ $isAnimating: boolean }>`
   position: relative;
   margin-top: -10px;
   margin-left: 13px;
   z-index: 1;
-  ${({ isAnimating }) =>
-    isAnimating &&
+  ${({ $isAnimating }) =>
+    $isAnimating &&
     css`
       animation: ${upAndDown} 1s forwards;
     `}

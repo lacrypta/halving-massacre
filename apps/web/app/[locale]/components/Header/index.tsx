@@ -1,12 +1,11 @@
-import { Heading, Divider, Text, Flex } from '@lawallet/ui';
+import { Divider, Flex, Text } from '@lawallet/ui';
 
-import { HeaderPrimitive } from './style';
 import { useTranslations } from 'next-intl';
+import { HeaderPrimitive } from './style';
 
-import pngLogo from '../../../../public/images/logo.png';
 import Image from 'next/image';
 import { useState } from 'react';
-import { ImagesContainer, ImageSubContainer, ImageM1, ImageSword, ImageM2 } from './style';
+import { ImageM1, ImageM2, ImageSubContainer, ImageSword, ImagesContainer } from './style';
 
 export default function Header() {
   const t = useTranslations();
@@ -20,7 +19,7 @@ export default function Header() {
             <ImageSword
               width={35}
               height={93}
-              isAnimating={isHovered}
+              $isAnimating={isHovered}
               alt="Sword - Halving Massacre by La Crypta"
               src={'/images/logoAnimated/sword.png'}
             />

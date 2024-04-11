@@ -1,6 +1,8 @@
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { Container, Divider, Flex, Heading } from '@lawallet/ui';
+import { useTranslations } from 'next-intl';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import styles from './style.module.css';
+import './styles.css';
 
 import { usePowerEvents } from '../../../../hooks/usePowerEvents';
 
@@ -21,16 +23,19 @@ const LastPowerActions = () => {
         <Heading as="h3">{t('LAST_10_ZAPS')}</Heading>
         <Divider y={8} />
         <Flex direction="column" gap={4}>
-          {powerActions.splice(0, 10).map((action) => (
-            <ItemTxs
-              key={action.id}
-              walias={action.player}
-              time={action.createdAt * 1000}
-              message={action.message}
-              value={action.amount}
-              type="last-zap"
-            />
-          ))}
+          <TransitionGroup className={styles.transactionElementsContainer}>
+            {powerActions.splice(0, 10).map((action) => (
+              <CSSTransition key={action.id} timeout={550} classNames="fade">
+                <ItemTxs
+                  walias={action.player}
+                  time={action.createdAt * 1000}
+                  message={action.message}
+                  value={action.amount}
+                  type="last-zap"
+                />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         </Flex>
       </Flex>
 

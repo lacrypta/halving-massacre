@@ -10,7 +10,7 @@ export function IsoAnimated() {
       <ImageSword
         width={12}
         height={30}
-        isAnimating={isHovered}
+        $isAnimating={isHovered}
         alt="Sword - Halving Massacre by La Crypta"
         src={'/images/isoAnimated/sword.png'}
       />

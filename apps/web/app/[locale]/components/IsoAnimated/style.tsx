@@ -6,9 +6,9 @@ const upAndDown = keyframes`
   100% { transform: translateY(0) translateX(0); }
 `;
 
-export const ImageSword = styled.img<{ isAnimating: boolean }>`
-  ${({ isAnimating }) =>
-    isAnimating &&
+export const ImageSword = styled.img<{ $isAnimating: boolean }>`
+  ${({ $isAnimating }) =>
+    $isAnimating &&
     css`
       animation: ${upAndDown} 1s forwards;
     `}

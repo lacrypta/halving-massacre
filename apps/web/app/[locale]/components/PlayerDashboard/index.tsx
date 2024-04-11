@@ -16,6 +16,9 @@ import { TabPanel } from '../Tabs/TabPanel';
 import { TabPanels } from '../Tabs/TabPanels';
 import { Tabs } from '../Tabs/Tabs';
 
+import styles from '../LastPowerActions/style.module.css';
+import '../LastPowerActions/styles.css';
+
 const NEXT_PUBLIC_TARGET_COUNTDOWN = process.env.NEXT_PUBLIC_TARGET_COUNTDOWN! || '2024-04-13T12:00:00';
 const targetDate: Date = new Date(NEXT_PUBLIC_TARGET_COUNTDOWN);
 
@@ -32,6 +35,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { usePowerEvents } from '../../../../hooks/usePowerEvents';
 import CountdownBox from '../CountdownBox';
 import { ItemTxs } from '../ItemTxs';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -267,11 +271,11 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
               </Card>
               <Divider y={24} />
 
-              <React.Fragment>
+              <TransitionGroup className={styles.transactionElementsContainer}>
                 {/* Mock Power Events */}
                 {powerActions.map((powerEvent) => {
                   return (
-                    <React.Fragment key={powerEvent.id}>
+                    <CSSTransition key={powerEvent.id} timeout={550} classNames="fade">
                       <ItemTxs
                         icon={<Bolt color={appTheme.colors.primary} />}
                         text={t('ADDED_POWER')}
@@ -279,14 +283,14 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
                         value={powerEvent.amount}
                         message={powerEvent.message}
                       />
-                    </React.Fragment>
+                    </CSSTransition>
                   );
                 })}
+              </TransitionGroup>
 
-                {/* Mock TicketEvent */}
-                <ItemTxs icon={<Ticket color={appTheme.colors.primary} />} text={t('PURCHASED_TICKET')} />
-                <Divider y={20} />
-              </React.Fragment>
+              {/* Mock TicketEvent */}
+              <ItemTxs icon={<Ticket color={appTheme.colors.primary} />} text={t('PURCHASED_TICKET')} />
+              <Divider y={20} />
             </TabPanel>
           </TabPanels>
         </Tabs>
