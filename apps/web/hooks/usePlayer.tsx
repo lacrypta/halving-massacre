@@ -1,23 +1,14 @@
 import { useContext } from 'react';
-import { PlayerContext } from '../context/PlayerContext';
+import { PlayerContext, type PlayerContextType } from '../context/PlayerContext';
 
-interface UsePlayerReturns {
-  walias: string;
-  hasTicket: boolean;
-  isAlive: boolean;
-  power: number;
-  totalZaps: number;
-  amountZapped: number;
-}
-
-export const usePlayer = (): UsePlayerReturns => {
-  const { walias, hasTicket, isAlive, power, totalZaps, amountZapped } = useContext(PlayerContext);
+export const usePlayer = (): PlayerContextType => {
+  const { player, hasTicket, ticketEvent, isAlive, totalZaps, amountZapped } = useContext(PlayerContext);
 
   return {
-    walias,
+    player,
     hasTicket,
+    ticketEvent,
     isAlive,
-    power,
     totalZaps,
     amountZapped,
   };

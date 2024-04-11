@@ -2,7 +2,6 @@
 
 // Libraries
 import { Divider } from '@lawallet/ui';
-import Image from 'next/image';
 import { useState } from 'react';
 
 // Context
@@ -13,9 +12,6 @@ import AddPowerSheet from '@/[locale]/components/AddPowerSheet/AddPowerSheet';
 import InscriptionSheet from '@/[locale]/components/InscriptionSheet/InscriptionSheet';
 import { Navbar } from '../../components/Navbar';
 import { PlayerDashboard } from '../../components/PlayerDashboard';
-
-import { Link } from '../../../../navigation';
-import pngIso from '../../../../public/images/iso.png';
 
 interface PageProps {
   params: {

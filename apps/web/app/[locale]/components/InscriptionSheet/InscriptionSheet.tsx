@@ -50,7 +50,9 @@ const InscriptionSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   const [eventIdReference, setEventIdReference] = useState<string>();
   const [isPaid, setIsPaid] = useState<boolean>(false);
   const [isPaying, setIsPaying] = useState<boolean>(false);
-  const { walias } = usePlayer();
+  const {
+    player: { walias },
+  } = usePlayer();
 
   // Subscription to the zap events
   const { events: zaps, subscription } = useSubscription({

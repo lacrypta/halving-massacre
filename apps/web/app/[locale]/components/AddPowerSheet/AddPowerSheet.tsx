@@ -40,7 +40,9 @@ type InvoiceInfoProps = {
 const AddPowerSheet = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const t = useTranslations();
   const notifications = useNotifications();
-  const { walias } = usePlayer();
+  const {
+    player: { walias },
+  } = usePlayer();
 
   const [isInvoiceLoading, setIsInvoiceLoading] = useState(false);
   const [amount, setAmount] = useState(MINIMUM_POWER_AMOUNT);
