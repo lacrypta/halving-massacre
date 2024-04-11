@@ -5,14 +5,14 @@ import { Link } from '../../../../navigation';
 
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 import { NavbarStyle } from './style';
+import { IsoAnimated } from '../IsoAnimated';
 
 interface NavbarProps {
   children?: ReactNode;
+  isoAnimated?: Boolean;
 }
 
-export function Navbar(props: NavbarProps) {
-  const { children } = props;
-
+export function Navbar({ children, isoAnimated = true }: NavbarProps) {
   const t = useTranslations();
 
   return (
@@ -20,6 +20,11 @@ export function Navbar(props: NavbarProps) {
       <NavbarStyle>
         <Container>
           <Flex flex={1} align="center" justify="space-between">
+            {isoAnimated && (
+              <Link href="/">
+                <IsoAnimated />
+              </Link>
+            )}
             {children}
             <Flex gap={16} align="center" justify="end">
               <Link href="/ranking">
