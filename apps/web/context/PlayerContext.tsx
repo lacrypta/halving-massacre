@@ -7,6 +7,7 @@ import type { NDKKind } from '../types/ndk';
 import { PUBLISHER_PUBKEY } from './MassacreContext';
 
 export interface PlayerContextType {
+  walias: string; // temporal
   player: PlayerInfo;
   totalZaps: number;
   amountZapped: number;
@@ -81,6 +82,7 @@ export function PlayerProvider({ walias, children }: React.PropsWithChildren & {
     );
 
     return {
+      walias,
       player: playerInfo,
       totalZaps,
       amountZapped,
