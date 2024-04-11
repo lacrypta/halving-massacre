@@ -25,7 +25,7 @@ export default function Page(): JSX.Element {
 
   return (
     <>
-      <Navbar />
+      <Navbar isoAnimated={false} />
       {/* <GameTime round={10} block="820.000" time="20" /> */}
       <Divider y={16} />
       <Container>
