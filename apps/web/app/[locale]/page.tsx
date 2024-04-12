@@ -14,6 +14,9 @@ import Countdown from './components/Countdown';
 import Header from './components/Header';
 import LastPowerActions from './components/LastPowerActions/LastPowerActions';
 import { Navbar } from './components/Navbar';
+import Rocket from './components/RocketAnimation';
+import Treasury from './components/TreasuryAnimation';
+import Crown from './components/CrownAnimation';
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
@@ -39,16 +42,16 @@ export default function Page(): JSX.Element {
 
         <Flex direction="column" gap={8}>
           <Flex direction="row" gap={8}>
-            <Card image="/emotes/crown.png">
+            <Card animation={<Crown />}>
               <Heading as="h2">4-7</Heading>
               <Text color={appTheme.colors.gray50}>{t('WINNERS')}.</Text>
             </Card>
-            <Card image="/emotes/rocket.png">
+            <Card animation={<Rocket />}>
               <Heading as="h2">{playerCount || 0}</Heading>
               <Text color={appTheme.colors.gray50}>{t('PARTICIPANTS')}.</Text>
             </Card>
           </Flex>
-          <Card image="/emotes/party.png" size="small">
+          <Card animation={<Treasury />} size="small">
             <Heading as="h2">{totalPrice}</Heading>
             <Text color={appTheme.colors.gray50}>{t('TOTAL_PRIZE')}.</Text>
           </Card>
