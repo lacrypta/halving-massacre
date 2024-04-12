@@ -21,7 +21,7 @@
   "SHITCOINED": "Fuiste shitcoineado.",
   "HISTORY": "Historial",
   "ROUNDS": "Rondas",
-  "ACCUMULATED_POWER": "de poder acumulado.",
+  "ACCUMULATED_POWER": "Poder acumulado total.",
   "CONTRIBUTED_POWER": "de poder aportado.",
   "ADDED_POWER": "Poder agregado",
   "IN_PROGRESS": "En progreso",
@@ -135,5 +135,6 @@
   "OPEN_SOURCE": "Código abierto",
   "OPEN_SOURCE_DESC": "Este es un juego de código abierto, por lo tanto pueden verificar todos los detalles, cambios y algoritmos utilizados en nuestro GitHub. También pueden colaborar.",
   "BUY_FIRST_TICKET": "Regalo por comprar tu ticket",
-  "LAST_10_ZAPS": "Últimos 10 zappeos"
+  "LAST_10_ZAPS": "Últimos 10 zappeos",
+  "RANKING": "Ranking"
 }

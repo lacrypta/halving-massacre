@@ -11,7 +11,7 @@ export const IconStyle = styled.div<IconStyleProps>`
   align-items: center;
   justify-content: center;
 
-  width: ${(props) => props.$size * slot}px;
+  min-width: ${(props) => props.$size * slot}px;
   height: ${(props) => props.$size * slot}px;
 
   svg,

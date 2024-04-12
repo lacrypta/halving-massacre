@@ -5,7 +5,7 @@ import { appTheme } from '../../../../config/exports';
 
 import { AutoAvatar } from '../AutoAvatar';
 import { Icon } from '../Icon';
-import { Bolt } from '../Icons';
+import { Bolt, Shield } from '../Icons';
 
 import { RankingListStyle, ItemStyle, NumberStyle, WaliasStyle, ValueStyle } from './style';
 import { formatAmount } from '../../../../lib/utils';
@@ -40,14 +40,14 @@ export function RankingList(props: RankingListProps) {
                     </Flex>
                   </Flex>
                   <Flex align="center" flex={0} gap={4}>
-                    <Icon>
-                      <Bolt color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error} />
-                    </Icon>
                     <ValueStyle>
-                      <Text color={type === 'global' ? appTheme.colors.primary : appTheme.colors.error}>
+                      <Text color={type === 'global' ? appTheme.colors.success : appTheme.colors.error}>
                         {formatAmount(players[walias]!) || '21'}
                       </Text>
                     </ValueStyle>
+                    <Icon size={4}>
+                      <Shield color={type === 'global' ? appTheme.colors.success : appTheme.colors.error} />
+                    </Icon>
                   </Flex>
                 </Flex>
               </Link>
