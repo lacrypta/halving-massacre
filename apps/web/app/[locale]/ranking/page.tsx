@@ -47,7 +47,7 @@ export default function Page({ params }: PageProps): JSX.Element {
       {/* <GameTime round={10} block="820.000" time="20" /> */}
       <Divider y={16} />
       <Flex direction="column" align="center">
-        <Heading as="h1">Ranking</Heading>
+        <Heading as="h1">{t('RANKING')}</Heading>
         <Divider y={16} />
         <Container>
           <Card animation={<Treasury />} size="small">
