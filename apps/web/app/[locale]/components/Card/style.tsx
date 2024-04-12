@@ -5,6 +5,10 @@ interface CardPrimitiveProps {
   $isSmall: boolean;
 }
 
+interface AnimationProps {
+  $isSmall: boolean;
+}
+
 export const CardPrimitive = styled.div<CardPrimitiveProps>`
   position: relative;
   overflow: hidden;
@@ -50,4 +54,11 @@ export const CardPrimitive = styled.div<CardPrimitiveProps>`
       transform: scale(1.3);
     }
   }
+`;
+
+export const Animation = styled.div<AnimationProps>`
+  position: absolute;
+  top: ${(props) => (props.$isSmall ? '0px' : '-45px')};
+  right: ${(props) => (props.$isSmall ? '-270px' : '-35px')};
+  z-index: 0;
 `;
