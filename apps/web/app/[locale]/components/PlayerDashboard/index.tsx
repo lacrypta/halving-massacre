@@ -184,116 +184,44 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
 
       {/* Configurar para que al hacer click en la Tab se muestre el TabPanel correspondiente */}
       {hasTicket ? (
-        <Tabs>
-          <TabList>
-            <Tab active={Boolean(showTab === 'zapeos')} onClick={() => setTab('zapeos')}>
-              {t('HISTORY')}
-            </Tab>
-            <Tab disabled={true} active={Boolean(showTab === 'rondas')} onClick={() => setTab('rondas')}>
-              {t('ROUNDS')}
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel show={Boolean(showTab === 'rondas')}>
-              <Divider y={12} />
-              <Card spacing={4} variant="filled">
-                <Flex align="center" gap={16}>
-                  <Icon size={8}>
-                    <Shield color={appTheme.colors.success} />
-                  </Icon>
-                  <Flex direction="column">
-                    <Heading as="h4" color={appTheme.colors.success}>
-                      100.000
-                    </Heading>
-                    <Text size="small">{t('ACCUMULATED_POWER')}</Text>
-                  </Flex>
-                </Flex>
-              </Card>
-              <Divider y={12} />
-              {/* Mostrar en caso de que no tenga rondas actuales */}
-              {/* <Flex direction="column" flex={1} align="center" justify="center">
-                <Heading as="h4">Lorem, ipsum dolor.</Heading>
-                <Text align="center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, impedit.</Text>
-              </Flex> */}
-              {/* Mostrar en el caso de que tenga rondas */}
-              <Flex direction="column" flex={1} align="center">
-                {userRounds
-                  .sort((a, b) => b.index - a.index)
-                  .map((round, k) => (
-                    <React.Fragment key={k}>
-                      <Flex align="center" justify="start" gap={8}>
-                        <Flex align="center" gap={8}>
-                          {/* Listado de iconos: */}
-                          {/* <Heart color={appTheme.colors.success} />
-                          <Skull color={appTheme.colors.error} />
-                          <Crown color={appTheme.colors.secondary} />
-                          <Sword color={appTheme.colors.primary} /> */}
-                          {!round.alive ? (
-                            <Skull color={appTheme.colors.error} />
-                          ) : (
-                            <Heart color={appTheme.colors.success} />
-                          )}
-                          <Text>{round.name}</Text>
-                        </Flex>
-                        {!round.finished ? (
-                          // Finished Round
-                          <Flex justify="end">
-                            <Text color={round.alive ? appTheme.colors.gray50 : appTheme.colors.error}>
-                              {round.alive ? `+${round.powerIncrease}` : t('MASSACRED')}
-                            </Text>
-                          </Flex>
-                        ) : (
-                          // In progress
-                          <Flex justify="end">
-                            <Text color={appTheme.colors.gray50}>{t('IN_PROGRESS')}</Text>
-                          </Flex>
-                        )}
-                      </Flex>
-                      <Divider y={20} />
-                    </React.Fragment>
-                  ))}
+        <>
+          <Divider y={12} />
+          <Card spacing={4} variant="filled">
+            <Flex align="center" gap={16}>
+              <Icon size={8}>
+                <Shield color={appTheme.colors.success} />
+              </Icon>
+              <Flex direction="column">
+                <Heading as="h4" color={appTheme.colors.success}>
+                  {formatAmount(totalPower / 1000)}
+                </Heading>
+                <Text size="small">{t('ACCUMULATED_POWER')}</Text>
               </Flex>
-            </TabPanel>
-            <TabPanel show={showTab === 'zapeos'}>
-              <Divider y={12} />
-              <Card spacing={4} variant="filled">
-                <Flex align="center" gap={16}>
-                  <Icon size={8}>
-                    <Bolt color={appTheme.colors.primary} />
-                  </Icon>
-                  <Flex direction="column">
-                    <Heading as="h4" color={appTheme.colors.primary}>
-                      {formatAmount(totalPower / 1000)}
-                    </Heading>
-                    <Text size="small">{t('CONTRIBUTED_POWER')}</Text>
-                  </Flex>
-                </Flex>
-              </Card>
-              <Divider y={24} />
+            </Flex>
+          </Card>
+          <Divider y={24} />
 
-              <TransitionGroup className={styles.transactionElementsContainer}>
-                {/* Mock Power Events */}
-                {powerActions.map((powerEvent) => {
-                  return (
-                    <CSSTransition key={powerEvent.id} timeout={550} classNames="fade">
-                      <ItemTxs
-                        icon={<Bolt color={appTheme.colors.primary} />}
-                        text={t('ADDED_POWER')}
-                        type="power"
-                        value={powerEvent.amount}
-                        message={powerEvent.message}
-                      />
-                    </CSSTransition>
-                  );
-                })}
-              </TransitionGroup>
+          <TransitionGroup className={styles.transactionElementsContainer}>
+            {/* Mock Power Events */}
+            {powerActions.map((powerEvent) => {
+              return (
+                <CSSTransition key={powerEvent.id} timeout={550} classNames="fade">
+                  <ItemTxs
+                    icon={<Bolt color={appTheme.colors.primary} />}
+                    text={t('ADDED_POWER')}
+                    type="power"
+                    value={powerEvent.amount}
+                    message={powerEvent.message}
+                  />
+                </CSSTransition>
+              );
+            })}
+          </TransitionGroup>
 
-              {/* Mock TicketEvent */}
-              <ItemTxs icon={<Ticket color={appTheme.colors.primary} />} text={t('PURCHASED_TICKET')} />
-              <Divider y={20} />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+          {/* Mock TicketEvent */}
+          <ItemTxs icon={<Ticket color={appTheme.colors.primary} />} text={t('PURCHASED_TICKET')} />
+          <Divider y={20} />
+        </>
       ) : (
         <div>
           <Text size="small" align="center" color={appTheme.colors.gray50}>
