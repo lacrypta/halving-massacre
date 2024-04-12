@@ -1,10 +1,9 @@
 import Lottie from 'lottie-react';
-
 import animationData from './crown.json';
 
 const style = {
-  height: 190,
-  width: 220,
+  height: 'auto',
+  width: 'auto',
 };
 
 export default function Crown() {

@@ -3,8 +3,8 @@ import Lottie from 'lottie-react';
 import animationData from './rocket.json';
 
 const style = {
-  height: 185,
-  width: 200,
+  height: 'auto',
+  width: 'auto',
 };
 
 export default function Rocket() {

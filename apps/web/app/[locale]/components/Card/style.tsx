@@ -25,7 +25,6 @@ export const CardPrimitive = styled.div<CardPrimitiveProps>`
 
   @media screen and (min-width: 768px) {
     height: 150px;
-
     padding: 24px;
   }
 
@@ -58,7 +57,22 @@ export const CardPrimitive = styled.div<CardPrimitiveProps>`
 
 export const Animation = styled.div<AnimationProps>`
   position: absolute;
-  top: ${(props) => (props.$isSmall ? '0px' : '-45px')};
-  right: ${(props) => (props.$isSmall ? '-270px' : '-35px')};
+  top: ${(props) => (props.$isSmall ? '0rem' : '-2rem')};
+  right: ${(props) => (props.$isSmall ? '-7rem' : '-1rem')};
   z-index: 0;
+
+  @media screen and (min-width: 600px) and (max-width: 768px) {
+    top: ${(props) => (props.$isSmall ? '0rem' : '-1.2rem')};
+    right: ${(props) => (props.$isSmall ? '-4rem' : '-0.6rem')};
+  }
+
+  @media screen and (min-width: 480px) and (max-width: 600px) {
+    top: ${(props) => (props.$isSmall ? '0rem' : '-1.2rem')};
+    right: ${(props) => (props.$isSmall ? '-2rem' : '0rem')};
+  }
+
+  @media screen and (min-width: 300px) and (max-width: 480px) {
+    top: ${(props) => (props.$isSmall ? '0rem' : '-0.2rem')};
+    right: ${(props) => (props.$isSmall ? '-2rem' : '0rem')};
+  }
 `;

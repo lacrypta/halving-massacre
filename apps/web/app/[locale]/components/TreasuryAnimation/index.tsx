@@ -6,8 +6,8 @@ import animationData from './chest.json'; // 200x200px
 // import animationData from './bitcoin-rotate.json'; // 200x220px
 
 const style = {
-  height: 200,
-  width: 200,
+  height: 'auto',
+  width: 'auto',
 };
 
 export default function Treasury() {

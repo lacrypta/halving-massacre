@@ -2,7 +2,6 @@ import { Flex, Heading, Text } from '@lawallet/ui';
 import { NumbersBox } from '../Countdown/style';
 import { useTranslations } from 'next-intl';
 import { useCountdown } from '../../../../hooks/useCountdown';
-import { Loader } from '../Icons/Loader';
 
 interface CountdownBoxProps {
   targetDate: Date;
