@@ -12,11 +12,11 @@ interface TabProps {
 }
 
 export function Tab(props: TabProps) {
-  const { children, active = false, disabled = false } = props;
+  const { children, active = false, disabled = false, onClick } = props;
 
   return (
     <TabStyle $active={active}>
-      <Button disabled={disabled} size="small" variant="borderless">
+      <Button disabled={disabled} size="small" variant="borderless" onClick={onClick}>
         {children}
       </Button>
     </TabStyle>
