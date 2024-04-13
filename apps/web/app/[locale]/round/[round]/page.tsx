@@ -14,7 +14,7 @@ import { useMassacre } from '../../../../hooks/useMassacre';
 import Badge from '@/[locale]/components/Badge';
 import { Card } from '@/[locale]/components/CardV2';
 import { Icon } from '@/[locale]/components/Icon';
-import { Shield, Snowflake } from '@/[locale]/components/Icons';
+import { SackSats, Shield, Snowflake } from '@/[locale]/components/Icons';
 import { Tab, TabList, Tabs, TabPanel, TabPanels } from '@/[locale]/components/Tabs';
 
 // Generic components
@@ -63,7 +63,7 @@ export default function Page({ params }: PageProps): JSX.Element {
           <Card variant="filled" spacing={4}>
             <Flex gap={16} align="center">
               <Icon size={8}>
-                <Shield color={itFinished ? appTheme.colors.success : appTheme.colors.warning} />
+                {itFinished ? <SackSats color={appTheme.colors.success} /> : <Shield color={appTheme.colors.warning} />}
               </Icon>
               <Flex direction="column">
                 <Heading as="h4" color={itFinished ? appTheme.colors.success : appTheme.colors.warning}>
