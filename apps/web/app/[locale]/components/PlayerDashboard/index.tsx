@@ -43,6 +43,9 @@ export interface PlayerDashboardInterface {
   onBuyTicket: Function;
 }
 
+const EMERGENCY_LOCK_TICKET = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_TICKET === 'true';
+const EMERGENCY_LOCK_POWER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_POWER === 'true';
+
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
   const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
@@ -87,13 +90,13 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
           <div>
             {hasTicket ? (
               <>
-                <Button onClick={() => onAddPower()} variant="bezeled" disabled={!isAlive}>
+                <Button onClick={() => onAddPower()} variant="bezeled" disabled={EMERGENCY_LOCK_POWER || !isAlive}>
                   <Bolt />
                   {t('ADD_POWER')}
                 </Button>
               </>
             ) : (
-              <Button onClick={() => onBuyTicket()}>
+              <Button onClick={() => onBuyTicket()} disabled={EMERGENCY_LOCK_TICKET}>
                 <Ticket />
                 {t('BUY_TICKET')}
               </Button>

@@ -19,6 +19,9 @@ interface PageProps {
   };
 }
 
+const EMERGENCY_LOCK_TICKET = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_TICKET === 'true';
+const EMERGENCY_LOCK_POWER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_POWER === 'true';
+
 export default function Page({ params }: PageProps): JSX.Element {
   const walias = decodeURIComponent(params.lud16);
   const [isAddPowerOpen, setIsAddPowerOpen] = useState(false);
@@ -38,8 +41,10 @@ export default function Page({ params }: PageProps): JSX.Element {
           onAddPower={() => setIsAddPowerOpen(true)}
           onBuyTicket={() => setIsInscriptionOpen(true)}
         />
-        <AddPowerSheet isOpen={isAddPowerOpen} onClose={() => setIsAddPowerOpen(false)} />
-        <InscriptionSheet isOpen={isInscriptionOpen} onClose={() => setIsInscriptionOpen(false)} />
+        {!EMERGENCY_LOCK_POWER && <AddPowerSheet isOpen={isAddPowerOpen} onClose={() => setIsAddPowerOpen(false)} />}
+        {!EMERGENCY_LOCK_TICKET && (
+          <InscriptionSheet isOpen={isInscriptionOpen} onClose={() => setIsInscriptionOpen(false)} />
+        )}
       </PlayerProvider>
     </>
   );

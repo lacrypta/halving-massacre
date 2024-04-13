@@ -28,7 +28,8 @@ const nostrConfig = mockConfig as unknown as ConfigProps;
 
 // const nostrConfig = createConfig({ relaysList }); // TODO: Fix BUG: Ignoring relaysList
 
-const EMERGENCY_LOCK = !!process.env.NEXT_PUBLIC_EMERGENCY_LOCK;
+const EMERGENCY_LOCK_SERVER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_SERVER === 'true';
+const EMERGENCY_LOCK_SERVER_DISCLAIMER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_SERVER_DISCLAIMER;
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -38,7 +39,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           <ProfileCacheProvider>
             <MassacreProvider setupId={MASSACRE_SETUP_ID}>
               <NotificationsProvider>
-                {EMERGENCY_LOCK ? <EmergencyLock /> : children}
+                {EMERGENCY_LOCK_SERVER ? <EmergencyLock message={EMERGENCY_LOCK_SERVER_DISCLAIMER || ''} /> : children}
                 <Footer />
               </NotificationsProvider>
             </MassacreProvider>
