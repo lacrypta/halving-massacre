@@ -2,11 +2,7 @@ import { styled } from 'styled-components';
 
 import { appTheme } from '@/../config/exports';
 
-interface BadgePrimitiveProps {
-  $color: 'primary' | 'secondary';
-}
-
-export const BadgePrimitive = styled.div<BadgePrimitiveProps>`
+export const BadgePrimitive = styled.div`
   display: inline-flex;
   width: auto;
 
@@ -15,5 +11,7 @@ export const BadgePrimitive = styled.div<BadgePrimitiveProps>`
   background-color: ${appTheme.colors.gray20};
   border-radius: 12px;
 
-  color: ${(props) => appTheme.colors[props.$color]};
+  p {
+    white-space: nowrap;
+  }
 `;
