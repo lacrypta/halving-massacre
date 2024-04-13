@@ -12,6 +12,7 @@ import AddPowerSheet from '@/[locale]/components/AddPowerSheet/AddPowerSheet';
 import InscriptionSheet from '@/[locale]/components/InscriptionSheet/InscriptionSheet';
 import { Navbar } from '../../components/Navbar';
 import { PlayerDashboard } from '../../components/PlayerDashboard';
+import { GameTime } from '@/[locale]/components/GameTime';
 
 interface PageProps {
   params: {
@@ -33,7 +34,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   return (
     <>
       <Navbar />
-      {/* <GameTime round={10} block="820.000" time="20" /> */}
+      <GameTime round={10} block="819.200" time="20" />
       <Divider y={16} />
       <PlayerProvider walias={walias}>
         <PlayerDashboard

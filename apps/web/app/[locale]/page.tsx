@@ -17,6 +17,7 @@ import { Navbar } from './components/Navbar';
 import Rocket from './components/RocketAnimation';
 import Treasury from './components/TreasuryAnimation';
 import Crown from './components/CrownAnimation';
+import { GameTime } from './components/GameTime';
 
 export default function Page(): JSX.Element {
   const t = useTranslations();
@@ -29,7 +30,7 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Navbar isoAnimated={false} />
-      {/* <GameTime round={10} block="820.000" time="20" /> */}
+      <GameTime round={2} block="819.200" time="20" />
       <Divider y={16} />
       <Container>
         <Flex direction="column" align="center">
