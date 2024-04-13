@@ -13,14 +13,16 @@ import { appTheme } from '../../../config/exports';
 // Hooks and utils
 import { useMassacre } from '../../../hooks/useMassacre';
 
+// New ui-components
+import { Tab, TabList, Tabs, TabPanel, TabPanels } from '../components/Tabs';
+
 // Generic components
 import { Navbar } from '../components/Navbar';
 import Card from '../components/Card';
 import Treasury from '../components/TreasuryAnimation';
-
 import { RankingList } from '../components/RankingList';
-import { Tab, TabList, Tabs, TabPanel, TabPanels } from '../components/Tabs';
 import { GameTime } from '../components/GameTime';
+import { RankingRounds } from '../components/RankingRounds';
 
 interface PageProps {
   params: {
@@ -39,12 +41,16 @@ export default function Page({ params }: PageProps): JSX.Element {
   const totalPrice = formatAmount(currentPool / 1000);
 
   // Mocks
-  const [nameTab, setNameTab] = useState('global');
+  const [nameTab, setNameTab] = useState<string>('global');
+
+  const handleChangeTab = (value: string) => {
+    setNameTab(value);
+  };
 
   return (
     <>
       <Navbar />
-      {/* <GameTime round={10} block="820.000" time="20" /> */}
+      <GameTime round={2} block="819.200" time="20" />
       <Divider y={16} />
       <Flex direction="column" align="center">
         <Heading as="h1">{t('RANKING')}</Heading>
@@ -64,21 +70,22 @@ export default function Page({ params }: PageProps): JSX.Element {
         <Container size="small">
           <Tabs>
             <TabList>
-              <Tab active={nameTab === 'global' && true} onClick={() => setNameTab('global')}>
+              <Tab active={nameTab === 'global'} onClick={() => handleChangeTab('global')}>
                 Global
               </Tab>
-              <Tab active={nameTab === 'massacre' && true} onClick={() => setNameTab('massacre')} disabled={true}>
-                Masacrados
+              <Tab active={nameTab === 'rounds'} onClick={() => handleChangeTab('rounds')}>
+                Rondas
               </Tab>
             </TabList>
           </Tabs>
           <TabPanels>
-            <TabPanel show={nameTab === 'global' && true}>
+            <TabPanel show={nameTab === 'global'}>
               <Divider y={16} />
               <RankingList players={players} />
             </TabPanel>
-            <TabPanel show={nameTab === 'massacre' && true}>
+            <TabPanel show={nameTab === 'rounds'}>
               <Divider y={16} />
+              <RankingRounds players={[]} />
               {/* Agregar listado de jugadores massacrados */}
               {/* <RankingList players={players} type="massacre" /> */}
             </TabPanel>

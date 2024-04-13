@@ -136,5 +136,7 @@
   "OPEN_SOURCE_DESC": "This is an open source game, so you can check all the details, changes and algorithms used on our GitHub. They can also collaborate.",
   "BUY_FIRST_TICKET": "Gift for purchasing your ticket",
   "LAST_10_ZAPS": "Last 10 zaps",
-  "RANKING": "Ranking"
+  "RANKING": "Ranking",
+  "FINISHED": "Finished",
+  "SOON": "Soon"
 }
