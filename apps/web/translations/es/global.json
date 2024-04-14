@@ -136,5 +136,10 @@
   "OPEN_SOURCE_DESC": "Este es un juego de código abierto, por lo tanto pueden verificar todos los detalles, cambios y algoritmos utilizados en nuestro GitHub. También pueden colaborar.",
   "BUY_FIRST_TICKET": "Regalo por comprar tu ticket",
   "LAST_10_ZAPS": "Últimos 10 zappeos",
-  "RANKING": "Ranking"
+  "RANKING": "Ranking",
+  "SERVICE_DOWN": "Servicio temporalmente caído",
+  "DISABLED": "deshabilitado",
+  "POWER": "Poder",
+  "TICKET": "Ticket",
+  "AND": "y"
 }
