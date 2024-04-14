@@ -9,5 +9,7 @@ export { Skull } from './Skull';
 export { Sword } from './Sword';
 export { Ticket } from './Ticket';
 export { Twitter } from './Twitter';
+export { ArrowDown } from './ArrowDown';
+export { MenuBar } from './MenuBar';
 // Custom
 export { Loader } from './Loader';
