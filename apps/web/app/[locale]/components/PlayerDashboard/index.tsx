@@ -43,8 +43,8 @@ export interface PlayerDashboardInterface {
   onBuyTicket: Function;
 }
 
-const EMERGENCY_LOCK_TICKET = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_TICKET === 'true';
-const EMERGENCY_LOCK_POWER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_POWER === 'true';
+const EMERGENCY_LOCK_TICKET = process.env.EMERGENCY_LOCK_TICKET === 'true';
+const EMERGENCY_LOCK_POWER = process.env.EMERGENCY_LOCK_POWER === 'true';
 
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });

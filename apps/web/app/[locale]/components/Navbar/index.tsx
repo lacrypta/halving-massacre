@@ -13,8 +13,8 @@ interface NavbarProps {
   isoAnimated?: Boolean;
 }
 
-const EMERGENCY_LOCK_TICKET = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_TICKET === 'true';
-const EMERGENCY_LOCK_POWER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_POWER === 'true';
+const EMERGENCY_LOCK_TICKET = process.env.EMERGENCY_LOCK_TICKET === 'true';
+const EMERGENCY_LOCK_POWER = process.env.EMERGENCY_LOCK_POWER === 'true';
 
 export function Navbar({ children, isoAnimated = true }: NavbarProps) {
   const t = useTranslations();
