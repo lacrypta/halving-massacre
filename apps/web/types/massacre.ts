@@ -11,3 +11,11 @@ export interface MassacreStatusEventContent {
   roundLength: number;
   freezeDuration: number;
 }
+
+export interface MassacreRound {
+  index?: number;
+  height: number;
+  survivors: number;
+  freezeHeight: number;
+  nextMassacre: number;
+}
