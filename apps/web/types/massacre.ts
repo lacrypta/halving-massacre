@@ -2,14 +2,16 @@ export type MassacreStatus = 'SETUP' | 'CLOSED' | 'INITIAL' | 'NORMAL' | 'FREEZE
 
 export interface MassacreStatusEventContent {
   currentBlock: number;
-  top100Players: { [walias: string]: number };
-  currentPool: number;
-  playerCount: number;
-  nextFreeze: number;
-  nextMassacre: number;
   status: MassacreStatus;
-  roundLength: number;
-  freezeDuration: number;
+  nextMassacre: number;
+  nextFreeze: number;
+  currentPool: number;
+  top100Players: { [walias: string]: number };
+  playerCount: number;
+  buckets: {
+    max: number;
+    min: number;
+  }[];
 }
 
 export interface MassacreRound {
