@@ -21,6 +21,7 @@ import { Tab, TabList, Tabs, TabPanel, TabPanels } from '@/[locale]/components/T
 import { Navbar } from '../../components/Navbar';
 import { GameTime } from '@/[locale]/components/GameTime';
 import { RankingList } from '@/[locale]/components/RankingList';
+import { useTranslations } from 'next-intl';
 
 interface PageProps {
   params: {
@@ -29,6 +30,8 @@ interface PageProps {
 }
 
 export default function Page({ params }: PageProps): JSX.Element {
+  const t = useTranslations();
+
   const round = parseInt(decodeURIComponent(params.round));
 
   const itFinished = round === 1 ? true : false;
@@ -55,7 +58,7 @@ export default function Page({ params }: PageProps): JSX.Element {
               <Heading>Ronda {round + 1}</Heading>
               <Text color={appTheme.colors.gray50}>#819.200</Text>
             </Flex>
-            <Badge color={itFinished ? 'success' : 'warning'}>{itFinished ? 'Finalizado' : 'En progreso'}</Badge>
+            <Badge color={itFinished ? 'success' : 'warning'}>{itFinished ? t('FINISHED') : t('IN_PROGRESS')}</Badge>
           </Flex>
         </Container>
         <Divider y={16} />
