@@ -1,4 +1,4 @@
-export type MassacreStatus = 'SETUP' | 'INITIAL' | 'NORMAL' | 'FREEZE' | 'FINAL';
+export type MassacreStatus = 'SETUP' | 'CLOSED' | 'INITIAL' | 'NORMAL' | 'FREEZE' | 'FINAL';
 
 export interface MassacreStatusEventContent {
   currentBlock: number;

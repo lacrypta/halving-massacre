@@ -1,13 +1,22 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "dev": {
       "cache": false,
@@ -21,7 +30,6 @@
     "NEXT_PUBLIC_MASSACRE_SETUP_ID",
     "NEXT_PUBLIC_TARGET_COUNTDOWN",
     "NEXT_PUBLIC_MASSACRE_ENDPOINT",
-    "NEXT_PUBLIC_MINIMUM_POWER_AMOUNT",
-    "NEXT_PUBLIC_EMERGENCY_LOCK"
+    "NEXT_PUBLIC_MINIMUM_POWER_AMOUNT"
   ]
 }

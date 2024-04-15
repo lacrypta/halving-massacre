@@ -36,6 +36,8 @@ import { usePowerEvents } from '../../../../hooks/usePowerEvents';
 import CountdownBox from '../CountdownBox';
 import { ItemTxs } from '../ItemTxs';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { useMassacre } from '../../../../hooks/useMassacre';
+import type { MassacreStatus } from '../../../../types/massacre';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -43,16 +45,17 @@ export interface PlayerDashboardInterface {
   onBuyTicket: Function;
 }
 
-const EMERGENCY_LOCK_TICKET = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_TICKET === 'true';
-const EMERGENCY_LOCK_POWER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_POWER === 'true';
+const EMERGENCY_LOCK_TICKET = process.env.EMERGENCY_LOCK_TICKET === 'true';
+const EMERGENCY_LOCK_POWER = process.env.EMERGENCY_LOCK_POWER === 'true';
+
+const closedPowerStatuses: MassacreStatus[] = ['FREEZE', 'FINAL'];
 
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
   const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
   const { powerActions } = usePowerEvents({ walias });
   const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
-
-  // const { medianPower } = useMassacre();
+  const { status } = useMassacre();
 
   const t = useTranslations();
   const locale = useLocale() as AvailableLanguages;
@@ -90,13 +93,17 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
           <div>
             {hasTicket ? (
               <>
-                <Button onClick={() => onAddPower()} variant="bezeled" disabled={EMERGENCY_LOCK_POWER || !isAlive}>
+                <Button
+                  onClick={() => onAddPower()}
+                  variant="bezeled"
+                  disabled={EMERGENCY_LOCK_POWER || !isAlive || closedPowerStatuses.includes(status)}
+                >
                   <Bolt />
                   {t('ADD_POWER')}
                 </Button>
               </>
             ) : (
-              <Button onClick={() => onBuyTicket()} disabled={EMERGENCY_LOCK_TICKET}>
+              <Button onClick={() => onBuyTicket()} disabled={EMERGENCY_LOCK_TICKET || status !== 'SETUP'}>
                 <Ticket />
                 {t('BUY_TICKET')}
               </Button>

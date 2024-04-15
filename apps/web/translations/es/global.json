@@ -138,5 +138,11 @@
   "LAST_10_ZAPS": "Últimos 10 zappeos",
   "RANKING": "Ranking",
   "FINISHED": "Finalizado",
-  "SOON": "Próximamente"
+  "SOON": "Próximamente",
+  "SERVICE_DOWN": "Servicio temporalmente caído",
+  "DISABLED": "deshabilitado",
+  "POWER": "Poder",
+  "TICKET": "Ticket",
+  "AND": "y",
+  "INSCRIPTION_CLOSED_TEXT": "Lista de participantes cerrada. Esperando calendario de rondas."
 }

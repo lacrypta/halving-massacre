@@ -138,5 +138,11 @@
   "LAST_10_ZAPS": "Last 10 zaps",
   "RANKING": "Ranking",
   "FINISHED": "Finished",
-  "SOON": "Soon"
+  "SOON": "Soon",
+  "SERVICE_DOWN": "Service temporarily down",
+  "DISABLED": "disabled",
+  "POWER": "Power",
+  "TICKET": "Ticket",
+  "AND": "and",
+  "INSCRIPTION_CLOSED_TEXT": "Players inscription closed. Waiting for rounds schedule."
 }

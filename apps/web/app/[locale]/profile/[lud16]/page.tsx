@@ -20,8 +20,8 @@ interface PageProps {
   };
 }
 
-const EMERGENCY_LOCK_TICKET = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_TICKET === 'true';
-const EMERGENCY_LOCK_POWER = process.env.NEXT_PUBLIC_EMERGENCY_LOCK_POWER === 'true';
+const EMERGENCY_LOCK_TICKET = process.env.EMERGENCY_LOCK_TICKET === 'true';
+const EMERGENCY_LOCK_POWER = process.env.EMERGENCY_LOCK_POWER === 'true';
 
 export default function Page({ params }: PageProps): JSX.Element {
   const walias = decodeURIComponent(params.lud16);
