@@ -1,7 +1,7 @@
 'use client';
 
 // Libraries
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 import { useFormatter } from '@lawallet/react';
@@ -12,6 +12,7 @@ import { appTheme } from '../../../config/exports';
 
 // Hooks and utils
 import { useMassacre } from '../../../hooks/useMassacre';
+import { RoundsContext } from '../../../context/RoundsContext';
 
 // New ui-components
 import { Tab, TabList, Tabs, TabPanel, TabPanels } from '../components/Tabs';
@@ -37,6 +38,7 @@ export default function Page({ params }: PageProps): JSX.Element {
 
   // Context
   const { top100Players: players, currentPool } = useMassacre();
+  const { rounds } = useContext(RoundsContext);
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
   const totalPrice = formatAmount(currentPool / 1000);
 
@@ -73,7 +75,7 @@ export default function Page({ params }: PageProps): JSX.Element {
               <Tab active={nameTab === 'global'} onClick={() => handleChangeTab('global')}>
                 Global
               </Tab>
-              <Tab active={nameTab === 'rounds'} onClick={() => handleChangeTab('rounds')}>
+              <Tab disabled={rounds.length < 1} active={nameTab === 'rounds'} onClick={() => handleChangeTab('rounds')}>
                 Rondas
               </Tab>
             </TabList>
