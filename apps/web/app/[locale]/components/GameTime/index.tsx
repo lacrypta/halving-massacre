@@ -6,22 +6,32 @@ import { appTheme } from '../../../../config/exports';
 import { useContext, useMemo } from 'react';
 import { RoundsContext } from '../../../../context/RoundsContext';
 import { useMassacre } from '../../../../hooks/useMassacre';
+import { useFormatter } from '@lawallet/react';
+import { useLocale } from 'next-intl';
+import type { AvailableLanguages } from '@lawallet/utils/types';
 
 export function GameTime() {
   const { currentBlock, status } = useMassacre();
   const { currentRound } = useContext(RoundsContext);
-  const { round, block, time } = useMemo(() => {
+  const locale = useLocale() as AvailableLanguages;
+
+  const { formatAmount } = useFormatter({ currency: 'SAT', locale });
+
+  const { round, time } = useMemo(() => {
     if (currentBlock === null || currentRound === null) {
       return {};
     }
     return {
       round: currentRound!.index,
-      block: currentBlock,
       time: (currentRound!.height - currentBlock) * 10,
     };
   }, [currentRound, currentBlock]);
 
   if (['SETUP', 'CLOSED'].includes(status)) {
+    return '';
+  }
+
+  if (!currentRound) {
     return '';
   }
 
@@ -32,10 +42,11 @@ export function GameTime() {
           <Flex flex={1} justify="space-between" align="center" gap={16}>
             <Flex direction="column">
               <Heading as="h4" color={appTheme.colors.warning}>
-                Ronda {round} - {status === 'FREEZE' && 'Freezado'}
+                Ronda {round! + 1}
+                {status === 'FREEZE' && ' - Freezado'}
               </Heading>
               <Flex align="center" gap={4}>
-                <Text size="small">#{block}</Text>
+                {currentRound && <Text size="small">Massacre en #{formatAmount(currentRound!.height)}</Text>}
               </Flex>
             </Flex>
             {time && (
