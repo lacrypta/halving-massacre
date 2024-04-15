@@ -7,6 +7,7 @@ import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 import { NavbarStyle, SubnavbarStyle } from './style';
 import { IsoAnimated } from '../IsoAnimated';
 import { appTheme } from '../../../../config/exports';
+import { useMassacre } from '../../../../hooks/useMassacre';
 
 interface NavbarProps {
   children?: ReactNode;
@@ -18,6 +19,7 @@ const EMERGENCY_LOCK_POWER = process.env.EMERGENCY_LOCK_POWER === 'true';
 
 export function Navbar({ children, isoAnimated = true }: NavbarProps) {
   const t = useTranslations();
+  const { status } = useMassacre();
 
   return (
     <>
@@ -62,6 +64,17 @@ export function Navbar({ children, isoAnimated = true }: NavbarProps) {
           </Container>
         </SubnavbarStyle>
       ) : null}
+      {status === 'CLOSED' && (
+        <SubnavbarStyle $background={appTheme.colors.warning15}>
+          <Container>
+            <Flex flex={1} justify="center" align="center">
+              <Text align="center" color={appTheme.colors.warning}>
+                {t('INSCRIPTION_CLOSED_TEXT')}
+              </Text>
+            </Flex>
+          </Container>
+        </SubnavbarStyle>
+      )}
     </>
   );
 }
