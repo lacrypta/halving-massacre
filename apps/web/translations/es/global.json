@@ -141,5 +141,6 @@
   "DISABLED": "deshabilitado",
   "POWER": "Poder",
   "TICKET": "Ticket",
-  "AND": "y"
+  "AND": "y",
+  "INSCRIPTION_CLOSED_TEXT": "Lista de participantes cerrada. Esperando calendario de rondas."
 }

@@ -141,5 +141,6 @@
   "DISABLED": "disabled",
   "POWER": "Power",
   "TICKET": "Ticket",
-  "AND": "and"
+  "AND": "and",
+  "INSCRIPTION_CLOSED_TEXT": "Players inscription closed. Waiting for rounds schedule."
 }
