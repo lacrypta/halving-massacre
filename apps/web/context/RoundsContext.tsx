@@ -67,7 +67,11 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
     if (startEvents.length < 1) {
       return;
     }
-    setRounds(JSON.parse(startEvents[0]?.content as string) as MassacreRound[]);
+
+    const _rounds = JSON.parse(startEvents[0]?.content as string) as MassacreRound[];
+
+    _rounds.sort((a, b) => a.height - b.height);
+    setRounds(_rounds);
   }, [startEvents]);
 
   // Unsubscribe start subscription on unmount
@@ -98,13 +102,11 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
 
 /**
  * Gets current round or returns null if no round is found
- * @param rounds
+ * @param rounds Should be sorted by height asc
  * @param currentBlock
  * @returns
  */
-function getCurrentRound(rounds: MassacreRound[], currentBlock: number): MassacreRound | null {
-  // Sort by height ascending
-  rounds.sort((a, b) => a.height - b.height);
+export function getCurrentRound(rounds: MassacreRound[], currentBlock: number): MassacreRound | null {
   // Find current round
   for (let index = 0; index < rounds.length; index++) {
     if (currentBlock < rounds[index]!.height) {
