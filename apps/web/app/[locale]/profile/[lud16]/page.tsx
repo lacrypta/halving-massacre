@@ -34,7 +34,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   return (
     <>
       <Navbar />
-      <GameTime round={10} block="819.200" time="20" />
+      <GameTime />
       <Divider y={16} />
       <PlayerProvider walias={walias}>
         <PlayerDashboard

@@ -46,7 +46,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   return (
     <>
       <Navbar />
-      <GameTime round={2} block="819.200" time="20" />
+      <GameTime />
       <Divider y={16} />
       <Flex direction="column" align="center">
         <Container size="small">

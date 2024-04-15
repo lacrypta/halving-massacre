@@ -30,7 +30,7 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Navbar isoAnimated={false} />
-      <GameTime round={2} block="819.200" time="20" />
+      <GameTime />
       <Divider y={16} />
       <Container>
         <Flex direction="column" align="center">
