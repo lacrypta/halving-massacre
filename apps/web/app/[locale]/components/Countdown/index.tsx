@@ -17,6 +17,7 @@ import { CountdownPrimitive } from './style';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '../../../../navigation';
 import { useSearchParams } from 'next/navigation';
+import { useMassacre } from '../../../../hooks/useMassacre';
 
 const NEXT_PUBLIC_TARGET_COUNTDOWN = process.env.NEXT_PUBLIC_TARGET_COUNTDOWN! || '2024-04-13T12:00:00';
 
@@ -33,6 +34,8 @@ export default function Countdown() {
   const { getLud16, getNip05 } = useProfileCache();
 
   const t = useTranslations();
+
+  const { status } = useMassacre();
 
   const checkValidLightningAddress = useCallback(async () => {
     setIsLoading(true);
@@ -68,12 +71,15 @@ export default function Countdown() {
   return (
     <>
       <CountdownPrimitive>
-        <Text size="small" align="center" color={appTheme.colors.gray50}>
-          {t('CLOSE_INSCRIPTION_IN')}
-        </Text>
+        {status === 'SETUP' && (
+          <Text size="small" align="center" color={appTheme.colors.gray50}>
+            {t('CLOSE_INSCRIPTION_IN')}
+          </Text>
+        )}
+
         <Divider y={8} />
 
-        <CountdownBox targetDate={targetDate} />
+        {status === 'SETUP' && <CountdownBox targetDate={targetDate} />}
 
         <Divider y={8} />
         <Input
