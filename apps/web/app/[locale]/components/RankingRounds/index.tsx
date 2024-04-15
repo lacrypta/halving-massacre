@@ -1,7 +1,10 @@
+// React
+import { useContext, useMemo } from 'react';
+
 // Libraries
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { Flex, Text, Divider } from '@lawallet/ui';
+import { Flex, Text } from '@lawallet/ui';
 
 // Theme
 import { appTheme } from '../../../../config/exports';
@@ -12,57 +15,26 @@ import { Shield, ArrowRight, Sword, SackSats } from '../Icons';
 
 // Style
 import { RankingRoundsStyle, ItemStyle, IconStyle } from './style';
+import { RoundsContext, getCurrentRound } from '../../../../context/RoundsContext';
+import type { MassacreRound } from '../../../../types/massacre';
+import { useMassacre } from '../../../../hooks/useMassacre';
 
-interface RankingRoundsProps {
-  players: any;
+interface Round {
+  round: number;
+  block: number;
+  status: RoundStatus;
 }
 
-// Mock
-const list = [
-  {
-    round: 1,
-    block: '819.000',
-    status: 'FINISHED',
-  },
-  {
-    round: 2,
-    block: '819.200',
-    status: 'ACTUAL',
-  },
-  {
-    round: 3,
-    block: '819.400',
-    status: 'PENDING',
-  },
-  {
-    round: 4,
-    block: '819.600',
-    status: 'PENDING',
-  },
-  {
-    round: 5,
-    block: '819.800',
-    status: 'PENDING',
-  },
-  {
-    round: 6,
-    block: '820.000',
-    status: 'PENDING',
-  },
-  {
-    round: 7,
-    block: '820.2000',
-    status: 'PENDING',
-  },
-];
+type RoundStatus = 'FINISHED' | 'ACTUAL' | 'PENDING';
 
-export function RankingRounds(props: RankingRoundsProps) {
-  const { players } = props;
+export function RankingRounds() {
+  const { rounds } = useContext(RoundsContext);
+  const { currentBlock } = useMassacre();
 
   // Generics
   const t = useTranslations();
 
-  const renderIconByStatus = (value: string) => {
+  const renderIconByStatus = (value: RoundStatus) => {
     switch (value) {
       case 'FINISHED':
         return <SackSats color={appTheme.colors.success} />;
@@ -73,7 +45,7 @@ export function RankingRounds(props: RankingRoundsProps) {
     }
   };
 
-  const renderLinkByStatus = (value: string) => {
+  const renderLinkByStatus = (value: RoundStatus) => {
     switch (value) {
       case 'FINISHED':
         return (
@@ -97,6 +69,8 @@ export function RankingRounds(props: RankingRoundsProps) {
         return <Text color={appTheme.colors.gray50}>{t('SOON')}</Text>;
     }
   };
+
+  const list = useMemo(() => generateRoundsList(rounds, currentBlock), [rounds, currentBlock]);
 
   return (
     <RankingRoundsStyle>
@@ -126,4 +100,17 @@ export function RankingRounds(props: RankingRoundsProps) {
       })}
     </RankingRoundsStyle>
   );
+}
+
+function generateRoundsList(rounds: MassacreRound[], currentBlock: number): Round[] {
+  const currentRound = getCurrentRound(rounds, currentBlock);
+
+  return rounds.map((round, k) => {
+    const finished = currentBlock >= round.height;
+    return {
+      round: k + 1,
+      block: round.height,
+      status: k === currentRound?.index ? 'ACTUAL' : finished ? 'FINISHED' : 'PENDING',
+    };
+  });
 }

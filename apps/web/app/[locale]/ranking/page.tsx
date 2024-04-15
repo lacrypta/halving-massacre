@@ -85,7 +85,7 @@ export default function Page({ params }: PageProps): JSX.Element {
             </TabPanel>
             <TabPanel show={nameTab === 'rounds'}>
               <Divider y={16} />
-              <RankingRounds players={[]} />
+              <RankingRounds />
               {/* Agregar listado de jugadores massacrados */}
               {/* <RankingList players={players} type="massacre" /> */}
             </TabPanel>
