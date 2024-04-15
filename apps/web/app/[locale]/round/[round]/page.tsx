@@ -29,9 +29,9 @@ interface PageProps {
 }
 
 export default function Page({ params }: PageProps): JSX.Element {
-  const round = decodeURIComponent(params.round);
+  const round = parseInt(decodeURIComponent(params.round));
 
-  const itFinished = round === '1' ? true : false;
+  const itFinished = round === 1 ? true : false;
 
   // Context
   const { top100Players: players } = useMassacre();
@@ -52,7 +52,7 @@ export default function Page({ params }: PageProps): JSX.Element {
         <Container size="small">
           <Flex align="center">
             <Flex direction="column">
-              <Heading>Ronda {round}</Heading>
+              <Heading>Ronda {round + 1}</Heading>
               <Text color={appTheme.colors.gray50}>#819.200</Text>
             </Flex>
             <Badge color={itFinished ? 'success' : 'warning'}>{itFinished ? 'Finalizado' : 'En progreso'}</Badge>
@@ -60,21 +60,25 @@ export default function Page({ params }: PageProps): JSX.Element {
         </Container>
         <Divider y={16} />
         <Container size="small">
-          <Card variant="filled" spacing={4}>
-            <Flex gap={16} align="center">
-              <Icon size={8}>
-                {itFinished ? <SackSats color={appTheme.colors.success} /> : <Shield color={appTheme.colors.warning} />}
-              </Icon>
-              <Flex direction="column">
-                <Heading as="h4" color={itFinished ? appTheme.colors.success : appTheme.colors.warning}>
-                  150.000
-                </Heading>
-                <Text color={appTheme.colors.gray50}>de poder distribuido.</Text>
-              </Flex>
-            </Flex>
-          </Card>
           {itFinished ? (
             <>
+              <Card variant="filled" spacing={4}>
+                <Flex gap={16} align="center">
+                  <Icon size={8}>
+                    {itFinished ? (
+                      <SackSats color={appTheme.colors.success} />
+                    ) : (
+                      <Shield color={appTheme.colors.warning} />
+                    )}
+                  </Icon>
+                  <Flex direction="column">
+                    <Heading as="h4" color={itFinished ? appTheme.colors.success : appTheme.colors.warning}>
+                      150.000
+                    </Heading>
+                    <Text color={appTheme.colors.gray50}>de poder distribuido.</Text>
+                  </Flex>
+                </Flex>
+              </Card>
               <Divider y={16} />
               <Tabs>
                 <TabList>
