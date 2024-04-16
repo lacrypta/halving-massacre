@@ -37,7 +37,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   const round = parseInt(decodeURIComponent(params.round));
 
   // Context
-  const { top100Players: players } = useMassacre();
+  const { players } = useMassacre();
   const { currentRound, rounds } = useContext(RoundsContext);
   const { currentBlock } = useMassacre();
 
