@@ -84,7 +84,7 @@ export function RankingRounds() {
                     <Icon size={4}>{renderIconByStatus(item.status)}</Icon>
                   </IconStyle>
                   <Flex direction="column">
-                    <Text>Ronda {item.round}</Text>
+                    <Text>Ronda {item.round + 1}</Text>
                     <Text size="small" color={appTheme.colors.gray50}>
                       #{item.block}
                     </Text>
@@ -108,7 +108,7 @@ function generateRoundsList(rounds: MassacreRound[], currentBlock: number): Roun
   return rounds.map((round, k) => {
     const finished = currentBlock >= round.height;
     return {
-      round: k + 1,
+      round: k,
       block: round.height,
       status: k === currentRound?.index ? 'ACTUAL' : finished ? 'FINISHED' : 'PENDING',
     };
