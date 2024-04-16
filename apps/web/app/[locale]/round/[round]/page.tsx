@@ -119,7 +119,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                 </TabList>
                 <TabPanels>
                   <TabPanel show={nameTab === 'alive'}>
-                    <RankingList players={massacreRound?.players || {}} type={'finished'} newValue={5000000} />
+                    <RankingList players={massacreRound?.players || {}} type={'finished'} newValue={massacreRound?.delta || 0} />
                   </TabPanel>
                   <TabPanel show={nameTab === 'massacre'}>
                     <RankingList players={massacreRound?.deadPlayers || {}} type="massacre" />

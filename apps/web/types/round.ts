@@ -25,4 +25,5 @@ export interface RoundEventContent {
   };
   players: PlayersPower;
   deadPlayers: PlayersPower;
+  delta: number;
 }
