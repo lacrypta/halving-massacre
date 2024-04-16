@@ -2,7 +2,7 @@
 
 // Libraries
 import { Divider, Container, Heading, Text, Flex } from '@lawallet/ui';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 // Theme
 import { appTheme } from '../../../../config/exports';
@@ -22,6 +22,8 @@ import { Navbar } from '../../components/Navbar';
 import { GameTime } from '@/[locale]/components/GameTime';
 import { RankingList } from '@/[locale]/components/RankingList';
 import { useTranslations } from 'next-intl';
+import type { RoundStatus } from '../../../../types/round';
+import { RoundsContext } from '../../../../context/RoundsContext';
 
 interface PageProps {
   params: {
@@ -34,13 +36,16 @@ export default function Page({ params }: PageProps): JSX.Element {
 
   const round = parseInt(decodeURIComponent(params.round));
 
-  const itFinished = round === 1 ? true : false;
-
   // Context
   const { top100Players: players } = useMassacre();
+  const { currentRound, rounds } = useContext(RoundsContext);
+  const { currentBlock } = useMassacre();
 
   // Mocks
   const [nameTab, setNameTab] = useState<string>('alive');
+
+  const roundStatus: RoundStatus =
+    currentRound!.index === round ? 'ACTUAL' : currentBlock < rounds[round]!.height ? 'PENDING' : 'FINISHED';
 
   const handleChangeTab = (value: string) => {
     setNameTab(value);
@@ -56,26 +61,31 @@ export default function Page({ params }: PageProps): JSX.Element {
           <Flex align="center">
             <Flex direction="column">
               <Heading>Ronda {round + 1}</Heading>
-              <Text color={appTheme.colors.gray50}>#819.200</Text>
+              <Text color={appTheme.colors.gray50}>#{rounds[round]?.height}</Text>
             </Flex>
-            <Badge color={itFinished ? 'success' : 'warning'}>{itFinished ? t('FINISHED') : t('IN_PROGRESS')}</Badge>
+            <Badge color={roundStatus === 'FINISHED' ? 'success' : 'warning'}>
+              {roundStatus === 'FINISHED' ? t('FINISHED') : roundStatus === 'ACTUAL' ? t('IN_PROGRESS') : 'Pendiente'}
+            </Badge>
           </Flex>
         </Container>
         <Divider y={16} />
         <Container size="small">
-          {itFinished ? (
+          {roundStatus === 'FINISHED' ? (
             <>
               <Card variant="filled" spacing={4}>
                 <Flex gap={16} align="center">
                   <Icon size={8}>
-                    {itFinished ? (
+                    {roundStatus === 'FINISHED' ? (
                       <SackSats color={appTheme.colors.success} />
                     ) : (
                       <Shield color={appTheme.colors.warning} />
                     )}
                   </Icon>
                   <Flex direction="column">
-                    <Heading as="h4" color={itFinished ? appTheme.colors.success : appTheme.colors.warning}>
+                    <Heading
+                      as="h4"
+                      color={roundStatus === 'FINISHED' ? appTheme.colors.success : appTheme.colors.warning}
+                    >
                       150.000
                     </Heading>
                     <Text color={appTheme.colors.gray50}>de poder distribuido.</Text>
@@ -105,14 +115,18 @@ export default function Page({ params }: PageProps): JSX.Element {
           ) : (
             <>
               <Divider y={16} />
-              <Flex direction="column" gap={8} align="center">
-                <Icon size={8}>
-                  <Snowflake color={appTheme.colors.gray50} />
-                </Icon>
-                <Text size="small" color={appTheme.colors.gray50} align="center">
-                  Poder freezado a 2 <br /> bloques de distancia.
-                </Text>
-              </Flex>
+              {currentBlock >= rounds[round]!.freezeHeight && (
+                <Flex direction="column" gap={8} align="center">
+                  <Icon size={8}>
+                    <Snowflake color={appTheme.colors.gray50} />
+                  </Icon>
+
+                  <Text size="small" color={appTheme.colors.gray50} align="center">
+                    Poder freezado a 2 <br /> bloques de distancia.
+                  </Text>
+                </Flex>
+              )}
+
               <Divider y={16} />
               <RankingList players={players} type={'global'} />
             </>
