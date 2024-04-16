@@ -4,6 +4,7 @@ import type { ZapReceiptWithCommitment } from '../types/zap';
 import { decode as decodeBolt11 } from 'bolt11';
 import { NIP05_REGEX } from 'nostr-tools/nip05';
 import type { LNRequestResponse } from '@lawallet/utils/types';
+import type { PlayersPower } from '../types/power';
 
 export function removeObjectKeys(
   obj1: { [key: string]: number },
@@ -86,3 +87,19 @@ export const formatAmount = (_amount: number): String => {
   const amount = _amount / 1000;
   return amount > 9999 ? (amount / 1000).toFixed(1) + 'K' : String(amount);
 };
+
+export function getTopPlayers(players: PlayersPower, count: number = 100): PlayersPower {
+  // Convert the object into an array of its entries
+  const entries = Object.entries(players);
+
+  // Slice the first 100 entries
+  const firstEntries = entries.slice(0, count);
+
+  // Convert the array back into an object
+  const firstPlayers: PlayersPower = {};
+  for (const [key, value] of firstEntries) {
+    firstPlayers[key] = value;
+  }
+
+  return firstPlayers;
+}

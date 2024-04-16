@@ -9,9 +9,10 @@ import { Bolt, Shield } from '../Icons';
 
 import { RankingListStyle, ItemStyle, NumberStyle, WaliasStyle, ValueStyle } from './style';
 import { formatAmount } from '../../../../lib/utils';
+import type { PlayersPower } from '../../../../types/power';
 
 interface RankingListProps {
-  players: any;
+  players: PlayersPower;
   type?: 'global' | 'massacre';
 }
 
