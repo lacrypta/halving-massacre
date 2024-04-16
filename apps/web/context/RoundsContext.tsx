@@ -18,28 +18,52 @@ export const RoundsContext = createContext({} as RoundsContextType);
 
 // const roundsMock: MassacreRound[] = [
 //   {
-//     height: 1000,
-//     freezeHeight: 123,
-//     nextMassacre: 123,
-//     survivors: 123,
+//     height: 839650,
+//     survivors: 139,
+//     freezeHeight: 839648,
+//     nextMassacre: 1,
 //   },
 //   {
-//     height: 2000,
-//     freezeHeight: 123,
-//     nextMassacre: 123,
-//     survivors: 123,
+//     height: 839750,
+//     survivors: 69,
+//     freezeHeight: 839748,
+//     nextMassacre: 2,
 //   },
 //   {
-//     height: 3000,
-//     freezeHeight: 123,
-//     nextMassacre: 123,
-//     survivors: 123,
+//     height: 839850,
+//     survivors: 34,
+//     freezeHeight: 839848,
+//     nextMassacre: 3,
 //   },
 //   {
-//     height: 4000,
-//     freezeHeight: 123,
-//     nextMassacre: 123,
-//     survivors: 123,
+//     height: 839950,
+//     survivors: 17,
+//     freezeHeight: 839848,
+//     nextMassacre: 4,
+//   },
+//   {
+//     height: 839974,
+//     survivors: 8,
+//     freezeHeight: 839972,
+//     nextMassacre: 5,
+//   },
+//   {
+//     height: 839984,
+//     survivors: 4,
+//     freezeHeight: 839982,
+//     nextMassacre: 6,
+//   },
+//   {
+//     height: 839994,
+//     survivors: 2,
+//     freezeHeight: 839992,
+//     nextMassacre: 7,
+//   },
+//   {
+//     height: 840000,
+//     survivors: 1,
+//     freezeHeight: 839998,
+//     nextMassacre: null,
 //   },
 // ];
 
