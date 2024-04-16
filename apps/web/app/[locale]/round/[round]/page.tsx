@@ -2,7 +2,7 @@
 
 // Libraries
 import { Divider, Container, Heading, Text, Flex } from '@lawallet/ui';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 
 // Theme
 import { appTheme } from '../../../../config/exports';
@@ -44,8 +44,12 @@ export default function Page({ params }: PageProps): JSX.Element {
   // Mocks
   const [nameTab, setNameTab] = useState<string>('alive');
 
-  const roundStatus: RoundStatus =
-    currentRound!.index === round ? 'ACTUAL' : currentBlock < rounds[round]!.height ? 'PENDING' : 'FINISHED';
+  const roundStatus: RoundStatus = useMemo(() => {
+    if (!currentRound) {
+      return 'PENDING';
+    }
+    return currentRound.index === round ? 'ACTUAL' : currentBlock < rounds[round]!.height ? 'PENDING' : 'FINISHED';
+  }, [currentRound, round, rounds, currentBlock]);
 
   const handleChangeTab = (value: string) => {
     setNameTab(value);
@@ -115,7 +119,7 @@ export default function Page({ params }: PageProps): JSX.Element {
           ) : (
             <>
               <Divider y={16} />
-              {currentBlock >= rounds[round]!.freezeHeight && (
+              {currentBlock >= (rounds[round]?.freezeHeight || 0) && (
                 <Flex direction="column" gap={8} align="center">
                   <Icon size={8}>
                     <Snowflake color={appTheme.colors.gray50} />
