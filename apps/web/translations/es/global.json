@@ -21,11 +21,13 @@
   "SHITCOINED": "Fuiste shitcoineado.",
   "HISTORY": "Historial",
   "GLOBAL": "Global",
+  "ROUND": "Ronda",
   "ROUNDS": "Rondas",
   "ACCUMULATED_POWER": "Poder acumulado total.",
   "CONTRIBUTED_POWER": "de poder aportado.",
   "ADDED_POWER": "Poder agregado",
   "IN_PROGRESS": "En progreso",
+  "PENDING": "Pendiente",
   "MADE_WITH": "Hecho con",
   "BY": "por",
   "WHAT_IS_LN_ADDRESS": "¿Qué es Lightning Address?",
@@ -145,5 +147,10 @@
   "POWER": "Poder",
   "TICKET": "Ticket",
   "AND": "y",
-  "INSCRIPTION_CLOSED_TEXT": "Lista de participantes cerrada. Esperando calendario de rondas."
+  "INSCRIPTION_CLOSED_TEXT": "Lista de participantes cerrada. Esperando calendario de rondas.",
+  "MASSACRE_IN": "Massacre en",
+  "NEXT_IN": "Próxima en",
+  "DISTRIBUTED_POWER": "de poder distribuido",
+  "ALIVES": "Vivos",
+  "POWER_LOCKED_DISTANCE": "Poder freezado a 2 bloques de distancia."
 }
