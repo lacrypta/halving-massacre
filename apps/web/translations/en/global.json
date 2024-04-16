@@ -145,5 +145,10 @@
   "POWER": "Power",
   "TICKET": "Ticket",
   "AND": "and",
-  "INSCRIPTION_CLOSED_TEXT": "Players inscription closed. Waiting for rounds schedule."
+  "INSCRIPTION_CLOSED_TEXT": "Players inscription closed. Waiting for rounds schedule.",
+  "MASSACRE_AT": "Massacre at",
+  "NEXT_ROUND": "Next in",
+  "HOURS_LONG": "hours",
+  "MINUTES_LONG": "minutes",
+  "ROUND": "Round"
 }
