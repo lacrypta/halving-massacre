@@ -5,19 +5,61 @@ import { appTheme } from '../../../../config/exports';
 
 import { AutoAvatar } from '../AutoAvatar';
 import { Icon } from '../Icon';
-import { Bolt, Shield } from '../Icons';
+import { Bolt, Shield, Skull } from '../Icons';
 
 import { RankingListStyle, ItemStyle, NumberStyle, WaliasStyle, ValueStyle } from './style';
 import { formatAmount } from '../../../../lib/utils';
 import type { PlayersPower } from '../../../../types/power';
 
 interface RankingListProps {
+  type?: 'global' | 'massacre' | 'in-game' | 'finished';
+  newValue?: number;
   players: PlayersPower;
-  type?: 'global' | 'massacre';
 }
 
 export function RankingList(props: RankingListProps) {
-  const { players, type = 'global' } = props;
+  const { players, type = 'global', newValue = 0 } = props;
+
+  const renderValueByType = (value: string, walias: string) => {
+    switch (value) {
+      case 'global':
+        return (
+          <>
+            <ValueStyle>
+              <Text color={appTheme.colors.success}>{formatAmount(players[walias]!) || '21'}</Text>
+            </ValueStyle>
+            <Icon size={4}>
+              <Shield color={appTheme.colors.success} />
+            </Icon>
+          </>
+        );
+        break;
+      case 'massacre':
+        return (
+          <>
+            <ValueStyle>
+              <Text color={appTheme.colors.gray50}>{formatAmount(players[walias]!) || '21'}</Text>
+            </ValueStyle>
+            <Icon size={4}>
+              <Skull color={appTheme.colors.gray50} />
+            </Icon>
+          </>
+        );
+        break;
+      case 'finished':
+        return (
+          <>
+            <ValueStyle>
+              <Text color={appTheme.colors.success}>+{formatAmount(newValue)}</Text>
+            </ValueStyle>
+            <Icon size={4}>
+              <Shield color={appTheme.colors.success} />
+            </Icon>
+          </>
+        );
+        break;
+    }
+  };
 
   return (
     <RankingListStyle>
@@ -41,14 +83,7 @@ export function RankingList(props: RankingListProps) {
                     </Flex>
                   </Flex>
                   <Flex align="center" flex={0} gap={4}>
-                    <ValueStyle>
-                      <Text color={type === 'global' ? appTheme.colors.success : appTheme.colors.error}>
-                        {formatAmount(players[walias]!) || '21'}
-                      </Text>
-                    </ValueStyle>
-                    <Icon size={4}>
-                      <Shield color={type === 'global' ? appTheme.colors.success : appTheme.colors.error} />
-                    </Icon>
+                    {renderValueByType(type, walias)}
                   </Flex>
                 </Flex>
               </Link>

@@ -34,7 +34,7 @@ export const TabStyle = styled.div<TabStyleProps>`
 
     border-radius: 8px;
 
-    color: ${appTheme.colors.text};
+    color: ${appTheme.colors.primary};
 
     :not(:disabled) {
       &:hover {

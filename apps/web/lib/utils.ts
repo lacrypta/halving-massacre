@@ -2,8 +2,8 @@ import { validateEvent, type Event, type Relay, relayInit } from 'nostr-tools';
 import type { ZapReceiptWithCommitment } from '../types/zap';
 
 import { decode as decodeBolt11 } from 'bolt11';
-import { NIP05_REGEX } from 'nostr-tools/nip05';
-import type { LNRequestResponse } from '@lawallet/utils/types';
+import type { MassacreRound } from '../types/massacre';
+import type { Round } from '../types/round';
 import type { PlayersPower } from '../types/power';
 
 export function removeObjectKeys(
@@ -87,6 +87,36 @@ export const formatAmount = (_amount: number): String => {
   const amount = _amount / 1000;
   return amount > 9999 ? (amount / 1000).toFixed(1) + 'K' : String(amount);
 };
+
+/**
+ * Gets current round or returns null if no round is found
+ * @param rounds Should be sorted by height asc
+ * @param currentBlock
+ * @returns
+ */
+export function getCurrentRound(rounds: MassacreRound[], currentBlock: number): MassacreRound | null {
+  // Find current round
+  for (let index = 0; index < rounds.length; index++) {
+    if (currentBlock < rounds[index]!.height) {
+      return { ...rounds[index]!, index };
+    }
+  }
+
+  return null;
+}
+
+export function generateRoundsList(rounds: MassacreRound[], currentBlock: number): Round[] {
+  const currentRound = getCurrentRound(rounds, currentBlock);
+
+  return rounds.map((round, k) => {
+    const finished = currentBlock >= round.height;
+    return {
+      round: k,
+      block: round.height,
+      status: k === currentRound?.index ? 'ACTUAL' : finished ? 'FINISHED' : 'PENDING',
+    };
+  });
+}
 
 export function getTopPlayers(players: PlayersPower, count: number = 100): PlayersPower {
   // Convert the object into an array of its entries

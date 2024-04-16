@@ -22,6 +22,7 @@ import '@lawallet/ui/styles';
 // Config
 import { mockConfig } from '@/../config/mock';
 import { Suspense } from 'react';
+import { RoundsProvider } from './RoundsContext';
 
 const MASSACRE_SETUP_ID = process.env.NEXT_PUBLIC_MASSACRE_SETUP_ID!;
 const nostrConfig = mockConfig as unknown as ConfigProps;
@@ -38,10 +39,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         <Suspense>
           <ProfileCacheProvider>
             <MassacreProvider setupId={MASSACRE_SETUP_ID}>
-              <NotificationsProvider>
-                {EMERGENCY_LOCK_SERVER ? <EmergencyLock message={EMERGENCY_LOCK_SERVER_DISCLAIMER || ''} /> : children}
-                <Footer />
-              </NotificationsProvider>
+              <RoundsProvider>
+                <NotificationsProvider>
+                  {EMERGENCY_LOCK_SERVER ? (
+                    <EmergencyLock message={EMERGENCY_LOCK_SERVER_DISCLAIMER || ''} />
+                  ) : (
+                    children
+                  )}
+                  <Footer />
+                </NotificationsProvider>
+              </RoundsProvider>
             </MassacreProvider>
           </ProfileCacheProvider>
         </Suspense>

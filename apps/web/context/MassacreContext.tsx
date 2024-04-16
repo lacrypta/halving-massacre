@@ -3,7 +3,6 @@ import type { Event } from 'nostr-tools';
 import { createContext, useEffect, useState } from 'react';
 import type { MassacreStatusEventContent } from '../types/massacre';
 import type { NDKKind } from '../types/ndk';
-import { getTopPlayers } from '../lib/utils';
 
 export const PUBLISHER_PUBKEY = process.env.NEXT_PUBLIC_PUBLISHER_PUBKEY!;
 export interface MassacreContextType extends MassacreStatusEventContent {
@@ -33,8 +32,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     nextFreeze: 0,
     nextMassacre: 0,
     status: 'SETUP',
-    roundLength: 0,
-    freezeDuration: 0,
+    buckets: [],
   });
   const { events: setupEvents, subscription: setupSubscription } = useSubscription({
     filters: [
@@ -105,6 +103,10 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
       }
     };
   }, [stateSubscription]);
+
+  // MOCK
+  status.status = 'NORMAL';
+  status.currentBlock = 839380;
 
   const value = {
     setupId,
