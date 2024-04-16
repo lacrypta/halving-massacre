@@ -81,7 +81,7 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
         '#l': ['start'],
       },
     ],
-    enabled: false && !!setupId,
+    enabled: !!setupId,
     options: {
       closeOnEose: false,
     },
@@ -93,7 +93,7 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
       return;
     }
 
-    const _rounds = JSON.parse(startEvents[0]?.content as string) as MassacreRound[];
+    const _rounds = JSON.parse(startEvents[0]?.content as string).massacreSchedule as MassacreRound[];
 
     _rounds.sort((a, b) => a.height - b.height);
     setRounds(_rounds);
