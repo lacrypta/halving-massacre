@@ -22,5 +22,5 @@ export interface MassacreRound {
   height: number;
   survivors: number;
   freezeHeight: number;
-  nextMassacre: number;
+  nextMassacre: number | null;
 }
