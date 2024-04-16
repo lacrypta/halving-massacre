@@ -96,8 +96,10 @@ export default function Countdown() {
               <Icon size={6}>
                 <Loader />
               </Icon>
-            ) : (
+            ) : status === 'SETUP' ? (
               t('INSCRIPTION_NOW')
+            ) : (
+              t('ADD_POWER')
             )}
           </Button>
         </Flex>
