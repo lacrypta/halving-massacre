@@ -1,3 +1,5 @@
+import type { PlayersPower } from './power';
+
 export type RoundStatus = 'FINISHED' | 'ACTUAL' | 'PENDING';
 
 export interface Round {
@@ -13,4 +15,14 @@ export interface UserRound {
   powerIncrease: number;
   accumulatedPower: number;
   finished: boolean;
+}
+
+export interface RoundEventContent {
+  block: {
+    id: string;
+    header: string;
+    height: number;
+  };
+  players: PlayersPower;
+  deadPlayers: PlayersPower;
 }

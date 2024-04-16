@@ -2,16 +2,18 @@ import { createContext, useEffect, useMemo, useState } from 'react';
 
 import { PUBLISHER_PUBKEY } from './MassacreContext';
 
+import { parseContent, useNostrContext, useSubscription } from '@lawallet/react';
 import { useMassacre } from '../hooks/useMassacre';
-import { useSubscription } from '@lawallet/react';
 
-import type { NDKKind } from '../types/ndk';
-import type { MassacreRound } from '../types/massacre';
 import { getCurrentRound } from '../lib/utils';
+import type { MassacreRound } from '../types/massacre';
+import type { NDKKind } from '../types/ndk';
+import type { RoundEventContent } from '../types/round';
 
 interface RoundsContextType {
   rounds: MassacreRound[];
   currentRound: MassacreRound | null;
+  getMassacreByRoundIndex: (roundIndex: number) => Promise<RoundEventContent | null>;
 }
 
 export const RoundsContext = createContext({} as RoundsContextType);
@@ -87,6 +89,23 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
     },
   });
 
+  const { ndk } = useNostrContext();
+
+  const getMassacreByRoundIndex = async (roundIndex: number): Promise<RoundEventContent | null> => {
+    if (currentBlock < rounds[roundIndex]!.height) return null;
+
+    const roundEvent = await ndk.fetchEvent({
+      authors: [PUBLISHER_PUBKEY],
+      kinds: [1112 as NDKKind],
+      '#e': [setupId],
+      '#t': [`round:${roundIndex}`],
+    });
+
+    if (!roundEvent) return null;
+
+    return parseContent(roundEvent.content) as RoundEventContent;
+  };
+
   // Set rounds on start event
   useEffect(() => {
     if (startEvents.length < 1) {
@@ -118,6 +137,7 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
       value={{
         rounds,
         currentRound,
+        getMassacreByRoundIndex,
       }}
     >
       {children}

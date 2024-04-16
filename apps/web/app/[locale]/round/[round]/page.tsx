@@ -2,7 +2,7 @@
 
 // Libraries
 import { Divider, Container, Heading, Text, Flex } from '@lawallet/ui';
-import { useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 // Theme
 import { appTheme } from '../../../../config/exports';
@@ -22,7 +22,7 @@ import { Navbar } from '../../components/Navbar';
 import { GameTime } from '@/[locale]/components/GameTime';
 import { RankingList } from '@/[locale]/components/RankingList';
 import { useTranslations } from 'next-intl';
-import type { RoundStatus } from '../../../../types/round';
+import type { RoundEventContent, RoundStatus } from '../../../../types/round';
 import { RoundsContext } from '../../../../context/RoundsContext';
 
 interface PageProps {
@@ -38,11 +38,13 @@ export default function Page({ params }: PageProps): JSX.Element {
 
   // Context
   const { players } = useMassacre();
-  const { currentRound, rounds } = useContext(RoundsContext);
+  const { currentRound, rounds, getMassacreByRoundIndex } = useContext(RoundsContext);
   const { currentBlock } = useMassacre();
 
   // Mocks
   const [nameTab, setNameTab] = useState<string>('alive');
+
+  const [massacreRound, setMassacreRound] = useState<RoundEventContent | null>(null);
 
   const roundStatus: RoundStatus = useMemo(() => {
     if (!currentRound) {
@@ -50,6 +52,15 @@ export default function Page({ params }: PageProps): JSX.Element {
     }
     return currentRound.index === round ? 'ACTUAL' : currentBlock < rounds[round]!.height ? 'PENDING' : 'FINISHED';
   }, [currentRound, round, rounds, currentBlock]);
+
+  const getMassacre = useCallback(async () => {
+    const massacre = await getMassacreByRoundIndex(round);
+    setMassacreRound(massacre);
+  }, [round, roundStatus]);
+
+  useEffect(() => {
+    if (roundStatus === 'FINISHED') getMassacre();
+  }, [round, roundStatus]);
 
   const handleChangeTab = (value: string) => {
     setNameTab(value);
@@ -108,10 +119,10 @@ export default function Page({ params }: PageProps): JSX.Element {
                 </TabList>
                 <TabPanels>
                   <TabPanel show={nameTab === 'alive'}>
-                    <RankingList players={players || {}} type={'finished'} newValue={5000000} />
+                    <RankingList players={massacreRound?.players || {}} type={'finished'} newValue={5000000} />
                   </TabPanel>
                   <TabPanel show={nameTab === 'massacre'}>
-                    <RankingList players={players || {}} type="massacre" />
+                    <RankingList players={massacreRound?.deadPlayers || {}} type="massacre" />
                   </TabPanel>
                 </TabPanels>
               </Tabs>
