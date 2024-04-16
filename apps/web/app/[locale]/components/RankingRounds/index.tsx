@@ -1,6 +1,9 @@
 // React
 import { useContext, useMemo } from 'react';
 
+// Types
+import type { RoundStatus } from '../../../../types/round';
+
 // Libraries
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -15,17 +18,9 @@ import { Shield, ArrowRight, Sword, SackSats } from '../Icons';
 
 // Style
 import { RankingRoundsStyle, ItemStyle, IconStyle } from './style';
-import { RoundsContext, getCurrentRound } from '../../../../context/RoundsContext';
-import type { MassacreRound } from '../../../../types/massacre';
+import { RoundsContext } from '../../../../context/RoundsContext';
 import { useMassacre } from '../../../../hooks/useMassacre';
-
-interface Round {
-  round: number;
-  block: number;
-  status: RoundStatus;
-}
-
-type RoundStatus = 'FINISHED' | 'ACTUAL' | 'PENDING';
+import { generateRoundsList } from '../../../../lib/utils';
 
 export function RankingRounds() {
   const { rounds } = useContext(RoundsContext);
@@ -100,17 +95,4 @@ export function RankingRounds() {
       })}
     </RankingRoundsStyle>
   );
-}
-
-function generateRoundsList(rounds: MassacreRound[], currentBlock: number): Round[] {
-  const currentRound = getCurrentRound(rounds, currentBlock);
-
-  return rounds.map((round, k) => {
-    const finished = currentBlock >= round.height;
-    return {
-      round: k,
-      block: round.height,
-      status: k === currentRound?.index ? 'ACTUAL' : finished ? 'FINISHED' : 'PENDING',
-    };
-  });
 }
