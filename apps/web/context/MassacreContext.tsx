@@ -3,7 +3,6 @@ import type { Event } from 'nostr-tools';
 import { createContext, useEffect, useState } from 'react';
 import type { MassacreStatusEventContent } from '../types/massacre';
 import type { NDKKind } from '../types/ndk';
-import { getTopPlayers } from '../lib/utils';
 
 export const PUBLISHER_PUBKEY = process.env.NEXT_PUBLIC_PUBLISHER_PUBKEY!;
 export interface MassacreContextType extends MassacreStatusEventContent {
