@@ -44,7 +44,7 @@ export default function Page(): JSX.Element {
         <Flex direction="column" gap={8}>
           <Flex direction="row" gap={8}>
             <Card animation={<Crown />}>
-              <Heading as="h2">4-7</Heading>
+              <Heading as="h2">4</Heading>
               <Text color={appTheme.colors.gray50}>{t('WINNERS')}.</Text>
             </Card>
             <Card animation={<Rocket />}>
