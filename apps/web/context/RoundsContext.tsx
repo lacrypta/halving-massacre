@@ -7,6 +7,7 @@ import { useSubscription } from '@lawallet/react';
 
 import type { NDKKind } from '../types/ndk';
 import type { MassacreRound } from '../types/massacre';
+import { getCurrentRound } from '../lib/utils';
 
 interface RoundsContextType {
   rounds: MassacreRound[];
@@ -98,21 +99,4 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
       {children}
     </RoundsContext.Provider>
   );
-}
-
-/**
- * Gets current round or returns null if no round is found
- * @param rounds Should be sorted by height asc
- * @param currentBlock
- * @returns
- */
-export function getCurrentRound(rounds: MassacreRound[], currentBlock: number): MassacreRound | null {
-  // Find current round
-  for (let index = 0; index < rounds.length; index++) {
-    if (currentBlock < rounds[index]!.height) {
-      return { ...rounds[index]!, index };
-    }
-  }
-
-  return null;
 }
