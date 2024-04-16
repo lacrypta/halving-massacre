@@ -105,8 +105,8 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
   }, [stateSubscription]);
 
   // MOCK
-  status.status = 'NORMAL';
-  status.currentBlock = 839380;
+  // status.status = 'NORMAL';
+  // status.currentBlock = 839380;
 
   const value = {
     setupId,
