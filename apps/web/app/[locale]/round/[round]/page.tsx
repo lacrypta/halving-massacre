@@ -104,10 +104,10 @@ export default function Page({ params }: PageProps): JSX.Element {
                 </TabList>
                 <TabPanels>
                   <TabPanel show={nameTab === 'alive'}>
-                    <RankingList players={players} type={'finished'} newValue={5000000} />
+                    <RankingList players={players || {}} type={'finished'} newValue={5000000} />
                   </TabPanel>
                   <TabPanel show={nameTab === 'massacre'}>
-                    <RankingList players={players} type="massacre" />
+                    <RankingList players={players || {}} type="massacre" />
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -128,7 +128,7 @@ export default function Page({ params }: PageProps): JSX.Element {
               )}
 
               <Divider y={16} />
-              <RankingList players={players} type={'global'} />
+              <RankingList players={players || {}} type={'global'} />
             </>
           )}
         </Container>
