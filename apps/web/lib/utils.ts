@@ -4,6 +4,7 @@ import type { ZapReceiptWithCommitment } from '../types/zap';
 import { decode as decodeBolt11 } from 'bolt11';
 import type { MassacreRound } from '../types/massacre';
 import type { Round } from '../types/round';
+import type { PlayersPower } from '../types/power';
 
 export function removeObjectKeys(
   obj1: { [key: string]: number },
@@ -115,4 +116,20 @@ export function generateRoundsList(rounds: MassacreRound[], currentBlock: number
       status: k === currentRound?.index ? 'ACTUAL' : finished ? 'FINISHED' : 'PENDING',
     };
   });
+}
+
+export function getTopPlayers(players: PlayersPower, count: number = 100): PlayersPower {
+  // Convert the object into an array of its entries
+  const entries = Object.entries(players);
+
+  // Slice the first 100 entries
+  const firstEntries = entries.slice(0, count);
+
+  // Convert the array back into an object
+  const firstPlayers: PlayersPower = {};
+  for (const [key, value] of firstEntries) {
+    firstPlayers[key] = value;
+  }
+
+  return firstPlayers;
 }

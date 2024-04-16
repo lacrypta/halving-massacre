@@ -5,3 +5,7 @@ export interface Power {
   createdAt: number; // Timestamp
   id: string; // Timestamp
 }
+
+export interface PlayersPower {
+  [walias: string]: number;
+}

@@ -9,11 +9,12 @@ import { Bolt, Shield, Skull } from '../Icons';
 
 import { RankingListStyle, ItemStyle, NumberStyle, WaliasStyle, ValueStyle } from './style';
 import { formatAmount } from '../../../../lib/utils';
+import type { PlayersPower } from '../../../../types/power';
 
 interface RankingListProps {
-  players: any;
   type?: 'global' | 'massacre' | 'in-game' | 'finished';
   newValue?: number;
+  players: PlayersPower;
 }
 
 export function RankingList(props: RankingListProps) {

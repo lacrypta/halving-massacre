@@ -24,6 +24,7 @@ import Treasury from '../components/TreasuryAnimation';
 import { RankingList } from '../components/RankingList';
 import { GameTime } from '../components/GameTime';
 import { RankingRounds } from '../components/RankingRounds';
+import { getTopPlayers } from '../../../lib/utils';
 
 interface PageProps {
   params: {
@@ -37,8 +38,9 @@ export default function Page({ params }: PageProps): JSX.Element {
   const locale = useLocale() as AvailableLanguages;
 
   // Context
-  const { top100Players: players, currentPool } = useMassacre();
+
   const { rounds } = useContext(RoundsContext);
+  const { players, currentPool } = useMassacre();
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
   const totalPrice = formatAmount(currentPool / 1000);
 
@@ -83,7 +85,7 @@ export default function Page({ params }: PageProps): JSX.Element {
           <TabPanels>
             <TabPanel show={nameTab === 'global'}>
               <Divider y={16} />
-              <RankingList players={players} />
+              <RankingList players={getTopPlayers(players!, 100)} />
             </TabPanel>
             <TabPanel show={nameTab === 'rounds'}>
               <Divider y={16} />

@@ -3,6 +3,7 @@ import type { Event } from 'nostr-tools';
 import { createContext, useEffect, useState } from 'react';
 import type { MassacreStatusEventContent } from '../types/massacre';
 import type { NDKKind } from '../types/ndk';
+import { getTopPlayers } from '../lib/utils';
 
 export const PUBLISHER_PUBKEY = process.env.NEXT_PUBLIC_PUBLISHER_PUBKEY!;
 export interface MassacreContextType extends MassacreStatusEventContent {
@@ -26,8 +27,9 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
   const [status, setStatus] = useState<MassacreStatusEventContent>({
     currentBlock: 0,
     currentPool: 2200000000,
-    top100Players: {},
     playerCount: 0,
+    players: {},
+    top100Players: {},
     nextFreeze: 0,
     nextMassacre: 0,
     status: 'SETUP',
@@ -79,9 +81,9 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
 
     const stateEvent = stateEvents.sort((a, b) => b.created_at! - a.created_at!)[0] as Event;
     const status = JSON.parse(stateEvent.content) as MassacreStatusEventContent;
-    console.info('!!!!!!! status !!!!!!!');
-    console.dir(stateEvent);
-    console.dir(status);
+
+    // Detect if players is empty and use top100Players instead
+    status.players = Object.keys(status.players || {}).length ? status.players : status.top100Players || {};
     setStatus(status);
   }, [stateEvents]);
 
