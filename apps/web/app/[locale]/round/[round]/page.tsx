@@ -64,11 +64,13 @@ export default function Page({ params }: PageProps): JSX.Element {
         <Container size="small">
           <Flex align="center">
             <Flex direction="column">
-              <Heading>Ronda {round + 1}</Heading>
+              <Heading>
+                {t('ROUND')} {round + 1}
+              </Heading>
               <Text color={appTheme.colors.gray50}>#{rounds[round]?.height}</Text>
             </Flex>
             <Badge color={roundStatus === 'FINISHED' ? 'success' : 'warning'}>
-              {roundStatus === 'FINISHED' ? t('FINISHED') : roundStatus === 'ACTUAL' ? t('IN_PROGRESS') : 'Pendiente'}
+              {roundStatus === 'FINISHED' ? t('FINISHED') : roundStatus === 'ACTUAL' ? t('IN_PROGRESS') : t('PENDING')}
             </Badge>
           </Flex>
         </Container>
@@ -92,7 +94,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                     >
                       150.000
                     </Heading>
-                    <Text color={appTheme.colors.gray50}>de poder distribuido.</Text>
+                    <Text color={appTheme.colors.gray50}>{t('DISTRIBUTED_POWER')}.</Text>
                   </Flex>
                 </Flex>
               </Card>
@@ -100,10 +102,10 @@ export default function Page({ params }: PageProps): JSX.Element {
               <Tabs>
                 <TabList>
                   <Tab active={nameTab === 'alive'} onClick={() => handleChangeTab('alive')}>
-                    Vivos
+                    {t('ALIVES')}
                   </Tab>
                   <Tab active={nameTab === 'massacre'} onClick={() => handleChangeTab('massacre')}>
-                    Masacrados
+                    {t('MASSACRATEDS')}
                   </Tab>
                 </TabList>
                 <TabPanels>
@@ -126,7 +128,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                   </Icon>
 
                   <Text size="small" color={appTheme.colors.gray50} align="center">
-                    Poder freezado a 2 <br /> bloques de distancia.
+                    {t('POWER_LOCKED_DISTANCE')}
                   </Text>
                 </Flex>
               )}

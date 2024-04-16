@@ -7,13 +7,14 @@ import { useContext, useMemo } from 'react';
 import { RoundsContext } from '../../../../context/RoundsContext';
 import { useMassacre } from '../../../../hooks/useMassacre';
 import { useFormatter } from '@lawallet/react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { AvailableLanguages } from '@lawallet/utils/types';
 
 export function GameTime() {
   const { currentBlock, status } = useMassacre();
   const { currentRound } = useContext(RoundsContext);
   const locale = useLocale() as AvailableLanguages;
+  const t = useTranslations();
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
@@ -42,16 +43,20 @@ export function GameTime() {
           <Flex flex={1} justify="space-between" align="center" gap={16}>
             <Flex direction="column">
               <Heading as="h4" color={appTheme.colors.warning}>
-                Ronda {round! + 1}
+                {t('ROUND')} {round! + 1}
                 {status === 'FREEZE' && ' - Freezado'}
               </Heading>
               <Flex align="center" gap={4}>
-                {currentRound && <Text size="small">Massacre en #{formatAmount(currentRound!.height)}</Text>}
+                {currentRound && (
+                  <Text size="small">
+                    {t('MASSACRE_IN')} #{formatAmount(currentRound!.height)}
+                  </Text>
+                )}
               </Flex>
             </Flex>
             {time && (
               <Flex direction="column" align="end">
-                <Text>Próxima en:</Text>
+                <Text>{t('NEXT_IN')}:</Text>
                 <Flex align="center" justify="end" gap={4}>
                   <Heading as="h4" color={appTheme.colors.warning}>
                     ~ {formatTime(time!)}
@@ -67,5 +72,5 @@ export function GameTime() {
 }
 
 function formatTime(min: number): string {
-  return min > 120 ? `${(min / 60).toFixed(0)} horas` : `${min} minutos`;
+  return min > 120 ? `${(min / 60).toFixed(0)} hrs` : `${min} min`;
 }
