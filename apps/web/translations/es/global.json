@@ -145,5 +145,10 @@
   "POWER": "Poder",
   "TICKET": "Ticket",
   "AND": "y",
-  "INSCRIPTION_CLOSED_TEXT": "Lista de participantes cerrada. Esperando calendario de rondas."
+  "INSCRIPTION_CLOSED_TEXT": "Lista de participantes cerrada. Esperando calendario de rondas.",
+  "MASSACRE_AT": "Massacre en",
+  "NEXT_ROUND": "Próxima en",
+  "HOURS_LONG": "horas",
+  "MINUTES_LONG": "minutos",
+  "ROUND": "Ronda"
 }
