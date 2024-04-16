@@ -105,7 +105,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
   }, [stateSubscription]);
 
   // MOCK
-  status.status = 'CLOSED';
+  // status.status = 'CLOSED';
   // status.currentBlock = 839380;
 
   const value = {
