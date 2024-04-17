@@ -21,9 +21,11 @@ import { Tab, TabList, Tabs, TabPanel, TabPanels } from '@/[locale]/components/T
 import { Navbar } from '../../components/Navbar';
 import { GameTime } from '@/[locale]/components/GameTime';
 import { RankingList } from '@/[locale]/components/RankingList';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { RoundEventContent, RoundStatus } from '../../../../types/round';
 import { RoundsContext } from '../../../../context/RoundsContext';
+import { useFormatter } from '@lawallet/react';
+import type { AvailableLanguages } from '@lawallet/utils/types';
 
 interface PageProps {
   params: {
@@ -31,8 +33,12 @@ interface PageProps {
   };
 }
 
+type MassacreRoundType = (RoundEventContent & { totalDistributedPower: number }) | null;
+
 export default function Page({ params }: PageProps): JSX.Element {
   const t = useTranslations();
+  const locale = useLocale() as AvailableLanguages;
+  const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
   const round = parseInt(decodeURIComponent(params.round));
 
@@ -44,7 +50,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   // Mocks
   const [nameTab, setNameTab] = useState<string>('alive');
 
-  const [massacreRound, setMassacreRound] = useState<RoundEventContent | null>(null);
+  const [massacreRound, setMassacreRound] = useState<MassacreRoundType>(null);
 
   const roundStatus: RoundStatus = useMemo(() => {
     if (!currentRound) {
@@ -55,7 +61,11 @@ export default function Page({ params }: PageProps): JSX.Element {
 
   const getMassacre = useCallback(async () => {
     const massacre = await getMassacreByRoundIndex(round);
-    setMassacreRound(massacre);
+    if (massacre)
+      setMassacreRound({
+        ...massacre,
+        totalDistributedPower: (massacre.delta / 1000) * Object.keys(massacre.deadPlayers).length,
+      });
   }, [round, roundStatus]);
 
   useEffect(() => {
@@ -103,7 +113,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                       as="h4"
                       color={roundStatus === 'FINISHED' ? appTheme.colors.success : appTheme.colors.warning}
                     >
-                      150.000
+                      {formatAmount(massacreRound?.totalDistributedPower || 0)}
                     </Heading>
                     <Text color={appTheme.colors.gray50}>{t('DISTRIBUTED_POWER')}.</Text>
                   </Flex>
@@ -121,7 +131,11 @@ export default function Page({ params }: PageProps): JSX.Element {
                 </TabList>
                 <TabPanels>
                   <TabPanel show={nameTab === 'alive'}>
-                    <RankingList players={massacreRound?.players || {}} type={'finished'} newValue={massacreRound?.delta || 0} />
+                    <RankingList
+                      players={massacreRound?.players || {}}
+                      type={'finished'}
+                      newValue={massacreRound?.delta || 0}
+                    />
                   </TabPanel>
                   <TabPanel show={nameTab === 'massacre'}>
                     <RankingList players={massacreRound?.deadPlayers || {}} type="massacre" />
