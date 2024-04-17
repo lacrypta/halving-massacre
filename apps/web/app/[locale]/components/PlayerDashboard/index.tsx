@@ -44,6 +44,12 @@ const EMERGENCY_LOCK_POWER = process.env.EMERGENCY_LOCK_POWER === 'true';
 
 const closedPowerStatuses: MassacreStatus[] = ['FREEZE', 'FINAL'];
 
+const powerActionVariants = {
+  LIGHTNING: <Bolt color={appTheme.colors.primary} />,
+  MASSACRE: <Shield color={appTheme.colors.success} />,
+  // ONCHAIN: <Bitcoin color={appTheme.colors.warning15} />,
+};
+
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
   const { hasTicket } = usePlayer(); // TODO: return totalPower
@@ -221,7 +227,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
                   return (
                     <CSSTransition key={powerEvent.id} timeout={550} classNames="fade">
                       <ItemTxs
-                        icon={<Bolt color={appTheme.colors.primary} />}
+                        icon={powerActionVariants[powerEvent.type! as keyof typeof powerActionVariants]}
                         text={t('ADDED_POWER')}
                         type="power"
                         value={powerEvent.amount}
