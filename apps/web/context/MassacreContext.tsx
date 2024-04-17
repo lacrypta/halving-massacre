@@ -1,14 +1,16 @@
 import { useSubscription } from '@lawallet/react';
 import type { Event } from 'nostr-tools';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import type { MassacreStatusEventContent } from '../types/massacre';
 import type { NDKKind } from '../types/ndk';
+import type { PlayersPower, PlayersPowerWithDead } from '../types/power';
 
 export const PUBLISHER_PUBKEY = process.env.NEXT_PUBLIC_PUBLISHER_PUBKEY!;
 export interface MassacreContextType extends MassacreStatusEventContent {
   playerCount: number;
   setupId: string;
   publisherPubkey: string;
+  top100WithDead: PlayersPowerWithDead;
 }
 
 export interface MassacreSetup {
@@ -28,6 +30,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     currentPool: 2200000000,
     playerCount: 0,
     players: {},
+    deadPlayers: {},
     top100Players: {},
     nextFreeze: 0,
     nextMassacre: 0,
@@ -104,6 +107,23 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     };
   }, [stateSubscription]);
 
+  const top100WithDead: PlayersPowerWithDead = useMemo(() => {
+    const alivePlayers: PlayersPowerWithDead = Object.fromEntries(
+      Object.entries(status.players || {}).map(([walias, power]) => [walias, { power, isAlive: true }]),
+    );
+    const deadPlayers: PlayersPowerWithDead = Object.fromEntries(
+      Object.entries(status.deadPlayers || {}).map(([walias, power]) => [walias, { power, isAlive: false }]),
+    );
+
+    const list: PlayersPowerWithDead = { ...alivePlayers, ...deadPlayers };
+
+    return Object.fromEntries(
+      Object.entries(list)
+        .sort((a, b) => b[1].power - a[1].power)
+        .slice(0, 100),
+    );
+  }, [status.players, status.deadPlayers]);
+
   // MOCK
   // status.status = 'CLOSED';
   // status.currentBlock = 839380;
@@ -112,6 +132,7 @@ export function MassacreProvider({ setupId, children }: { setupId: string } & Re
     setupId,
     setup,
     publisherPubkey: PUBLISHER_PUBKEY,
+    top100WithDead,
     ...status,
   };
 
