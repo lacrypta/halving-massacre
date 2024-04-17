@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { NDKKind } from '../types/ndk';
 import type { Power } from '../types/power';
 import { useMassacre } from './useMassacre';
-import { useSubscription } from '@lawallet/react';
+import { parseContent, useSubscription } from '@lawallet/react';
 import type { Event } from 'nostr-tools';
 
 interface UsePowerEventsReturns {
@@ -19,7 +19,7 @@ type UsePowerEventsProps = {
 
 export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): UsePowerEventsReturns => {
   const [powerEventsDeduplicated, setPowerEventsDeduplicated] = useState<Event[]>([]);
-  const { setupId, publisherPubkey } = useMassacre();
+  const { setupId, publisherPubkey, players } = useMassacre();
   const filters = {
     kinds: [1112 as NDKKind],
     '#l': ['power-receipt'],
@@ -43,9 +43,21 @@ export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): Use
   });
 
   useEffect(() => {
-    const deduplicated = Object.values(Object.fromEntries(_powerEvents.map((event) => [event.id, event as Event])));
-    setPowerEventsDeduplicated(deduplicated.sort((a, b) => b.created_at - a.created_at));
-  }, [_powerEvents]);
+    if (players) {
+      const filteredsPower = _powerEvents.filter((event) => {
+        if (
+          !Object.keys(players!).includes(walias) &&
+          parseContent(event.content)?.message === 'You survived! For now...'
+        )
+          return false;
+
+        return true;
+      });
+
+      const deduplicated = Object.values(Object.fromEntries(filteredsPower.map((event) => [event.id, event as Event])));
+      setPowerEventsDeduplicated(deduplicated.sort((a, b) => b.created_at - a.created_at));
+    }
+  }, [_powerEvents, players]);
 
   // Unsubscribe subscription on unmount
   useEffect(() => {
