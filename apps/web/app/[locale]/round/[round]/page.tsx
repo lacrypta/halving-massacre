@@ -88,7 +88,9 @@ export default function Page({ params }: PageProps): JSX.Element {
               <Heading>
                 {t('MASSACRE')} {round + 1}
               </Heading>
-              <Text color={appTheme.colors.gray50}>#{rounds[round]?.height}</Text>
+              {(rounds || rounds[round]) && (
+                <Text color={appTheme.colors.gray50}>#{formatAmount(rounds[round]?.height || 0)}</Text>
+              )}
             </Flex>
             <Badge color={roundStatus === 'FINISHED' ? 'success' : 'warning'}>
               {roundStatus === 'FINISHED' ? t('FINISHED') : roundStatus === 'ACTUAL' ? t('IN_PROGRESS') : t('PENDING')}

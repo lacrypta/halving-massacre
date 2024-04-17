@@ -6,7 +6,8 @@ import type { RoundStatus } from '../../../../types/round';
 
 // Libraries
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useFormatter } from '@lawallet/react';
 import { Flex, Text } from '@lawallet/ui';
 
 // Theme
@@ -21,10 +22,13 @@ import { RankingRoundsStyle, ItemStyle, IconStyle } from './style';
 import { RoundsContext } from '../../../../context/RoundsContext';
 import { useMassacre } from '../../../../hooks/useMassacre';
 import { generateRoundsList } from '../../../../lib/utils';
+import type { AvailableLanguages } from '@lawallet/utils/types';
 
 export function RankingRounds() {
   const { rounds } = useContext(RoundsContext);
   const { currentBlock } = useMassacre();
+  const locale = useLocale() as AvailableLanguages;
+  const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
   // Generics
   const t = useTranslations();
@@ -83,7 +87,7 @@ export function RankingRounds() {
                       {t('MASSACRE')} {item.round + 1}
                     </Text>
                     <Text size="small" color={appTheme.colors.gray50}>
-                      #{item.block}
+                      #{formatAmount(item.block)}
                     </Text>
                   </Flex>
                 </Flex>
