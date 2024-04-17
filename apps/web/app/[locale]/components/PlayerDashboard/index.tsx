@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 // @lawallet/ui
 import { Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
@@ -51,22 +51,23 @@ const closedPowerStatuses: MassacreStatus[] = ['FREEZE', 'FINAL'];
 
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
-  const { hasTicket } = usePlayer(); // TODO: return totalPower
+  const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
   const { powerActions } = usePowerEvents({ walias });
   const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
-  const { status, buckets, players } = useMassacre();
+  const { status, buckets } = useMassacre();
 
   const t = useTranslations();
   const locale = useLocale() as AvailableLanguages;
 
-  const isAlive = useMemo(() => {
-    return players ? Object.hasOwn(players, walias) : true;
-  }, []);
+  // const isAlive = useMemo(() => {
+  //   return players ? Object.hasOwn(players, walias) : true;
+  // }, []);
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
-  const powerProgress =
-    (buckets.length > 0 && totalPower && smoothLimits(estimateSurvivalChance(buckets, totalPower) * 100)) || 0;
+  const powerProgress = useMemo(() => {
+    return (buckets.length > 0 && totalPower && smoothLimits(estimateSurvivalChance(buckets, totalPower) * 100)) || 0;
+  }, [buckets, totalPower]);
 
   // Mock data
   const positionNumber = 554;
