@@ -12,5 +12,6 @@ export { Twitter } from './Twitter';
 export { ArrowRight } from './ArrowRight';
 export { Snowflake } from './Snowflake';
 export { SackSats } from './SackSats';
+export { ArrowLeft } from './ArrowLeft';
 // Custom
 export { Loader } from './Loader';
