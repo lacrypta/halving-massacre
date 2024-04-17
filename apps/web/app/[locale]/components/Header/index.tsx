@@ -6,6 +6,9 @@ import { HeaderPrimitive } from './style';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ImageM1, ImageM2, ImageSubContainer, ImageSword, ImagesContainer } from './style';
+import { appTheme } from '../../../../config/exports';
+
+const version = '0.5.0';
 
 export default function Header() {
   const t = useTranslations();
@@ -56,7 +59,13 @@ export default function Header() {
         {/*Static image
            <Image width={240} height={77} alt="Halving Massacre by La Crypta" src={pngLogo.src} />
          */}
-        <Divider y={12} />
+        <Divider y={4} />
+        <Text size="small" color={appTheme.colors.gray35}>
+          v{version}
+        </Text>
+
+        <Divider y={4} />
+
         <Text align="center">{t('HEADER_DESC')}</Text>
         <Text align="center">{t('HEADER_DESC2')}</Text>
       </Flex>
