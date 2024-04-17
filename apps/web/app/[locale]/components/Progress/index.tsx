@@ -13,7 +13,7 @@ export default function Progress(props: ProgressProps) {
     <ProgressPrimitive>
       <Value $width={value} />
       <TextValue>
-        <Text isBold>{value}%</Text>
+        <Text isBold>{Number(value.toFixed(2))}%</Text>
       </TextValue>
     </ProgressPrimitive>
   );

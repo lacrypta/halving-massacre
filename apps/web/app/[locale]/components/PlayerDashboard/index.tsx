@@ -24,9 +24,6 @@ const targetDate: Date = new Date(NEXT_PUBLIC_TARGET_COUNTDOWN);
 
 import { appTheme } from '@/../config/exports';
 
-// Mock Data
-import { userRounds } from '@/../mocks/rounds';
-
 // Hooks
 import { usePlayer } from '@/../hooks/usePlayer';
 import { useFormatter, useProfile } from '@lawallet/react';
@@ -38,6 +35,8 @@ import { ItemTxs } from '../ItemTxs';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useMassacre } from '../../../../hooks/useMassacre';
 import type { MassacreStatus } from '../../../../types/massacre';
+import Progress from '../Progress';
+import { estimateSurvivalChance } from '../../../../lib/utils';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -55,16 +54,14 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
   const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
   const { powerActions } = usePowerEvents({ walias });
   const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
-  const { status } = useMassacre();
+  const { status, buckets } = useMassacre();
 
   const t = useTranslations();
   const locale = useLocale() as AvailableLanguages;
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
-  // const powerProgress = parseInt(Math.min(((power * 1000) / medianPower) * 100, 100).toFixed(2));
-
-  const [showTab, setTab] = useState('zapeos');
+  const powerProgress = (buckets.length > 0 && totalPower && estimateSurvivalChance(buckets, totalPower) * 100) || 0;
 
   // Mock data
   const positionNumber = 554;
@@ -145,12 +142,14 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
             )}
           </Flex>
           <>
-            {/* <Divider y={12} />
+            <Divider y={12} />
             <Text size="small" color={appTheme.colors.gray50}>
               Chances de sobrevivir la ronda
             </Text>
             <Divider y={8} />
-            <Progress value={powerProgress} /> */}
+            {powerProgress && (
+              <Progress value={powerProgress > 60 ? powerProgress * 0.95 : powerProgress < 2 ? 2 : powerProgress} />
+            )}
           </>
         </>
       ) : (
