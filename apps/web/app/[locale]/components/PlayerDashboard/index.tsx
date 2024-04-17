@@ -135,56 +135,59 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
         </>
       )}
 
-      <Divider y={12} />
-
-      {isAlive ? (
-        <>
-          <Flex gap={4}>
-            {hasTicket ? (
-              <>
-                <Badge color="primary">{t('PURCHASED_TICKET')}</Badge>
-                <Badge color="secondary">
-                  <strong>#{rankingPosition}</strong>
-                </Badge>
-              </>
-            ) : (
-              <Badge color="secondary">{t('NO_TICKET')}</Badge>
-            )}
-          </Flex>
-          <>
-            <Divider y={12} />
-            <Text size="small" color={appTheme.colors.gray50}>
-              {t('SURVIVAL_CHANCE')}
-            </Text>
-            <Divider y={8} />
-            {powerProgress > 0 && <Progress value={powerProgress} />}
-          </>
-        </>
+      {!hasTicket ? (
+        <Flex gap={4}>
+          <Text>{t('NOT_BUY_TICKET')}</Text>
+        </Flex>
       ) : (
         <>
-          <Card spacing={4} variant="filled">
-            <Flex align="center" gap={16}>
-              <Icon size={8}>
-                <Skull color={appTheme.colors.error} />
-              </Icon>
-              <Flex direction="column">
-                <Heading as="h4" color={appTheme.colors.error}>
-                  {t('MASSACRED')}
-                </Heading>
-                {/* <Text color={appTheme.colors.error}>
+          <Divider y={12} />
+          {isAlive ? (
+            <>
+              <Flex gap={4}>
+                {hasTicket ? (
+                  <>
+                    <Badge color="primary">{t('PURCHASED_TICKET')}</Badge>
+                    <Badge color="secondary">
+                      <strong>#{rankingPosition}</strong>
+                    </Badge>
+                  </>
+                ) : (
+                  <Badge color="secondary">{t('NO_TICKET')}</Badge>
+                )}
+              </Flex>
+              <>
+                <Divider y={12} />
+                <Text size="small" color={appTheme.colors.gray50}>
+                  {t('SURVIVAL_CHANCE')}
+                </Text>
+                <Divider y={8} />
+                {powerProgress > 0 && <Progress value={powerProgress} />}
+              </>
+            </>
+          ) : (
+            <>
+              <Card spacing={4} variant="filled">
+                <Flex align="center" gap={16}>
+                  <Icon size={8}>
+                    <Skull color={appTheme.colors.error} />
+                  </Icon>
+                  <Flex direction="column">
+                    <Heading as="h4" color={appTheme.colors.error}>
+                      {t('MASSACRED')}
+                    </Heading>
+                    {/* <Text color={appTheme.colors.error}>
                   {t('POSITION')} {`#${positionNumber}`}
                 </Text> */}
-                <Text size="small">{t('SHITCOINED')}</Text>
-              </Flex>
-            </Flex>
-          </Card>
-        </>
-      )}
-
-      <Divider y={12} />
-
-      {/* Mostrar en el caso de haber salido ganador */}
-      {/* <Card spacing={4} variant="filled">
+                    <Text size="small">{t('SHITCOINED')}</Text>
+                  </Flex>
+                </Flex>
+              </Card>
+            </>
+          )}
+          <Divider y={12} />
+          {/* Mostrar en el caso de haber salido ganador */}
+          {/* <Card spacing={4} variant="filled">
         <Flex align="center" gap={16}>
           <Icon size={8}>
             <Crown color={appTheme.colors.secondary} />
@@ -198,55 +201,57 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
         </Flex>
       </Card>
       <Divider y={12} /> */}
+          {/* Configurar para que al hacer click en la Tab se muestre el TabPanel correspondiente */}
+          {hasTicket ? (
+            <>
+              <Divider y={12} />
+              <Card spacing={4} variant="filled">
+                <Flex align="center" gap={16}>
+                  <Icon size={8}>
+                    <Shield color={appTheme.colors.success} />
+                  </Icon>
+                  <Flex direction="column">
+                    <Heading as="h4" color={appTheme.colors.success}>
+                      {formatAmount(totalPower / 1000)}
+                    </Heading>
+                    <Text size="small">{t('ACCUMULATED_POWER')}</Text>
+                  </Flex>
+                </Flex>
+              </Card>
+              <Divider y={24} />
 
-      {/* Configurar para que al hacer click en la Tab se muestre el TabPanel correspondiente */}
-      {hasTicket ? (
-        <>
-          <Divider y={12} />
-          <Card spacing={4} variant="filled">
-            <Flex align="center" gap={16}>
-              <Icon size={8}>
-                <Shield color={appTheme.colors.success} />
-              </Icon>
-              <Flex direction="column">
-                <Heading as="h4" color={appTheme.colors.success}>
-                  {formatAmount(totalPower / 1000)}
-                </Heading>
-                <Text size="small">{t('ACCUMULATED_POWER')}</Text>
-              </Flex>
-            </Flex>
-          </Card>
-          <Divider y={24} />
+              <TransitionGroup className={styles.transactionElementsContainer}>
+                {/* Mock Power Events */}
+                {powerActions.map((powerEvent) => {
+                  return (
+                    <CSSTransition key={powerEvent.id} timeout={550} classNames="fade">
+                      <ItemTxs
+                        icon={<Bolt color={appTheme.colors.primary} />}
+                        text={t('ADDED_POWER')}
+                        type="power"
+                        value={powerEvent.amount}
+                        message={powerEvent.message}
+                      />
+                    </CSSTransition>
+                  );
+                })}
+              </TransitionGroup>
 
-          <TransitionGroup className={styles.transactionElementsContainer}>
-            {/* Mock Power Events */}
-            {powerActions.map((powerEvent) => {
-              return (
-                <CSSTransition key={powerEvent.id} timeout={550} classNames="fade">
-                  <ItemTxs
-                    icon={<Bolt color={appTheme.colors.primary} />}
-                    text={t('ADDED_POWER')}
-                    type="power"
-                    value={powerEvent.amount}
-                    message={powerEvent.message}
-                  />
-                </CSSTransition>
-              );
-            })}
-          </TransitionGroup>
-
-          {/* Mock TicketEvent */}
-          <ItemTxs icon={<Ticket color={appTheme.colors.primary} />} text={t('PURCHASED_TICKET')} />
-          <Divider y={20} />
+              {/* Mock TicketEvent */}
+              <ItemTxs icon={<Ticket color={appTheme.colors.primary} />} text={t('PURCHASED_TICKET')} />
+              <Divider y={20} />
+            </>
+          ) : (
+            <div>
+              <Text size="small" align="center" color={appTheme.colors.gray50}>
+                {t('CLOSE_INSCRIPTION_IN')}
+              </Text>
+              <Divider y={8} />
+              <CountdownBox targetDate={targetDate} />
+            </div>
+          )}
+          )
         </>
-      ) : (
-        <div>
-          <Text size="small" align="center" color={appTheme.colors.gray50}>
-            {t('CLOSE_INSCRIPTION_IN')}
-          </Text>
-          <Divider y={8} />
-          <CountdownBox targetDate={targetDate} />
-        </div>
       )}
     </Container>
   );

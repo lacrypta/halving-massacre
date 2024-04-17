@@ -156,6 +156,7 @@
   "SURVIVAL_CHANCE": "Chances to survive next round.",
   "FROZEN": "Frozen",
   "FROZEN_IN": "Frozen in",
+  "NOT_BUY_TICKET": "You did not buy the ticket on time",
   "simulator": {
     "TITLE": "Massacre Simulator",
     "PARTICIPANTS": "Participants",
