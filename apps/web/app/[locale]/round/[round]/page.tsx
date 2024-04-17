@@ -86,7 +86,7 @@ export default function Page({ params }: PageProps): JSX.Element {
           <Flex align="center">
             <Flex direction="column">
               <Heading>
-                {t('ROUND')} {round + 1}
+                {t('MASSACRE')} {round + 1}
               </Heading>
               <Text color={appTheme.colors.gray50}>#{rounds[round]?.height}</Text>
             </Flex>
@@ -126,7 +126,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                     {t('ALIVES')}
                   </Tab>
                   <Tab active={nameTab === 'massacre'} onClick={() => handleChangeTab('massacre')}>
-                    {t('MASSACRATEDS')}
+                    {t('MASSACRED')}
                   </Tab>
                 </TabList>
                 <TabPanels>

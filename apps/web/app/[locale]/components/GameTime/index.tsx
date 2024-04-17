@@ -44,14 +44,14 @@ export function GameTime() {
           <Flex flex={1} justify="space-between" align="center" gap={16}>
             <Flex direction="column">
               <Heading as="h4" color={status === 'FREEZE' ? appTheme.colors.warning : appTheme.colors.success}>
-                {status === 'FREEZE' ? t('FROZEN') : `${t('ROUND')} ${round! + 1}`}
+                {status === 'FREEZE' ? t('FROZEN') : `${t('MASSACRE')} ${round! + 1}`}
               </Heading>
               <Flex align="center" gap={4}>
                 {currentRound && (
                   <Text size="small">
                     {status === 'FREEZE'
                       ? `#${formatAmount(currentRound.freezeHeight)}`
-                      : `${t('MASSACRE_IN')} #${formatAmount(currentRound.height)}`}
+                      : `#${formatAmount(currentRound.height)}`}
                   </Text>
                 )}
               </Flex>

@@ -109,7 +109,7 @@ const Rules_EN = () => {
           </li>
         </ul>
         <Divider y={20} />
-        <Heading as="h3">Massacrateds</Heading>
+        <Heading as="h3">Massacreds</Heading>
         <Divider y={10} />
         <ul style={listUnorderStyles}>
           <li>

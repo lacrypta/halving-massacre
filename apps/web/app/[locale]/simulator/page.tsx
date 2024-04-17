@@ -149,7 +149,7 @@ const page = () => {
                 <Flex align="center">
                   <Flex direction="column">
                     <Heading as={'h2'}>
-                      {t('ROUND')} {simulationInfo.roundIndex + 1}
+                      {t('MASSACRE')} {simulationInfo.roundIndex + 1}
                     </Heading>
                   </Flex>
                   <Badge color={'success'}>{t('FINISH')}</Badge>
@@ -178,7 +178,7 @@ const page = () => {
                     {t('ALIVES')}
                   </Tab>
                   <Tab active={nameTab === 'massacre'} onClick={() => setNameTab('massacre')}>
-                    {t('MASSACRATEDS')}
+                    {t('MASSACRED')}
                   </Tab>
                 </TabList>
                 <TabPanels>

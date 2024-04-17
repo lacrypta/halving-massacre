@@ -78,7 +78,7 @@ export default function Page({ params }: PageProps): JSX.Element {
                 {t('GLOBAL')}
               </Tab>
               <Tab disabled={rounds.length < 1} active={nameTab === 'rounds'} onClick={() => handleChangeTab('rounds')}>
-                {t('ROUNDS')}
+                {t('MASSACRES')}
               </Tab>
             </TabList>
           </Tabs>

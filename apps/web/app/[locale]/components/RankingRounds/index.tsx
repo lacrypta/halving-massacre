@@ -80,7 +80,7 @@ export function RankingRounds() {
                   </IconStyle>
                   <Flex direction="column">
                     <Text>
-                      {t('ROUND')} {item.round + 1}
+                      {t('MASSACRE')} {item.round + 1}
                     </Text>
                     <Text size="small" color={appTheme.colors.gray50}>
                       #{item.block}

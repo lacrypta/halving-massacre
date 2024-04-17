@@ -36,7 +36,7 @@ export const userRounds: UserRound[] = [
   {
     index: 4,
     name: 'Ronda 5',
-    alive: false, // Massacrated
+    alive: false, // Massacred
     finished: true, // Done. Last round for this user
     accumulatedPower: 1000000,
     powerIncrease: 0,
@@ -44,7 +44,7 @@ export const userRounds: UserRound[] = [
   {
     index: 5,
     name: 'Ronda Final',
-    alive: false, // Massacrated
+    alive: false, // Massacred
     finished: false, // In progress but dead (should be hidden for the user)
     accumulatedPower: 1000000,
     powerIncrease: 0,
