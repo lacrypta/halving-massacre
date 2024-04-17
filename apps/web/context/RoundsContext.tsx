@@ -93,12 +93,11 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
 
   const getMassacreByRoundIndex = async (roundIndex: number): Promise<RoundEventContent | null> => {
     if (currentBlock < rounds[roundIndex]!.height) return null;
-
     const roundEvent = await ndk.fetchEvent({
       authors: [PUBLISHER_PUBKEY],
       kinds: [1112 as NDKKind],
       '#e': [setupId],
-      '#t': [`round:${roundIndex}`],
+      '#t': [`round:${roundIndex + 1}`],
     });
 
     if (!roundEvent) return null;
