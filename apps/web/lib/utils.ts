@@ -123,8 +123,11 @@ export function generateRoundsList(rounds: MassacreRound[], currentBlock: number
 }
 
 export function getTopPlayers(players: PlayersPower, count: number = 100): PlayersPower {
+  // Sort players
+  const sortedPlayers = Object.fromEntries(Object.entries(players).sort((a, b) => b[1] - a[1]));
+
   // Convert the object into an array of its entries
-  const entries = Object.entries(players);
+  const entries = Object.entries(sortedPlayers);
 
   // Slice the first 100 entries
   const firstEntries = entries.slice(0, count);
