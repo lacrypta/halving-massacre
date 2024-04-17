@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 // @lawallet/ui
 import { Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
@@ -61,8 +61,9 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
-  const powerProgress =
-    (buckets.length > 0 && totalPower && smoothLimits(estimateSurvivalChance(buckets, totalPower) * 100)) || 0;
+  const powerProgress = useMemo(() => {
+    return (buckets.length > 0 && totalPower && smoothLimits(estimateSurvivalChance(buckets, totalPower) * 100)) || 0;
+  }, [buckets, totalPower]);
 
   // Mock data
   const positionNumber = 554;
