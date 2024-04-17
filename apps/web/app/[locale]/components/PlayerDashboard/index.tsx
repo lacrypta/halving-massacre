@@ -63,6 +63,10 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
     return players ? Object.hasOwn(players, walias) : true;
   }, [players, walias]);
 
+  const rankingPosition = useMemo(() => {
+    return players ? Object.keys(players).indexOf(walias) + 1 : 0;
+  }, [players, walias]);
+
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
   const powerProgress = useMemo(() => {
@@ -139,9 +143,9 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
             {hasTicket ? (
               <>
                 <Badge color="primary">{t('PURCHASED_TICKET')}</Badge>
-                {/* <Badge color="secondary">
-                  {t('POSITION')} <strong>#30</strong>
-                </Badge> */}
+                <Badge color="secondary">
+                  <strong>#{rankingPosition}</strong>
+                </Badge>
               </>
             ) : (
               <Badge color="secondary">{t('NO_TICKET')}</Badge>
