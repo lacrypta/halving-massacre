@@ -21,7 +21,7 @@ import { Tab, TabList, Tabs, TabPanel, TabPanels } from '../components/Tabs';
 import { Navbar } from '../components/Navbar';
 import Card from '../components/Card';
 import Treasury from '../components/TreasuryAnimation';
-import { RankingList } from '../components/RankingList';
+import { RankingListWithDead } from '../components/RankingList/RankingListWithDead';
 import { GameTime } from '../components/GameTime';
 import { RankingRounds } from '../components/RankingRounds';
 import { getTopPlayers } from '../../../lib/utils';
@@ -86,12 +86,10 @@ export default function Page({ params }: PageProps): JSX.Element {
             <TabPanel show={nameTab === 'massacres'}>
               <Divider y={16} />
               <RankingRounds />
-              {/* Agregar listado de jugadores massacrados */}
-              {/* <RankingList players={players} type="massacre" /> */}
             </TabPanel>
             <TabPanel show={nameTab === 'global'}>
               <Divider y={16} />
-              <RankingList players={getTopPlayers(players!, 100)} />
+              <RankingListWithDead players={[]} />
             </TabPanel>
           </TabPanels>
         </Container>
