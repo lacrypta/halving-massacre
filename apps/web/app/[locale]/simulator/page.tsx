@@ -149,7 +149,7 @@ const page = () => {
                 <Flex align="center">
                   <Flex direction="column">
                     <Heading as={'h2'}>
-                      {t('MASSACRE')} {simulationInfo.roundIndex + 1}
+                      {t('MASSACRED')} {simulationInfo.roundIndex + 1}
                     </Heading>
                   </Flex>
                   <Badge color={'success'}>{t('FINISH')}</Badge>
