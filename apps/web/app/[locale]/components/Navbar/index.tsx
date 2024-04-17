@@ -33,9 +33,9 @@ export function Navbar({ children, isoAnimated = true }: NavbarProps) {
             )}
             {children}
             <Flex gap={16} align="center" justify="end">
-              <Link href="/ranking">
+              <Link href="/massacres">
                 <Button size="small" variant="borderless">
-                  {t('RANKING')}
+                  {t('MASSACRES')}
                 </Button>
               </Link>
 
