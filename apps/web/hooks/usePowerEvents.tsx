@@ -79,7 +79,7 @@ export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): Use
         player,
         createdAt: event.created_at,
         message,
-        type: type || message === 'You survived! For now...' ? 'MASSACRE' : 'LIGHTNING',
+        type: type || (message === 'You survived! For now...' ? 'MASSACRE' : 'LIGHTNING'),
       };
     }),
   };
