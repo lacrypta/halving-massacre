@@ -17,6 +17,8 @@ type UsePowerEventsProps = {
   limit?: number;
 };
 
+const CREATED_AT_ROUND_0_PATH: number = 1713369221;
+
 export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): UsePowerEventsReturns => {
   const [powerEventsDeduplicated, setPowerEventsDeduplicated] = useState<Event[]>([]);
   const { setupId, publisherPubkey, players } = useMassacre();
@@ -47,7 +49,8 @@ export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): Use
       const filteredsPower = _powerEvents.filter((event) => {
         if (
           !Object.keys(players!).includes(walias) &&
-          parseContent(event.content)?.message === 'You survived! For now...'
+          parseContent(event.content)?.message === 'You survived! For now...' &&
+          event.created_at! <= CREATED_AT_ROUND_0_PATH
         )
           return false;
 
