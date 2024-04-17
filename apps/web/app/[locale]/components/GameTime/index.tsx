@@ -58,7 +58,7 @@ export function GameTime() {
             </Flex>
             {time && (
               <Flex direction="column" align="end">
-                <Text>
+                <Text size="small">
                   {status === 'FREEZE'
                     ? `${t('MASSACRE_IN')} #${formatAmount(currentRound.height)}`
                     : `${t('FROZEN_IN')} #${formatAmount(currentRound.freezeHeight)}`}
