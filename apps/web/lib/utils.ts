@@ -89,7 +89,7 @@ export const formatAmount = (_amount: number): String => {
     ? (amount / 1000000).toFixed(1) + 'M'
     : amount > 9999
       ? (amount / 1000).toFixed(1) + 'K'
-      : amount.toFixed(1);
+      : amount.toFixed(0);
 };
 
 /**
