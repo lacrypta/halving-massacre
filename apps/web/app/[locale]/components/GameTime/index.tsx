@@ -18,13 +18,14 @@ export function GameTime() {
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
-  const { round, time } = useMemo(() => {
+  const { round, time, freezeTime } = useMemo(() => {
     if (currentBlock === null || currentRound === null) {
       return {};
     }
     return {
-      round: currentRound!.index,
-      time: (currentRound!.height - currentBlock) * 10,
+      round: currentRound.index,
+      time: (currentRound.height - currentBlock) * 10,
+      freezeTime: (currentRound.freezeHeight - currentBlock) * 10,
     };
   }, [currentRound, currentBlock]);
 
@@ -38,28 +39,33 @@ export function GameTime() {
 
   return (
     <Link href={`/round/${round}`}>
-      <GameTimeStyle $background={appTheme.colors.warning15}>
+      <GameTimeStyle $background={status === 'FREEZE' ? appTheme.colors.warning15 : appTheme.colors.success15}>
         <Container>
           <Flex flex={1} justify="space-between" align="center" gap={16}>
             <Flex direction="column">
-              <Heading as="h4" color={appTheme.colors.warning}>
-                {t('ROUND')} {round! + 1}
-                {status === 'FREEZE' && ' - Freezado'}
+              <Heading as="h4" color={status === 'FREEZE' ? appTheme.colors.warning : appTheme.colors.success}>
+                {status === 'FREEZE' ? t('FROZEN') : `${t('ROUND')} ${round! + 1}`}
               </Heading>
               <Flex align="center" gap={4}>
                 {currentRound && (
                   <Text size="small">
-                    {t('MASSACRE_IN')} #{formatAmount(currentRound!.height)}
+                    {status === 'FREEZE'
+                      ? `#${formatAmount(currentRound.freezeHeight)}`
+                      : `${t('MASSACRE_IN')} #${formatAmount(currentRound.height)}`}
                   </Text>
                 )}
               </Flex>
             </Flex>
             {time && (
               <Flex direction="column" align="end">
-                <Text>{t('NEXT_IN')}:</Text>
+                <Text>
+                  {status === 'FREEZE'
+                    ? `${t('MASSACRE_IN')} #${formatAmount(currentRound.height)}`
+                    : `${t('FROZEN_IN')} #${formatAmount(currentRound.freezeHeight)}`}
+                </Text>
                 <Flex align="center" justify="end" gap={4}>
-                  <Heading as="h4" color={appTheme.colors.warning}>
-                    ~ {formatTime(time!)}
+                  <Heading as="h4" color={status === 'FREEZE' ? appTheme.colors.warning : appTheme.colors.success}>
+                    ~ {formatTime(status === 'FREEZE' ? time : freezeTime)}
                   </Heading>
                 </Flex>
               </Flex>
