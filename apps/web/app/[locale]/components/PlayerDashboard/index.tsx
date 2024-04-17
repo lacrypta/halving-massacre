@@ -150,7 +150,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
           <>
             <Divider y={12} />
             <Text size="small" color={appTheme.colors.gray50}>
-              Chances de sobrevivir la ronda
+              {t('SURVIVAL_CHANCE')}
             </Text>
             <Divider y={8} />
             {powerProgress > 0 && <Progress value={powerProgress} />}
