@@ -76,7 +76,7 @@ export function RankingRounds() {
       {list.map((item, index) => {
         return (
           <ItemStyle key={index} $disabled={item.status === 'PENDING'}>
-            <Link href={`/round/${item.round}`}>
+            <Link href={`/massacre/${item.round}`}>
               <Flex align="center" gap={16}>
                 <Flex align="center" gap={8}>
                   <IconStyle>
