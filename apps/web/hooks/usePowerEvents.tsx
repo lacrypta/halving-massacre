@@ -71,7 +71,7 @@ export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): Use
   return {
     events: powerEventsDeduplicated as Event[],
     powerActions: (powerEventsDeduplicated as Event[]).map((event) => {
-      const { amount, player, message } = JSON.parse(event.content) as Power;
+      const { amount, player, message, type } = JSON.parse(event.content) as Power;
 
       return {
         id: event.id,
@@ -79,6 +79,7 @@ export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): Use
         player,
         createdAt: event.created_at,
         message,
+        type: type || message === 'You survived! For now...' ? 'MASSACRE' : 'LIGHTNING',
       };
     }),
   };
