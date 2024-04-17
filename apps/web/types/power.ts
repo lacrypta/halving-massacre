@@ -10,3 +10,7 @@ export interface Power {
 export interface PlayersPower {
   [walias: string]: number;
 }
+
+export interface PlayersPowerWithDead {
+  [walias: string]: { power: number; isAlive: boolean };
+}
