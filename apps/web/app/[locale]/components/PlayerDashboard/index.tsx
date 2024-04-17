@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 // @lawallet/ui
 import { Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
@@ -9,12 +9,7 @@ import Badge from '../Badge/index';
 import { Avatar } from '../Avatar';
 import { Card } from '../CardV2';
 import { Icon } from '../Icon';
-import { Bolt, Heart, Loader, Shield, Skull, Ticket } from '../Icons';
-import { Tab } from '../Tabs/Tab';
-import { TabList } from '../Tabs/TabList';
-import { TabPanel } from '../Tabs/TabPanel';
-import { TabPanels } from '../Tabs/TabPanels';
-import { Tabs } from '../Tabs/Tabs';
+import { Bolt, Loader, Shield, Skull, Ticket } from '../Icons';
 
 import styles from '../LastPowerActions/style.module.css';
 import '../LastPowerActions/styles.css';
@@ -29,14 +24,14 @@ import { usePlayer } from '@/../hooks/usePlayer';
 import { useFormatter, useProfile } from '@lawallet/react';
 import type { AvailableLanguages } from '@lawallet/utils/types';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePowerEvents } from '../../../../hooks/usePowerEvents';
-import CountdownBox from '../CountdownBox';
-import { ItemTxs } from '../ItemTxs';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useMassacre } from '../../../../hooks/useMassacre';
-import type { MassacreStatus } from '../../../../types/massacre';
-import Progress from '../Progress';
+import { usePowerEvents } from '../../../../hooks/usePowerEvents';
 import { estimateSurvivalChance, smoothLimits } from '../../../../lib/utils';
+import type { MassacreStatus } from '../../../../types/massacre';
+import CountdownBox from '../CountdownBox';
+import { ItemTxs } from '../ItemTxs';
+import Progress from '../Progress';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -250,7 +245,6 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
               <CountdownBox targetDate={targetDate} />
             </div>
           )}
-          )
         </>
       )}
     </Container>
