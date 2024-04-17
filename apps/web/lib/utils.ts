@@ -133,3 +133,28 @@ export function getTopPlayers(players: PlayersPower, count: number = 100): Playe
 
   return firstPlayers;
 }
+
+/**
+ * Estimate the chances of survival given a bucketization and a power input.
+ *
+ * @param buckets - A list of the buckets.
+ * @param power - The power input to estimate for.
+ * @returns The estimated probability (mostly in line with simulations).
+ */
+export function estimateSurvivalChance(buckets: { min: number; max: number }[], power: number): number {
+  if (buckets[0]!.max < power) {
+    return 1;
+  } else if (power <= buckets[buckets.length - 1]!.min) {
+    return 0;
+  }
+  const { max, min, idx }: { max: number; min: number; idx: number } = buckets
+    .map(({ max, min }: { max: number; min: number }, idx: number): { max: number; min: number; idx: number } | null =>
+      min < power && power <= max ? { max, min, idx } : null,
+    )
+    .filter(
+      (x: { max: number; min: number; idx: number } | null): x is { max: number; min: number; idx: number } =>
+        null !== x,
+    )[0]!;
+
+  return (buckets.length - idx + (power - min) / (max - min) - 1) / buckets.length;
+}
