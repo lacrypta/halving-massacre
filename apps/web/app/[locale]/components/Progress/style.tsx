@@ -22,6 +22,8 @@ export const Value = styled.div<ValueProps>`
   height: 100%;
 
   background-color: ${(props) => props.theme.colors.success};
+
+  transition-duration: 0.4s;
 `;
 
 export const TextValue = styled.div`
