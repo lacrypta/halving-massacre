@@ -36,7 +36,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useMassacre } from '../../../../hooks/useMassacre';
 import type { MassacreStatus } from '../../../../types/massacre';
 import Progress from '../Progress';
-import { estimateSurvivalChance } from '../../../../lib/utils';
+import { estimateSurvivalChance, smoothLimits } from '../../../../lib/utils';
 
 export interface PlayerDashboardInterface {
   walias: string;
@@ -61,7 +61,8 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
-  const powerProgress = (buckets.length > 0 && totalPower && estimateSurvivalChance(buckets, totalPower) * 100) || 0;
+  const powerProgress =
+    (buckets.length > 0 && totalPower && smoothLimits(estimateSurvivalChance(buckets, totalPower) * 100)) || 0;
 
   // Mock data
   const positionNumber = 554;
@@ -147,9 +148,7 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
               Chances de sobrevivir la ronda
             </Text>
             <Divider y={8} />
-            {powerProgress && (
-              <Progress value={powerProgress > 60 ? powerProgress * 0.95 : powerProgress < 2 ? 2 : powerProgress} />
-            )}
+            {powerProgress > 0 && <Progress value={powerProgress} />}
           </>
         </>
       ) : (

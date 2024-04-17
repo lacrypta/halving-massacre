@@ -158,3 +158,13 @@ export function estimateSurvivalChance(buckets: { min: number; max: number }[], 
 
   return (buckets.length - idx + (power - min) / (max - min) - 1) / buckets.length;
 }
+
+export function smoothLimits(value: number): number {
+  if (value < 2) {
+    return 2;
+  }
+  if (value > 50) {
+    return value - Math.min(100 - 50) * 0.05;
+  }
+  return value;
+}
