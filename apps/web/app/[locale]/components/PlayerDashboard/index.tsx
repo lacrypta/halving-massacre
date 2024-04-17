@@ -51,13 +51,17 @@ const closedPowerStatuses: MassacreStatus[] = ['FREEZE', 'FINAL'];
 
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
-  const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
+  const { hasTicket } = usePlayer(); // TODO: return totalPower
   const { powerActions } = usePowerEvents({ walias });
   const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
-  const { status, buckets } = useMassacre();
+  const { status, buckets, players } = useMassacre();
 
   const t = useTranslations();
   const locale = useLocale() as AvailableLanguages;
+
+  const isAlive = useMemo(() => {
+    return players ? Object.hasOwn(players, walias) : true;
+  }, []);
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
@@ -163,9 +167,9 @@ export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashb
                 <Heading as="h4" color={appTheme.colors.error}>
                   {t('MASSACRED')}
                 </Heading>
-                <Text color={appTheme.colors.error}>
+                {/* <Text color={appTheme.colors.error}>
                   {t('POSITION')} {`#${positionNumber}`}
-                </Text>
+                </Text> */}
                 <Text size="small">{t('SHITCOINED')}</Text>
               </Flex>
             </Flex>
