@@ -51,17 +51,17 @@ const closedPowerStatuses: MassacreStatus[] = ['FREEZE', 'FINAL'];
 
 export function PlayerDashboard({ walias, onBuyTicket, onAddPower }: PlayerDashboardInterface) {
   const { nip05, lud16, nip05Avatar, lud16Avatar, domainAvatar } = useProfile({ walias });
-  const { hasTicket, isAlive } = usePlayer(); // TODO: return totalPower
+  const { hasTicket } = usePlayer(); // TODO: return totalPower
   const { powerActions } = usePowerEvents({ walias });
   const [totalPower, setTotalPower] = useState(0); // TODO: should be get from usePlayer
-  const { status, buckets } = useMassacre();
+  const { status, buckets, players } = useMassacre();
 
   const t = useTranslations();
   const locale = useLocale() as AvailableLanguages;
 
-  // const isAlive = useMemo(() => {
-  //   return players ? Object.hasOwn(players, walias) : true;
-  // }, []);
+  const isAlive = useMemo(() => {
+    return players ? Object.hasOwn(players, walias) : true;
+  }, [players, walias]);
 
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
