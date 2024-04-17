@@ -1,8 +1,15 @@
 'use client';
 
 // Libraries
-import { Divider, Container, Heading, Text, Flex } from '@lawallet/ui';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
+import { Divider, Container, Heading, Text, Flex, Button } from '@lawallet/ui';
+import { useFormatter } from '@lawallet/react';
+import type { AvailableLanguages } from '@lawallet/utils/types';
+
+// Context
+import { RoundsContext } from '../../../../context/RoundsContext';
 
 // Theme
 import { appTheme } from '../../../../config/exports';
@@ -14,22 +21,18 @@ import { useMassacre } from '../../../../hooks/useMassacre';
 import Badge from '@/[locale]/components/Badge';
 import { Card } from '@/[locale]/components/CardV2';
 import { Icon } from '@/[locale]/components/Icon';
-import { SackSats, Shield, Snowflake } from '@/[locale]/components/Icons';
+import { SackSats, Shield, Snowflake, ArrowLeft, ArrowRight } from '@/[locale]/components/Icons';
 import { Tab, TabList, Tabs, TabPanel, TabPanels } from '@/[locale]/components/Tabs';
 
 // Generic components
 import { Navbar } from '../../components/Navbar';
 import { GameTime } from '@/[locale]/components/GameTime';
 import { RankingList } from '@/[locale]/components/RankingList';
-import { useLocale, useTranslations } from 'next-intl';
 import type { RoundEventContent, RoundStatus } from '../../../../types/round';
-import { RoundsContext } from '../../../../context/RoundsContext';
-import { useFormatter } from '@lawallet/react';
-import type { AvailableLanguages } from '@lawallet/utils/types';
 
 interface PageProps {
   params: {
-    round: string;
+    number: string;
   };
 }
 
@@ -40,7 +43,7 @@ export default function Page({ params }: PageProps): JSX.Element {
   const locale = useLocale() as AvailableLanguages;
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
-  const round = parseInt(decodeURIComponent(params.round));
+  const round = parseInt(decodeURIComponent(params.number));
 
   // Context
   const { players } = useMassacre();
@@ -85,7 +88,7 @@ export default function Page({ params }: PageProps): JSX.Element {
         <Container size="small">
           <Flex align="center">
             <Flex direction="column">
-              <Heading>
+              <Heading as="h3">
                 {t('MASSACRE')} {round + 1}
               </Heading>
               {(rounds || rounds[round]) && (
@@ -99,6 +102,29 @@ export default function Page({ params }: PageProps): JSX.Element {
         </Container>
         <Divider y={16} />
         <Container size="small">
+          <Flex justify="end" gap={4}>
+            {round > 0 && (
+              <Link href={`/massacre/${round - 1}`}>
+                <Button size="small" variant="borderless" disabled={round === 0}>
+                  <Icon size={4}>
+                    <ArrowLeft />
+                  </Icon>
+                  {t('MASSACRE')} {round}
+                </Button>
+              </Link>
+            )}
+            {round <= rounds.length - 2 && (
+              <Link href={`/massacre/${round + 1}`}>
+                <Button size="small" variant="borderless" disabled={round === rounds.length - 1}>
+                  {t('MASSACRE')} {round + 2}
+                  <Icon size={4}>
+                    <ArrowRight />
+                  </Icon>
+                </Button>
+              </Link>
+            )}
+          </Flex>
+
           {roundStatus === 'FINISHED' ? (
             <>
               <Card variant="filled" spacing={4}>
@@ -147,7 +173,7 @@ export default function Page({ params }: PageProps): JSX.Element {
             </>
           ) : (
             <>
-              <Divider y={16} />
+              {/* <Divider y={16} /> */}
               {currentBlock >= (rounds[round]?.freezeHeight || 0) && (
                 <Flex direction="column" gap={8} align="center">
                   <Icon size={8}>
