@@ -85,7 +85,11 @@ export async function publishEvent(event: Event, relayList: string[]) {
 
 export const formatAmount = (_amount: number): String => {
   const amount = _amount / 1000;
-  return amount > 9999 ? (amount / 1000).toFixed(1) + 'K' : String(amount);
+  return amount > 1000000
+    ? (amount / 1000000).toFixed(1) + 'M'
+    : amount > 9999
+      ? (amount / 1000).toFixed(1) + 'K'
+      : amount.toFixed(1);
 };
 
 /**

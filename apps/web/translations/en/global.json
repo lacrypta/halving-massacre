@@ -153,5 +153,17 @@
   "DISTRIBUTED POWER": "distributed power",
   "ALIVES": "Alive",
   "POWER_LOCKED_DISTANCE": "Power freeze 2 blocks away.",
-  "SURVIVAL_CHANCE": "Chances to survive next round."
+  "SURVIVAL_CHANCE": "Chances to survive next round.",
+  "simulator": {
+    "TITLE": "Massacre Simulator",
+    "PARTICIPANTS": "Participants",
+    "INIT_SIMULATE": "Start simulation",
+    "ALIVES": "Alive",
+    "MASSACRATEDS": "Massacred",
+    "DISTRIBUTED_POWER": "of distributed power",
+    "NEXT_ROUND": "Next round",
+    "HASH": "Hash used",
+    "ROUND": "Round",
+    "FINISH": "Finished"
+  }
 }

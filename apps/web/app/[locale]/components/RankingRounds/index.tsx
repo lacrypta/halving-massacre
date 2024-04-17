@@ -79,7 +79,9 @@ export function RankingRounds() {
                     <Icon size={4}>{renderIconByStatus(item.status)}</Icon>
                   </IconStyle>
                   <Flex direction="column">
-                    <Text>Ronda {item.round + 1}</Text>
+                    <Text>
+                      {t('ROUND')} {item.round + 1}
+                    </Text>
                     <Text size="small" color={appTheme.colors.gray50}>
                       #{item.block}
                     </Text>
