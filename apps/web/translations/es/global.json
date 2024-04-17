@@ -154,6 +154,7 @@
   "ALIVES": "Vivos",
   "POWER_LOCKED_DISTANCE": "Poder freezado a 2 bloques de distancia.",
   "SURVIVAL_CHANCE": "Chances de sobrevivir la ronda",
+  "NOT_BUY_TICKET": "No compraste el ticket a tiempo",
   "simulator": {
     "TITLE": "Massacre Simulator",
     "PARTICIPANTS": "Participantes",

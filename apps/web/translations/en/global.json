@@ -154,6 +154,7 @@
   "ALIVES": "Alive",
   "POWER_LOCKED_DISTANCE": "Power freeze 2 blocks away.",
   "SURVIVAL_CHANCE": "Chances to survive next round.",
+  "NOT_BUY_TICKET": "You did not buy the ticket on time",
   "simulator": {
     "TITLE": "Massacre Simulator",
     "PARTICIPANTS": "Participants",
