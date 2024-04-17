@@ -38,7 +38,7 @@ export function GameTime() {
   }
 
   return (
-    <Link href={`/round/${round}`}>
+    <Link href={`/massacre/${round}`}>
       <GameTimeStyle $background={status === 'FREEZE' ? appTheme.colors.warning15 : appTheme.colors.success15}>
         <Container>
           <Flex flex={1} justify="space-between" align="center" gap={16}>
