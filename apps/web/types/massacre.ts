@@ -5,6 +5,7 @@ export type MassacreStatus = 'SETUP' | 'CLOSED' | 'INITIAL' | 'NORMAL' | 'FREEZE
 export interface MassacreStatusEventContent {
   currentBlock: number;
   players?: PlayersPower;
+  deadPlayers?: PlayersPower;
   status: MassacreStatus;
   nextMassacre: number;
   nextFreeze: number;
