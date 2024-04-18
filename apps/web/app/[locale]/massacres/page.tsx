@@ -1,30 +1,29 @@
 'use client';
 
 // Libraries
-import React, { useContext, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 import { useFormatter } from '@lawallet/react';
+import { Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
 import type { AvailableLanguages } from '@lawallet/utils/types';
+import { useLocale, useTranslations } from 'next-intl';
+import { useContext, useState } from 'react';
 
 // Theme
 import { appTheme } from '../../../config/exports';
 
 // Hooks and utils
-import { useMassacre } from '../../../hooks/useMassacre';
 import { RoundsContext } from '../../../context/RoundsContext';
+import { useMassacre } from '../../../hooks/useMassacre';
 
 // New ui-components
-import { Tab, TabList, Tabs, TabPanel, TabPanels } from '../components/Tabs';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../components/Tabs';
 
 // Generic components
-import { Navbar } from '../components/Navbar';
 import Card from '../components/Card';
-import Treasury from '../components/TreasuryAnimation';
-import { RankingListWithDead } from '../components/RankingList/RankingListWithDead';
 import { GameTime } from '../components/GameTime';
+import { Navbar } from '../components/Navbar';
+import { RankingListWithDead } from '../components/RankingList/RankingListWithDead';
 import { RankingRounds } from '../components/RankingRounds';
-import { getTopPlayers } from '../../../lib/utils';
+import Treasury from '../components/TreasuryAnimation';
 
 interface PageProps {
   params: {

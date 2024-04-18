@@ -158,6 +158,7 @@
   "FROZEN": "Freezado",
   "FROZEN_IN": "Freezado en",
   "NOT_BUY_TICKET": "No compraste el ticket a tiempo",
+  "WAITING_PLAYERS_LIST": "Esperando lista de participantes y calendario de eventos.",
   "simulator": {
     "TITLE": "Massacre Simulator",
     "PARTICIPANTS": "Participantes",

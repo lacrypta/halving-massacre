@@ -5,7 +5,7 @@ import { BadgePrimitive } from './style';
 import { appTheme } from '../../../../config/exports';
 
 interface BadgeProps {
-  color: 'primary' | 'secondary' | 'success' | 'warning';
+  color: 'primary' | 'secondary' | 'success' | 'warning' | 'white';
   children: ReactNode;
 }
 

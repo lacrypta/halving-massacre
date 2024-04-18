@@ -15,7 +15,7 @@ import { appTheme } from '../../../../config/exports';
 
 // New ui-components
 import { Icon } from '../Icon';
-import { Shield, ArrowRight, Sword, SackSats } from '../Icons';
+import { Shield, ArrowRight, Sword, SackSats, Crown } from '../Icons';
 
 // Style
 import { RankingRoundsStyle, ItemStyle, IconStyle } from './style';
@@ -23,6 +23,7 @@ import { RoundsContext } from '../../../../context/RoundsContext';
 import { useMassacre } from '../../../../hooks/useMassacre';
 import { generateRoundsList } from '../../../../lib/utils';
 import type { AvailableLanguages } from '@lawallet/utils/types';
+import Gift from '../Icons/Gift';
 
 export function RankingRounds() {
   const { rounds } = useContext(RoundsContext);
@@ -33,15 +34,25 @@ export function RankingRounds() {
   // Generics
   const t = useTranslations();
 
-  const renderIconByStatus = (value: RoundStatus) => {
+  const renderIconByStatus = (value: RoundStatus, roundIndex: number) => {
+    if (roundIndex === rounds.length - 1) return <Gift color={appTheme.colors.warning} />;
+    if (roundIndex === rounds.length) return <Crown color={appTheme.colors.warning} />;
+
     switch (value) {
       case 'FINISHED':
-        return <SackSats color={appTheme.colors.success} />;
+        return <Shield color={appTheme.colors.error} />;
       case 'ACTUAL':
-        return <Sword color={appTheme.colors.warning} />;
+        return <Sword color={appTheme.colors.success} />;
       case 'PENDING':
-        return <Shield color={appTheme.colors.gray50} />;
+        return <Shield color={appTheme.colors.warning} />;
     }
+  };
+
+  const renderMassacreTitle = (roundIndex: number) => {
+    if (roundIndex === rounds.length - 1) return `${t('SEMIFINAL')}`;
+    if (roundIndex === rounds.length) return `${t('FINAL')}`;
+
+    return `${t('MASSACRE')} ${roundIndex}`;
   };
 
   const renderLinkByStatus = (value: RoundStatus) => {
@@ -49,23 +60,31 @@ export function RankingRounds() {
       case 'FINISHED':
         return (
           <>
-            <Text>{t('FINISHED')}</Text>
+            <Text color={appTheme.colors.white}>{t('FINISHED')}</Text>
             <Icon size={4}>
-              <ArrowRight />
+              <ArrowRight color={appTheme.colors.white} />
             </Icon>
           </>
         );
       case 'ACTUAL':
         return (
           <>
-            <Text color={appTheme.colors.warning}>{t('IN_PROGRESS')}</Text>
+            <Text color={appTheme.colors.success}>{t('IN_PROGRESS')}</Text>
+            <Icon size={4}>
+              <ArrowRight color={appTheme.colors.success} />
+            </Icon>
+          </>
+        );
+      case 'PENDING':
+        return (
+          <>
+            <Text color={appTheme.colors.warning}>{t('SOON')}</Text>
             <Icon size={4}>
               <ArrowRight color={appTheme.colors.warning} />
             </Icon>
           </>
         );
-      case 'PENDING':
-        return <Text color={appTheme.colors.gray50}>{t('SOON')}</Text>;
+      // return <Text color={appTheme.colors.gray50}>{t('SOON')}</Text>;
     }
   };
 
@@ -75,17 +94,15 @@ export function RankingRounds() {
     <RankingRoundsStyle>
       {list.map((item, index) => {
         return (
-          <ItemStyle key={index} $disabled={item.status === 'PENDING'}>
+          <ItemStyle key={index} $disabled={false}>
             <Link href={`/massacre/${item.round}`}>
               <Flex align="center" gap={16}>
                 <Flex align="center" gap={8}>
                   <IconStyle>
-                    <Icon size={4}>{renderIconByStatus(item.status)}</Icon>
+                    <Icon size={4}>{renderIconByStatus(item.status, item.round + 1)}</Icon>
                   </IconStyle>
                   <Flex direction="column">
-                    <Text>
-                      {t('MASSACRE')} {item.round + 1}
-                    </Text>
+                    <Text>{renderMassacreTitle(item.round + 1)}</Text>
                     <Text size="small" color={appTheme.colors.gray50}>
                       #{formatAmount(item.block)}
                     </Text>
