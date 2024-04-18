@@ -96,6 +96,7 @@ export function RoundsProvider({ children }: React.PropsWithChildren) {
     const roundEvent = await ndk.fetchEvent({
       authors: [PUBLISHER_PUBKEY],
       kinds: [1112 as NDKKind],
+      '#l': ['massacre'],
       '#e': [setupId],
       '#t': [`round:${roundIndex + 1}`],
     });
