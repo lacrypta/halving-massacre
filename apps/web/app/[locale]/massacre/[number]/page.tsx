@@ -102,20 +102,22 @@ export default function Page({ params }: PageProps): JSX.Element {
         </Container>
         <Divider y={16} />
         <Container size="small">
-          <Flex justify="end" gap={4}>
-            {round > 0 && (
-              <Link href={`/massacre/${round - 1}`}>
-                <Button size="small" variant="borderless" disabled={round === 0}>
-                  <Icon size={4}>
-                    <ArrowLeft />
-                  </Icon>
-                  {t('MASSACRE')} {round}
-                </Button>
-              </Link>
-            )}
+          <Flex justify="space-between" gap={4}>
+            <div>
+              {round > 0 && (
+                <Link href={`/massacre/${round - 1}`}>
+                  <Button size="small" variant="borderless" disabled={round === 0}>
+                    <Icon size={4}>
+                      <ArrowLeft />
+                    </Icon>
+                    {t('MASSACRE')} {round}
+                  </Button>
+                </Link>
+              )}
+            </div>
             {round <= rounds.length - 2 && (
               <Link href={`/massacre/${round + 1}`}>
-                <Button size="small" variant="borderless" disabled={round === rounds.length - 1}>
+                <Button size="small" variant="borderless" disabled={round >= (currentRound?.index || 0)}>
                   {t('MASSACRE')} {round + 2}
                   <Icon size={4}>
                     <ArrowRight />
