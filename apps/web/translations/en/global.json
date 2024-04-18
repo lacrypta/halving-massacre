@@ -87,6 +87,7 @@
   "MASSACRE_DESC_2": "Half of the participants, rounded down, are the survivors of the massacre.",
   "MASSACRE_DESC_3": "The power of the massacred players is distributed among the survivors evenly.",
   "PLAYERS": "Players",
+  "SURVIVOR": "Survivor",
   "SURVIVORS": "Survivors",
   "ADDING_MORE_POWER": "They can continue to accumulate sats to gain more power.",
   "RECEIVED_MASSACRED_POWER": "They receive the power of the massacred divided equally. (total power of the massacred / number of survivors)",
@@ -172,5 +173,7 @@
     "FINISH": "Finished",
     "USE_CUSTOM_SEED": "Use custom hash",
     "REMOVE_CUSTOM": "Remove custom"
-  }
+  },
+  "FOR_THE_MASSACRED": "for the massacred",
+  "ROUND_SURVIVORS_ASSURED_PRIZE": "Survivors of this round are guaranteed a prize."
 }

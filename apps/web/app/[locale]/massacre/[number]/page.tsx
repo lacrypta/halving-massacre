@@ -135,7 +135,7 @@ export default function Page({ params }: PageProps): JSX.Element {
               totalDistributedPower={massacreRound?.totalDistributedPower}
             />
           ) : roundStatus === 'PENDING' ? (
-            <PendingContent survivals={rounds[round]?.survivors} />
+            <PendingContent survivals={rounds[round]?.survivors} round={round} />
           ) : (
             <ActualContent currentBlock={currentBlock} freezeHeight={rounds[round]?.freezeHeight} players={players} />
           )}

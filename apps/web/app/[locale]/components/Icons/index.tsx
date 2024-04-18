@@ -13,5 +13,6 @@ export { ArrowRight } from './ArrowRight';
 export { Snowflake } from './Snowflake';
 export { SackSats } from './SackSats';
 export { ArrowLeft } from './ArrowLeft';
+export { Medal } from './Medal';
 // Custom
 export { Loader } from './Loader';
