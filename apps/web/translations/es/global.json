@@ -168,6 +168,8 @@
     "NEXT_ROUND": "Siguiente ronda",
     "HASH": "Hash utilizado",
     "ROUND": "Ronda",
-    "FINISH": "Terminado"
+    "FINISH": "Terminado",
+    "USE_CUSTOM_SEED": "Usar hash custom",
+    "REMOVE_CUSTOM": "Remover custom"
   }
 }

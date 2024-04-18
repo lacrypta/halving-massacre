@@ -1,5 +1,5 @@
 'use client';
-import { Button, Container, Divider, Flex, Heading, Text } from '@lawallet/ui';
+import { Button, Container, Divider, Flex, Heading, Input, Text } from '@lawallet/ui';
 import { useContext, useEffect, useState } from 'react';
 import { MassacreContext } from '../../../context/MassacreContext';
 import type { PlayersPower } from '../../../types/power';
@@ -30,12 +30,19 @@ type ISimulation = {
   rounds: ISimulationRound[];
 };
 
+type CustomSeedProps = {
+  hash: string;
+  enabled: boolean;
+};
+
 function generateHeader() {
   const length = 45;
 
   return '0'.repeat(19) + Array.from({ length }, () => Math.floor(Math.random() * 16).toString(16)).join('');
 }
 const page = () => {
+  const [customSeed, setCustomSeed] = useState<CustomSeedProps>({ hash: '', enabled: false });
+
   const [nameTab, setNameTab] = useState<string>('alive');
   const { players } = useContext(MassacreContext);
   const [simulationInfo, setSimulationInfo] = useState<ISimulation>({
@@ -45,6 +52,7 @@ const page = () => {
   } as ISimulation);
 
   const t = useTranslations('simulator');
+
   const initSimulate = () => {
     if (simulationInfo.nextRound === -1) return;
 
@@ -53,7 +61,7 @@ const page = () => {
         ? simulationInfo.players
         : simulationInfo.rounds[simulationInfo.roundIndex]!.survivors;
 
-    const blockHeader: string = generateHeader();
+    const blockHeader: string = customSeed.enabled ? customSeed.hash : generateHeader();
     const halveResult = halve(blockHeader, halvePlayers);
 
     const sortedLosers = halveResult.losers.sort((a, b) => simulationInfo.players![b]! - simulationInfo.players![a]!);
@@ -120,9 +128,38 @@ const page = () => {
         <Divider y={16} />
 
         {simulationInfo.nextRound !== -1 ? (
-          <Button onClick={initSimulate} disabled={Object.keys(simulationInfo.players).length === 0}>
-            {simulationInfo.nextRound === 0 ? t('INIT_SIMULATE') : t('NEXT_ROUND')}
-          </Button>
+          <>
+            <Button onClick={initSimulate} disabled={Object.keys(simulationInfo.players).length === 0}>
+              {simulationInfo.nextRound === 0 ? t('INIT_SIMULATE') : t('NEXT_ROUND')}
+            </Button>
+
+            <Divider y={16} />
+
+            {!customSeed.enabled ? (
+              <Flex justify="center">
+                <Button
+                  disabled={Object.keys(simulationInfo.players).length === 0}
+                  onClick={() => setCustomSeed({ hash: '', enabled: true })}
+                  variant="borderless"
+                >
+                  {t('USE_CUSTOM_SEED')}
+                </Button>
+              </Flex>
+            ) : (
+              <>
+                <Input
+                  placeholder="seed"
+                  onChange={(e) => {
+                    const hash = String(e.target.value);
+                    setCustomSeed({ ...customSeed, hash });
+                  }}
+                />
+                <Button onClick={() => setCustomSeed({ hash: '', enabled: false })} variant="borderless">
+                  {t('REMOVE_CUSTOM')}
+                </Button>
+              </>
+            )}
+          </>
         ) : (
           <Button onClick={() => window.location.reload()} disabled={Object.keys(simulationInfo.players).length === 0}>
             Reset
