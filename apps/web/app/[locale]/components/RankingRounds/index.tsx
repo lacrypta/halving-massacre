@@ -15,7 +15,7 @@ import { appTheme } from '../../../../config/exports';
 
 // New ui-components
 import { Icon } from '../Icon';
-import { Shield, ArrowRight, Sword, SackSats, Crown } from '../Icons';
+import { Shield, ArrowRight, Sword, SackSats, Crown, Skull } from '../Icons';
 
 // Style
 import { RankingRoundsStyle, ItemStyle, IconStyle } from './style';
@@ -40,7 +40,7 @@ export function RankingRounds() {
 
     switch (value) {
       case 'FINISHED':
-        return <Shield color={appTheme.colors.error} />;
+        return <Skull color={appTheme.colors.error} />;
       case 'ACTUAL':
         return <Sword color={appTheme.colors.success} />;
       case 'PENDING':
