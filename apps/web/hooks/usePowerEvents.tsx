@@ -17,7 +17,7 @@ type UsePowerEventsProps = {
   limit?: number;
 };
 
-const CREATED_AT_ROUND_0_PATH: number = 1713369221;
+const CREATED_AT_ROUND_0_PATH: number = 1713367221;
 
 export const usePowerEvents = ({ walias = '', limit }: UsePowerEventsProps): UsePowerEventsReturns => {
   const [powerEventsDeduplicated, setPowerEventsDeduplicated] = useState<Event[]>([]);
