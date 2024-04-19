@@ -107,6 +107,33 @@ const ActualContent = ({ currentBlock, freezeHeight, players, round }: ActualCon
               </Flex>
             </Card>
             <Divider y={16} />
+            <Flex gap={16}>
+              <Card spacing={4} variant="filled">
+                <Flex direction="column">
+                  <Icon size={8}>
+                    <Medal color="#D6D6D6" />
+                  </Icon>
+                  <Divider y={4} />
+                  <Heading as="h3">25%</Heading>
+                  <Text size="small" color={appTheme.colors.gray50}>
+                    {t('MASSACRED')}.
+                  </Text>
+                </Flex>
+              </Card>
+              <Card spacing={4} variant="filled">
+                <Flex direction="column">
+                  <Icon size={8}>
+                    <Medal color="#FAD240" />
+                  </Icon>
+                  <Divider y={4} />
+                  <Heading as="h3">50%</Heading>
+                  <Text size="small" color={appTheme.colors.gray50}>
+                    {t('SURVIVOR')}.
+                  </Text>
+                </Flex>
+              </Card>
+            </Flex>
+            <Divider y={16} />
             <Heading as="h3" align="center">
               {t('FINALISTS')}
             </Heading>
