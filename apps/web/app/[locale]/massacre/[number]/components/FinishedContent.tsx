@@ -52,8 +52,9 @@ const FinishedContent = ({
 
     const survivorWalias = Object.keys(players!);
     const deadWalias = Object.keys(deadPlayers!);
-    if (survivorWalias.length > 1) return;
-    if (deadWalias.length > 1) return;
+
+    // if (survivorWalias.length > 1) return;
+    // if (deadWalias.length > 1) return;
 
     let tmpFinalists: string[] = [survivorWalias[0]!, deadWalias[0]!];
     return tmpFinalists;
