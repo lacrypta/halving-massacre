@@ -175,5 +175,7 @@
     "REMOVE_CUSTOM": "Remove custom"
   },
   "FOR_THE_MASSACRED": "for the massacred",
-  "ROUND_SURVIVORS_ASSURED_PRIZE": "Survivors of this round are guaranteed a prize."
+  "ROUND_SURVIVORS_ASSURED_PRIZE": "Survivors of this round are guaranteed a prize.",
+  "PRIZE_OBTAINED_SATS": "SATs obtained from prize",
+  "FINALISTS": "Finalists"
 }

@@ -6,6 +6,17 @@ import type { MassacreRound } from '../types/massacre';
 import type { Round } from '../types/round';
 import type { PlayersPower } from '../types/power';
 
+export function calculateFinalPercentages(percentagePlayer1: number, percentagePlayer2: number) {
+  let sumPercentages = percentagePlayer1 + percentagePlayer2;
+  let tmpP1 = (percentagePlayer1 / sumPercentages) * 100;
+  let tmpP2 = (percentagePlayer2 / sumPercentages) * 100;
+
+  return {
+    player1: tmpP1.toFixed(2),
+    player2: tmpP2.toFixed(2),
+  };
+}
+
 export function removeObjectKeys(
   obj1: { [key: string]: number },
   obj2: { [key: string]: number },
