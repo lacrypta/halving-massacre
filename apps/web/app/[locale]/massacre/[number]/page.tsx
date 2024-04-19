@@ -54,7 +54,7 @@ export default function Page({ params }: PageProps): JSX.Element {
 
   const roundStatus: RoundStatus = useMemo(() => {
     if (!currentRound) {
-      return 'PENDING';
+      return 'FINISHED';
     }
     return currentRound.index === round ? 'ACTUAL' : currentBlock < rounds[round]!.height ? 'PENDING' : 'FINISHED';
   }, [currentRound, round, rounds, currentBlock]);
@@ -133,11 +133,17 @@ export default function Page({ params }: PageProps): JSX.Element {
               deadPlayers={massacreRound?.deadPlayers}
               powerDistributedByPlayer={massacreRound?.delta}
               totalDistributedPower={massacreRound?.totalDistributedPower}
+              round={round}
             />
           ) : roundStatus === 'PENDING' ? (
             <PendingContent survivals={rounds[round]?.survivors} round={round} />
           ) : (
-            <ActualContent currentBlock={currentBlock} freezeHeight={rounds[round]?.freezeHeight} players={players} />
+            <ActualContent
+              currentBlock={currentBlock}
+              freezeHeight={rounds[round]?.freezeHeight}
+              players={players}
+              round={round}
+            />
           )}
         </Container>
       </Flex>
