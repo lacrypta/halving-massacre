@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useFormatter } from '@lawallet/react';
 import { Divider, Flex, Heading, Text } from '@lawallet/ui';
@@ -17,6 +17,7 @@ import { RankingList } from '@/[locale]/components/RankingList';
 
 import type { PlayersPower } from '../../../../../types/power';
 import { AutoAvatar } from '@/[locale]/components/AutoAvatar';
+import { useMassacre } from '../../../../../hooks/useMassacre';
 
 type FinishedContentProps = {
   players?: PlayersPower;
@@ -37,6 +38,7 @@ const FinishedContent = ({
   const locale = useLocale() as AvailableLanguages;
   const { formatAmount } = useFormatter({ currency: 'SAT', locale });
 
+  const { currentPool } = useMassacre();
   const { rounds } = useContext(RoundsContext);
 
   const [nameTab, setNameTab] = useState<string>('alive');
@@ -44,6 +46,27 @@ const FinishedContent = ({
   const handleChangeTab = (value: string) => {
     setNameTab(value);
   };
+
+  const finalists = useMemo(() => {
+    if (!players || !deadPlayers) return;
+
+    const survivorWalias = Object.keys(players!);
+    const deadWalias = Object.keys(deadPlayers!);
+    if (survivorWalias.length > 1) return;
+    if (deadWalias.length > 1) return;
+
+    let tmpFinalists: string[] = [survivorWalias[0]!, deadWalias[0]!];
+    return tmpFinalists;
+  }, [players, deadPlayers]);
+
+  const distribution = useMemo(() => {
+    const totalPrize = currentPool / 1000;
+
+    return {
+      first: formatAmount(totalPrize * 0.5),
+      two: formatAmount(totalPrize * 0.25),
+    };
+  }, [currentPool]);
 
   if (rounds.length - 1 === round) {
     return (
@@ -54,11 +77,11 @@ const FinishedContent = ({
               <Medal color="#FAD240" />
             </Icon>
             <Flex gap={8} align="center">
-              <AutoAvatar walias={'pozo@lacrypta.ar'} size={8} />
-              <Text>{'pozo@lacrypta.ar'}</Text>
+              <AutoAvatar walias={finalists![0]!} size={8} />
+              <Text>{finalists![0]!}</Text>
             </Flex>
             <Flex direction="column" align="center">
-              <Heading>1.345.890</Heading>
+              <Heading>{distribution.first}</Heading>
               <Text size="small" color={appTheme.colors.gray50}>
                 {t('PRIZE_OBTAINED_SATS')}.
               </Text>
@@ -72,11 +95,11 @@ const FinishedContent = ({
               <Medal color="#D6D6D6" />
             </Icon>
             <Flex gap={8} align="center">
-              <AutoAvatar walias={'tesoro@lawallet.ar'} size={8} />
-              <Text>{'tesoro@lawallet.ar'}</Text>
+              <AutoAvatar walias={finalists![1]!} size={8} />
+              <Text>{finalists![1]!}</Text>
             </Flex>
             <Flex direction="column" align="center">
-              <Heading as="h2">1.345.890</Heading>
+              <Heading as="h2">{distribution.two}</Heading>
               <Text size="small" color={appTheme.colors.gray50}>
                 {t('PRIZE_OBTAINED_SATS')}.
               </Text>
