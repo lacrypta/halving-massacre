@@ -79,15 +79,18 @@ const ActualContent = ({ currentBlock, freezeHeight, players, round }: ActualCon
   return (
     <>
       {currentBlock >= (freezeHeight || 0) && (
-        <Flex direction="column" gap={8} align="center">
-          <Icon size={8}>
-            <Snowflake color={appTheme.colors.gray50} />
-          </Icon>
+        <>
+          <Flex direction="column" gap={8} align="center">
+            <Icon size={8}>
+              <Snowflake color={appTheme.colors.gray50} />
+            </Icon>
 
-          <Text size="small" color={appTheme.colors.gray50} align="center">
-            {t('POWER_LOCKED_DISTANCE')}
-          </Text>
-        </Flex>
+            <Text size="small" color={appTheme.colors.gray50} align="center">
+              {t('POWER_LOCKED_DISTANCE')}
+            </Text>
+          </Flex>
+          <Divider y={16} />
+        </>
       )}
 
       {rounds.length - 1 === round ? (
