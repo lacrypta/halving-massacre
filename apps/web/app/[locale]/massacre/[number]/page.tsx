@@ -127,24 +127,24 @@ export default function Page({ params }: PageProps): JSX.Element {
             )}
           </Flex>
 
-          {/* {roundStatus === 'FINISHED' ? (
+          {roundStatus === 'FINISHED' ? (
             <FinishedContent
               players={massacreRound?.players}
               deadPlayers={massacreRound?.deadPlayers}
               powerDistributedByPlayer={massacreRound?.delta}
               totalDistributedPower={massacreRound?.totalDistributedPower}
+              round={round}
             />
           ) : roundStatus === 'PENDING' ? (
             <PendingContent survivals={rounds[round]?.survivors} round={round} />
           ) : (
-            // ActualContent here
-          )} */}
-          <ActualContent
-            currentBlock={currentBlock}
-            freezeHeight={rounds[round]?.freezeHeight}
-            players={players}
-            round={round}
-          />
+            <ActualContent
+              currentBlock={currentBlock}
+              freezeHeight={rounds[round]?.freezeHeight}
+              players={players}
+              round={round}
+            />
+          )}
         </Container>
       </Flex>
     </>

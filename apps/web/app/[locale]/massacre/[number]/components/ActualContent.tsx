@@ -67,7 +67,7 @@ const ActualContent = ({ currentBlock, freezeHeight, players, round }: ActualCon
           </Card>
           <Divider y={16} />
           <Heading as="h3" align="center">
-            Finalistas
+            {t('FINALISTS')}
           </Heading>
           <Divider y={12} />
           <CustomProgress valueOne={40} valueTwo={60} />
