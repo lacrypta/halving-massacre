@@ -72,41 +72,47 @@ const FinishedContent = ({
   if (rounds.length - 1 === round) {
     return (
       <>
-        <Card spacing={4} variant="filled">
-          <Flex direction="column" gap={16}>
-            <Icon size={8}>
-              <Medal color="#FAD240" />
-            </Icon>
-            <Flex gap={8} align="center">
-              <AutoAvatar walias={finalists![0]!} size={8} />
-              <Text>{finalists![0]!}</Text>
-            </Flex>
-            <Flex direction="column" align="center">
-              <Heading>{distribution.first}</Heading>
-              <Text size="small" color={appTheme.colors.gray50}>
-                {t('PRIZE_OBTAINED_SATS')}.
-              </Text>
-            </Flex>
-          </Flex>
-        </Card>
-        <Divider y={16} />
-        <Card spacing={4}>
-          <Flex direction="column" gap={16}>
-            <Icon size={8}>
-              <Medal color="#D6D6D6" />
-            </Icon>
-            <Flex gap={8} align="center">
-              <AutoAvatar walias={finalists![1]!} size={8} />
-              <Text>{finalists![1]!}</Text>
-            </Flex>
-            <Flex direction="column" align="center">
-              <Heading as="h2">{distribution.two}</Heading>
-              <Text size="small" color={appTheme.colors.gray50}>
-                {t('PRIZE_OBTAINED_SATS')}.
-              </Text>
-            </Flex>
-          </Flex>
-        </Card>
+        {finalists ? (
+          <>
+            <Card spacing={4} variant="filled">
+              <Flex direction="column" gap={16}>
+                <Icon size={8}>
+                  <Medal color="#FAD240" />
+                </Icon>
+                <Flex gap={8} align="center">
+                  <AutoAvatar walias={finalists![0]!} size={8} />
+                  <Text>{finalists![0]!}</Text>
+                </Flex>
+                <Flex direction="column" align="center">
+                  <Heading>{distribution.first}</Heading>
+                  <Text size="small" color={appTheme.colors.gray50}>
+                    {t('PRIZE_OBTAINED_SATS')}.
+                  </Text>
+                </Flex>
+              </Flex>
+            </Card>
+            <Divider y={16} />
+            <Card spacing={4}>
+              <Flex direction="column" gap={16}>
+                <Icon size={8}>
+                  <Medal color="#D6D6D6" />
+                </Icon>
+                <Flex gap={8} align="center">
+                  <AutoAvatar walias={finalists![1]!} size={8} />
+                  <Text>{finalists![1]!}</Text>
+                </Flex>
+                <Flex direction="column" align="center">
+                  <Heading as="h2">{distribution.two}</Heading>
+                  <Text size="small" color={appTheme.colors.gray50}>
+                    {t('PRIZE_OBTAINED_SATS')}.
+                  </Text>
+                </Flex>
+              </Flex>
+            </Card>
+          </>
+        ) : (
+          'Sin finalistas'
+        )}
       </>
     );
   }
