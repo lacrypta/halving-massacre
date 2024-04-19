@@ -16,7 +16,7 @@ import { useMassacre } from '../../../../../hooks/useMassacre';
 
 // New ui-components
 import { Icon } from '@/[locale]/components/Icon';
-import { Loader, Snowflake } from '@/[locale]/components/Icons';
+import { Loader, Medal, Snowflake } from '@/[locale]/components/Icons';
 
 // Generic components
 import { RankingList } from '@/[locale]/components/RankingList';
@@ -134,6 +134,22 @@ const ActualContent = ({ currentBlock, freezeHeight, players, round }: ActualCon
         )
       ) : (
         <>
+          {round === rounds.length - 2 && (
+            <>
+              <Card spacing={4} variant="filled">
+                <Flex direction="column">
+                  <Icon size={8}>
+                    <Medal color="#D1853C" />
+                  </Icon>
+                  <Divider y={4} />
+                  <Heading as="h3">6.25%</Heading>
+                  <Text size="small" color={appTheme.colors.gray50}>
+                    {t('FOR_THE_MASSACRED')}.
+                  </Text>
+                </Flex>
+              </Card>
+            </>
+          )}
           <Divider y={16} />
           <RankingList players={players || {}} type={'global'} />
         </>
