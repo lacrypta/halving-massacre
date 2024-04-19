@@ -133,6 +133,24 @@ const FinishedContent = ({
         </Flex>
       </Card>
       <Divider y={16} />
+      {round === rounds.length - 2 && (
+        <>
+          <Card spacing={4} variant="filled">
+            <Flex direction="column">
+              <Icon size={8}>
+                <Medal color="#D1853C" />
+              </Icon>
+              <Divider y={4} />
+              <Heading as="h3">6.25%</Heading>
+              <Text size="small" color={appTheme.colors.gray50}>
+                {t('FOR_THE_MASSACRED')}.
+              </Text>
+            </Flex>
+          </Card>
+          <Divider y={16} />
+        </>
+      )}
+      <Divider y={16} />
       <Tabs>
         <TabList>
           <Tab active={nameTab === 'alive'} onClick={() => handleChangeTab('alive')}>
