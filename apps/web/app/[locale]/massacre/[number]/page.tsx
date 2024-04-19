@@ -54,7 +54,7 @@ export default function Page({ params }: PageProps): JSX.Element {
 
   const roundStatus: RoundStatus = useMemo(() => {
     if (!currentRound) {
-      return 'PENDING';
+      return 'FINISHED';
     }
     return currentRound.index === round ? 'ACTUAL' : currentBlock < rounds[round]!.height ? 'PENDING' : 'FINISHED';
   }, [currentRound, round, rounds, currentBlock]);
