@@ -51,12 +51,13 @@ const FinishedContent = ({
     if (!players || !deadPlayers) return;
 
     const survivorWalias = Object.keys(players!);
-    const deadWalias = Object.keys(deadPlayers!);
+    // const deadWalias = Object.keys(deadPlayers!);
 
     // if (survivorWalias.length > 1) return;
     // if (deadWalias.length > 1) return;
 
-    let tmpFinalists: string[] = [survivorWalias[0]!, deadWalias[0]!];
+    //PATH: Temporal fix - event deadPlayers semifinalist error
+    let tmpFinalists: string[] = [survivorWalias[0]!, '42f0b@lawallet.ar'];
     return tmpFinalists;
   }, [players, deadPlayers]);
 
